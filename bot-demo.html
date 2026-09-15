@@ -1,0 +1,2125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CÉ Studios — Chatbot Demo</title>
+    
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <style>
+        /* =========================================================================
+           LOKALE SCHRIFTARTEN (DSGVO-KONFORM)
+           ========================================================================= */
+        @font-face {
+            font-family: 'Archivo';
+            font-style: normal;
+            font-weight: 400;
+            src: url('fonts/archivo-400.ttf') format('truetype');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Archivo';
+            font-style: normal;
+            font-weight: 500;
+            src: url('fonts/archivo-500.ttf') format('truetype');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Bodoni Moda';
+            font-style: normal;
+            font-weight: 400;
+            src: url('fonts/bodoni-moda-400.ttf') format('truetype');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Bodoni Moda';
+            font-weight: 600;
+            src: url('fonts/bodoni-moda-600.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        :root {
+            --bg: #FFFFFF;
+            --bg-secondary: #FAF9F7;
+            --text: #0A0A0A;
+            --text-secondary: #767370;
+            --line: #E8E6E2;
+            --font-display: 'Bodoni Moda', Georgia, serif;
+            --font-sans: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --chat-shadow: 0 20px 48px rgba(10, 10, 10, 0.14);
+            --chip-bg: #FAF9F7;
+            --chip-border: #E8E6E2;
+            --chip-text: #0A0A0A;
+            --accent-green: #2E7D32;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* OBERE STEUERUNGSLEISTE */
+        .preview-topbar {
+            height: 60px;
+            background-color: var(--bg);
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            z-index: 1000;
+            flex-shrink: 0;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .topbar-logo {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 1.15rem;
+            letter-spacing: 0.05em;
+        }
+
+        .topbar-badge {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-secondary);
+            border: 1px solid var(--line);
+            padding: 3px 9px;
+            border-radius: 999px;
+            background-color: var(--bg-secondary);
+        }
+
+        .topbar-tabs {
+            display: flex;
+            gap: 6px;
+            background-color: var(--bg-secondary);
+            padding: 4px;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+        }
+
+        .topbar-tab {
+            background: none;
+            border: none;
+            padding: 6px 16px;
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .topbar-tab:hover {
+            color: var(--text);
+        }
+
+        .topbar-tab.active {
+            background-color: var(--bg);
+            color: var(--text);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .topbar-right a {
+            font-size: 13px;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            transition: opacity 0.2s;
+        }
+
+        .topbar-right a:hover {
+            opacity: 0.6;
+        }
+
+        /* HAUPTCONTAINER */
+        .preview-content {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--bg-secondary);
+        }
+
+        /* Modus 1: Live-Website Iframe */
+        .preview-frame-wrapper {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            transition: filter 0.3s ease;
+        }
+
+        .preview-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Modus 3: Wissensbasis Tabelle */
+        .kb-view {
+            display: none;
+            position: absolute;
+            inset: 0;
+            overflow-y: auto;
+            background-color: var(--bg-secondary);
+            padding: 40px 24px 80px;
+        }
+
+        .kb-container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .kb-header {
+            margin-bottom: 28px;
+        }
+
+        .kb-title {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .kb-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .kb-search {
+            width: 100%;
+            padding: 12px 18px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 14px;
+            outline: none;
+            background: #FFFFFF;
+            transition: border-color 0.2s;
+        }
+
+        .kb-search:focus {
+            border-color: var(--text);
+        }
+
+        .kb-category-section {
+            margin-top: 36px;
+        }
+
+        .kb-category-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 6px;
+        }
+
+        .kb-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }
+
+        .kb-card {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 20px 22px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .kb-card:hover {
+            border-color: #BDBAB5;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+        }
+
+        .kb-card-q {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 14.5px;
+            color: var(--text);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .kb-card-kw {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            font-family: monospace;
+            background: var(--bg-secondary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .kb-card-a {
+            font-size: 13.5px;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        .kb-card-weiter {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .kb-card-weiter span {
+            background: #F0EEEA;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11.5px;
+            color: var(--text);
+        }
+
+        /* =========================================================================
+           FLOATING CHATBOT KOMPONENTE
+           ========================================================================= */
+
+        /* Floating Trigger Button */
+        .ce-chat-trigger {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background-color: var(--text);
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(10, 10, 10, 0.22);
+            transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s ease;
+            z-index: 1200;
+            user-select: none;
+        }
+
+        .ce-chat-trigger:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 32px rgba(10, 10, 10, 0.28);
+        }
+
+        .ce-chat-trigger-icon {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 1.15rem;
+            letter-spacing: 0.05em;
+            transition: transform 0.25s ease, opacity 0.2s ease;
+        }
+
+        .ce-chat-trigger-close {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0;
+            transform: rotate(-90deg) scale(0.6);
+            transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .ce-chat-trigger.open .ce-chat-trigger-icon {
+            opacity: 0;
+            transform: scale(0.6);
+        }
+
+        .ce-chat-trigger.open .ce-chat-trigger-close {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+
+        /* Chat Dialog Window */
+        .ce-chat-window {
+            position: fixed;
+            bottom: 96px;
+            right: 28px;
+            width: 400px;
+            height: 580px;
+            background-color: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            box-shadow: var(--chat-shadow);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1190;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(16px) scale(0.97);
+            transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .ce-chat-window.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Chat Header */
+        .ce-chat-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--line);
+            background-color: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .ce-chat-header-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .ce-chat-header-status {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: var(--accent-green);
+            display: inline-block;
+            box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+            animation: pulse-dot 2.5s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(46, 125, 50, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0); }
+        }
+
+        .ce-chat-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ce-header-btn {
+            background: none;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .ce-header-btn:hover {
+            background-color: var(--bg-secondary);
+            color: var(--text);
+        }
+
+        /* Chat Body & Messages */
+        .ce-chat-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            scroll-behavior: smooth;
+            background-color: var(--bg);
+        }
+
+        .ce-message {
+            display: flex;
+            flex-direction: column;
+            max-width: 86%;
+            animation: msg-fade 0.25s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        @keyframes msg-fade {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ce-message.bot {
+            align-self: flex-start;
+        }
+
+        .ce-message.user {
+            align-self: flex-end;
+        }
+
+        .ce-bubble {
+            padding: 12px 16px;
+            font-size: 13.5px;
+            line-height: 1.55;
+            border-radius: 12px;
+            white-space: pre-line;
+            word-break: break-word;
+        }
+
+        .ce-message.bot .ce-bubble {
+            background-color: var(--bg-secondary);
+            color: var(--text);
+            border: 1px solid var(--line);
+            border-top-left-radius: 2px;
+        }
+
+        .ce-message.user .ce-bubble {
+            background-color: var(--text);
+            color: #FFFFFF;
+            border-top-right-radius: 2px;
+        }
+
+        .ce-msg-time {
+            font-size: 10px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            padding: 0 2px;
+        }
+
+        .ce-message.user .ce-msg-time {
+            align-self: flex-end;
+        }
+
+        /* Folgefragen Knöpfe (Chips) unter Antworten */
+        .ce-followups {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .ce-chip {
+            background: var(--chip-bg);
+            border: 1px solid var(--chip-border);
+            color: var(--chip-text);
+            font-family: var(--font-sans);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            line-height: 1.3;
+        }
+
+        .ce-chip:hover {
+            border-color: var(--text);
+            background-color: #FFFFFF;
+            transform: translateY(-1px);
+        }
+
+        .ce-chip.special-action {
+            background-color: var(--text);
+            color: #FFFFFF;
+            border-color: var(--text);
+            font-weight: 600;
+        }
+
+        .ce-chip.special-action:hover {
+            opacity: 0.88;
+            background-color: #222222;
+        }
+
+        /* Typing Indicator */
+        .ce-typing {
+            display: none;
+            align-self: flex-start;
+            padding: 10px 14px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            border-top-left-radius: 2px;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .ce-typing.active {
+            display: flex;
+        }
+
+        .typing-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: var(--text-secondary);
+            animation: typing-blink 1.2s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing-blink {
+            0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+            40% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Chat Footer */
+        .ce-chat-footer {
+            padding: 14px 18px;
+            border-top: 1px solid var(--line);
+            background-color: var(--bg);
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .ce-input-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ce-input {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            background-color: var(--bg-secondary);
+            font-family: var(--font-sans);
+            font-size: 13.5px;
+            outline: none;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .ce-input:focus {
+            border-color: var(--text);
+            background: #FFFFFF;
+        }
+
+        .ce-send-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            background-color: var(--text);
+            color: #FFFFFF;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .ce-send-btn:hover {
+            opacity: 0.85;
+        }
+
+        .ce-send-btn svg {
+            width: 15px;
+            height: 15px;
+            fill: currentColor;
+        }
+
+        .ce-footer-hint {
+            font-size: 10.5px;
+            color: var(--text-secondary);
+            text-align: center;
+            letter-spacing: 0.02em;
+        }
+
+        /* Focus mode: Center dialog on large screens */
+        body.focus-mode .ce-chat-window {
+            right: 50%;
+            bottom: 50%;
+            transform: translate(50%, 50%) scale(1);
+            width: 440px;
+            height: 640px;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        body.focus-mode .preview-frame-wrapper {
+            filter: blur(4px) brightness(0.92);
+            pointer-events: none;
+        }
+
+        @media (max-width: 600px) {
+            .preview-topbar {
+                padding: 0 16px;
+            }
+            .topbar-badge {
+                display: none;
+            }
+            .ce-chat-window {
+                right: 12px;
+                left: 12px;
+                bottom: 84px;
+                width: auto;
+                height: calc(100vh - 110px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOPBAR MIT MODUS-WECHSLER -->
+    <header class="preview-topbar">
+        <div class="topbar-left">
+            <span class="topbar-logo">CÉ STUDIOS</span>
+            <span class="topbar-badge">Chatbot Vorschau</span>
+        </div>
+
+        <div class="topbar-tabs">
+            <button class="topbar-tab active" id="tab-live" onclick="setMode('live')">Website-Ansicht</button>
+            <button class="topbar-tab" id="tab-focus" onclick="setMode('focus')">Fokus-Chat</button>
+            <button class="topbar-tab" id="tab-kb" onclick="setMode('kb')">Wissensbasis</button>
+        </div>
+
+        <div class="topbar-right">
+            <a href="index.html">Zurück zur Hauptseite</a>
+        </div>
+    </header>
+
+    <!-- CONTENT BEREICH -->
+    <main class="preview-content">
+        <!-- Modus 1 & 2: Live-Website als Hintergrund -->
+        <div class="preview-frame-wrapper" id="frameWrapper">
+            <iframe src="index.html" class="preview-frame" title="CÉ Studios Live Website"></iframe>
+        </div>
+
+        <!-- Modus 3: Wissensbasis Tabelle -->
+        <div class="kb-view" id="kbView">
+            <div class="kb-container">
+                <div class="kb-header">
+                    <h1 class="kb-title">Wortwörtlicher Katalog</h1>
+                    <p class="kb-subtitle">109 hinterlegte Antworten zu Preisen, Ablauf, Leistungen, Technik, Recht, Sichtbarkeit, Über CÉ Studios, Einwänden und nächsten Schritten.</p>
+                    <input type="text" class="kb-search" id="kbSearch" placeholder="Katalog durchsuchen (z.B. onOffice, Baukasten, DSGVO, Anzahlung, Energieausweis)..." oninput="filterKb()">
+                </div>
+
+                <div id="kbContent">
+                    <!-- Dynamisch aus dem Katalog befüllt -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FLOATING CHAT BUTTON -->
+    <div class="ce-chat-trigger" id="chatTrigger" onclick="toggleChatWindow()" aria-label="Chat öffnen">
+        <span class="ce-chat-trigger-icon">CÉ</span>
+        <span class="ce-chat-trigger-close">&times;</span>
+    </div>
+
+    <!-- CHAT DIALOG FENSTER -->
+    <div class="ce-chat-window" id="chatWindow">
+        <!-- Header -->
+        <div class="ce-chat-header">
+            <div class="ce-chat-header-info">
+                <div class="ce-chat-header-title">CÉ Concierge</div>
+                <div class="ce-chat-header-status">
+                    <span class="status-dot"></span>
+                    <span>Antwortet sofort</span>
+                </div>
+            </div>
+            <div class="ce-chat-header-actions">
+                <button class="ce-header-btn" onclick="toggleSound()" id="soundBtn" title="Ton an/aus">🔊</button>
+                <button class="ce-header-btn" onclick="toggleChatWindow()" title="Schließen">&times;</button>
+            </div>
+        </div>
+
+        <!-- Nachrichtenverlauf -->
+        <div class="ce-chat-body" id="chatBody">
+            <div class="ce-message bot">
+                <div class="ce-bubble">Guten Tag. Ich bin der digitale Assistent von CÉ Studios. Wie kann ich Ihnen zu Ihrer Immobilien-Website helfen?</div>
+                <span class="ce-msg-time">Gerade eben</span>
+                
+                <div class="ce-followups">
+                    <button class="ce-chip" onclick="handleChipClick('Was kostet das?')">Was kostet das?</button>
+                    <button class="ce-chip" onclick="handleChipClick('Wie lange dauert es?')">Wie lange dauert es?</button>
+                    <button class="ce-chip" onclick="handleChipClick('Wie läuft das ab?')">Wie läuft das ab?</button>
+                    <button class="ce-chip" onclick="handleChipClick('Was muss ich selbst tun?')">Was muss ich selbst tun?</button>
+                    <button class="ce-chip" onclick="handleChipClick('Warum CÉ Studios?')">Warum CÉ Studios?</button>
+                </div>
+            </div>
+
+            <!-- Schreibindikator -->
+            <div class="ce-typing" id="typingIndicator">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+        </div>
+
+        <!-- Footer Eingabe -->
+        <div class="ce-chat-footer">
+            <div class="ce-input-row">
+                <input type="text" class="ce-input" id="chatInput" placeholder="Ihre Frage eintippen..." onkeypress="handleKey(event)" autocomplete="off">
+                <button class="ce-send-btn" onclick="sendMessage()" aria-label="Senden">
+                    <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </button>
+            </div>
+            <div class="ce-footer-hint">100% lokal &amp; datenschutzfreundlich · Keine Speicherung Dritter</div>
+        </div>
+    </div>
+
+    <script>
+        let soundEnabled = true;
+
+        // Audioton per Web Audio API (keine externen mp3-Dateien nötig)
+        function playChime(type) {
+            if (!soundEnabled) return;
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'bot') {
+                    osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+                    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.1); // A5
+                    gain.gain.setValueAtTime(0.035, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.22);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 0.22);
+                } else {
+                    osc.frequency.setValueAtTime(440, ctx.currentTime); // A4
+                    gain.gain.setValueAtTime(0.025, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 0.12);
+                }
+            } catch (e) {}
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            document.getElementById('soundBtn').textContent = soundEnabled ? '🔊' : '🔇';
+        }
+
+        // Modus Umschaltung
+        function setMode(mode) {
+            document.querySelectorAll('.topbar-tab').forEach(t => t.classList.remove('active'));
+            const frameWrapper = document.getElementById('frameWrapper');
+            const kbView = document.getElementById('kbView');
+            const chatWindow = document.getElementById('chatWindow');
+            const trigger = document.getElementById('chatTrigger');
+
+            document.body.classList.remove('focus-mode');
+
+            if (mode === 'live') {
+                document.getElementById('tab-live').classList.add('active');
+                frameWrapper.style.display = 'block';
+                kbView.style.display = 'none';
+                chatWindow.classList.add('active');
+                trigger.classList.add('open');
+            } else if (mode === 'focus') {
+                document.getElementById('tab-focus').classList.add('active');
+                frameWrapper.style.display = 'block';
+                kbView.style.display = 'none';
+                document.body.classList.add('focus-mode');
+                chatWindow.classList.add('active');
+                trigger.classList.add('open');
+            } else if (mode === 'kb') {
+                document.getElementById('tab-kb').classList.add('active');
+                frameWrapper.style.display = 'none';
+                kbView.style.display = 'block';
+                chatWindow.classList.remove('active');
+                trigger.classList.remove('open');
+            }
+        }
+
+        // Dialog Toggle
+        function toggleChatWindow() {
+            const win = document.getElementById('chatWindow');
+            const trigger = document.getElementById('chatTrigger');
+            
+            const isOpen = win.classList.contains('active');
+            if (isOpen) {
+                win.classList.remove('active');
+                trigger.classList.remove('open');
+            } else {
+                win.classList.add('active');
+                trigger.classList.add('open');
+                setTimeout(() => document.getElementById('chatInput').focus(), 300);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const win = document.getElementById('chatWindow');
+                const trigger = document.getElementById('chatTrigger');
+                win.classList.add('active');
+                trigger.classList.add('open');
+            }, 800);
+            renderKbGrid();
+        });
+
+        // =========================================================================
+        // 1 — AUSWEICHANTWORTEN: POOL (10 ANTWORTEN)
+        // =========================================================================
+        const fallbackPool = [
+            "Dazu habe ich keine hinterlegte Antwort. Ich kann Ihnen etwas sagen zu Preisen, Ablauf, Leistungen, Technik und Datenschutz.",
+            "Das steht nicht in meinen Antworten. Fragen Sie mich lieber nach dem Ablauf, den Kosten oder dem, was Sie selbst tun müssen.",
+            "Da komme ich nicht weiter. Versuchen Sie es anders formuliert — oder wählen Sie unten ein Thema.",
+            "Das kann ich nicht beantworten, ohne zu raten, und raten möchte ich nicht. Fragen Sie mich etwas Konkretes zum Projekt.",
+            "Dafür bin ich nicht gebaut. Ich kenne mich mit Websites für Maklerbüros aus — probieren Sie es damit.",
+            "Keine Antwort hinterlegt. Wenn Sie mir sagen, worum es ungefähr geht, finde ich vielleicht doch etwas.",
+            "Das habe ich nicht verstanden. Ein einzelnes Stichwort hilft mir oft mehr als ein ganzer Satz — zum Beispiel 'Preis' oder 'Datenschutz'.",
+            "Dazu weiß ich nichts. Cyril Portmann schon — schreiben Sie ihm an service@ce-studios.de.",
+            "Steht nicht in meinem Katalog. Soll ich Ihnen zeigen, was ich kann?",
+            "Damit kann ich nichts anfangen. Formulieren Sie es gern kürzer, dann klappt es meist."
+        ];
+
+        // =========================================================================
+        // 3 — THEMEN-AUSWEICHANTWORTEN
+        // =========================================================================
+        const topicFallbacks = [
+            {
+                topic: "Geld",
+                keywords: ['geld', 'zahlen', 'rechnung', 'finanzierung', 'budget', 'bezahlung'],
+                answer: "Es geht ums Geld — sagen Sie mir, worum genau: Preis der Website, Objektseiten, Zahlungszeitpunkt oder laufende Kosten?",
+                buttons: ["Was kostet eine Website?", "Was kosten Objektseiten?", "Wann muss ich zahlen?", "Gibt es laufende Kosten?"]
+            },
+            {
+                topic: "Zeit",
+                keywords: ['zeit', 'termin', 'schnell', 'dauer', 'wann', 'frist'],
+                answer: "Es geht um Zeit. Meinen Sie die Dauer des Projekts, den möglichen Starttermin oder Ihren eigenen Aufwand?",
+                buttons: ["Wie lange dauert es?", "Wann kann es losgehen?", "Was muss ich selbst tun?"]
+            },
+            {
+                topic: "Recht",
+                keywords: ['recht', 'gesetz', 'anwalt', 'paragraph', 'pflicht', 'haftung'],
+                answer: "Rechtliche Fragen beantworte ich nur, soweit sie meine Arbeit betreffen — Datenschutz, Impressum und die Pflichtangaben in Inseraten. Alles andere gehört zu einem Anwalt.",
+                buttons: ["Wie sieht es mit DSGVO aus?", "Was sind die Pflichtangaben?", "Brauche ich ein Cookie-Banner?"]
+            },
+            {
+                topic: "Technik",
+                keywords: ['technik', 'server', 'code', 'programm', 'software', 'tool'],
+                answer: "Technisch kann ich Ihnen sagen, wie die Seite gebaut ist, wie Ihre Maklersoftware angebunden wird und wo sie liegt. Was davon interessiert Sie?",
+                buttons: ["Binden Sie onOffice an?", "Wo liegt die Seite gehostet?", "Wie steht es um Sicherheit?"]
+            },
+            {
+                topic: "Bild",
+                keywords: ['bild', 'foto', 'video', 'drohne', 'grundriss'],
+                answer: "Zum Thema Bild und Objektdarstellung kann ich etwas sagen — fragen Sie nach Bildaufbereitung, Objektseiten oder Rundgängen.",
+                buttons: ["Was kostet Bildaufbereitung?", "Können Grundrisse eingebunden werden?", "Können Videos eingebunden werden?"]
+            },
+            {
+                topic: "Kunde",
+                keywords: ['kunde', 'anfrage', 'verkauf', 'eigentuemer', 'mandat', 'akquise'],
+                answer: "Ich verspreche keine Anfragen und keine Mandate. Was ich sagen kann: wie die Seite gebaut ist, damit die Leute, die schon kommen, nicht abspringen.",
+                buttons: ["Wie läuft das ab?", "Was kostet eine Website?", "Erstgespräch vereinbaren"]
+            }
+        ];
+
+        // =========================================================================
+        // KATALOG — 97 EINTRÄGE WORTWÖRTLICH ÜBERNOMMEN
+        // =========================================================================
+        const rawCatalog = [
+            // --- GESPRÄCH ---
+            {
+                category: "GESPRÄCH",
+                label: "Alltägliche Begrüßung",
+                keywords: "hallo, hi, hey, guten tag, moin, servus, guten morgen, guten abend",
+                answer: "Guten Tag. Fragen Sie mich nach Preisen, Ablauf, Leistungen oder Datenschutz — oder wählen Sie unten.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?", "Wie lange dauert es?"]
+            },
+            {
+                category: "GESPRÄCH",
+                label: "Verabschiedung",
+                keywords: "tschuess, auf wiedersehen, bis dann, ciao, machs gut",
+                answer: "Bis dahin. Wenn etwas offen bleibt: service@ce-studios.de.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?", "Kontakt aufnehmen"]
+            },
+            {
+                category: "GESPRÄCH",
+                label: "Danksagung & Bestätigung",
+                keywords: "danke, dankeschoen, super, alles klar, ok, verstanden",
+                answer: "Gern. Wenn noch etwas offen ist, fragen Sie einfach.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?", "Was muss ich selbst tun?"]
+            },
+            {
+                category: "GESPRÄCH",
+                label: "Smalltalk / Wetter / Befinden",
+                keywords: "wetter, uhrzeit, wie spaet, wie gehts, wie geht es dir, witz",
+                answer: "Da muss ich passen — ich beantworte nur Fragen zu CÉ Studios. Womit kann ich helfen?",
+                weiter: ["Was kostet das?", "Wie läuft das ab?", "Wie lange dauert es?"]
+            },
+            {
+                category: "GESPRÄCH",
+                label: "Mensch oder Bot?",
+                keywords: "bist du ein mensch, bist du echt, ki, bot, roboter, chatgpt",
+                answer: "Ich bin ein einfacher Assistent mit hinterlegten Antworten, keine künstliche Intelligenz. Was ich nicht weiß, sagt Ihnen Cyril Portmann persönlich.",
+                weiter: ["Wer steckt dahinter?", "Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "GESPRÄCH",
+                label: "Was kann der Assistent?",
+                keywords: "was kannst du, hilfe, themen, wobei hilfst du",
+                answer: "Preise, Ablauf, Leistungen, Technik, Datenschutz, und was Sie selbst tun müssen. Fragen Sie einfach frei heraus.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?", "Was muss ich selbst tun?"]
+            },
+
+            // --- PREIS ---
+            {
+                category: "PREIS",
+                label: "Was kostet eine Website?",
+                keywords: "was kostet, preis, kosten, teuer, euro",
+                answer: "Eine Website beginnt bei 1.900 € einmalig. Einzelne Objektseiten ab 490 €. Was es bei Ihnen genau wird, hängt vom Umfang ab — das klären wir im Erstgespräch.",
+                weiter: ["Was ist im Preis enthalten?", "Wann muss ich zahlen?"]
+            },
+            {
+                category: "PREIS",
+                label: "Kosten für eine einzelne Objektseite",
+                keywords: "objektseite kosten, einzelne objektseite, was kostet objektseite",
+                answer: "Eine einzelne Objektseite beginnt bei 490 €. Darin enthalten: Aufbereitung der Fotos, Objekttext und ein Link, den Sie Interessenten direkt schicken können.",
+                weiter: ["Was ist im Preis enthalten?", "Wie lange dauert es?"]
+            },
+            {
+                category: "PREIS",
+                label: "Kosten für Bildbearbeitung & Fotoaufbereitung",
+                keywords: "bildbearbeitung, fotos kosten, bilder aufbereiten preis",
+                answer: "Bildaufbereitung ist auch einzeln buchbar, ohne Website. Preis je nach Menge — schicken Sie mir zwei Beispielbilder, dann sage ich Ihnen konkret, was geht.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "PREIS",
+                label: "Warum CÉ Studios statt Baukasten?",
+                keywords: "warum so teuer, guenstiger, billiger, andere machen das fuer",
+                answer: "Es gibt günstiger, und es gibt Baukästen für ein paar Euro im Monat. Was Sie bei mir bekommen, ist ein Auftritt, den es kein zweites Mal gibt, und jemand, der Ihr Geschäft kennt. Ob Ihnen das den Unterschied wert ist, entscheiden Sie.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+            {
+                category: "PREIS",
+                label: "Gibt es Rabatte oder Preisnachlässe?",
+                keywords: "rabatt, nachlass, verhandeln, geht da was",
+                answer: "Ich rechne knapp und gebe keine Rabatte. Was ich anbiete: Sie sehen die fertige Startseite, bevor Sie zahlen. Damit tragen Sie kein Risiko.",
+                weiter: ["Wie läuft das ab?", "Wann muss ich zahlen?"]
+            },
+            {
+                category: "PREIS",
+                label: "Ist Ratenzahlung oder Teilzahlung möglich?",
+                keywords: "raten, ratenzahlung, aufteilen, teilzahlung",
+                answer: "Eine Aufteilung auf zwei Zahlungen ist möglich. Sprechen Sie mich im Erstgespräch darauf an.",
+                weiter: ["Wann muss ich zahlen?", "Was kostet das?"]
+            },
+            {
+                category: "PREIS",
+                label: "Wann muss ich zahlen / Anzahlung?",
+                keywords: "wann zahlen, anzahlung, vorkasse, vorab bezahlen",
+                answer: "Keine Anzahlung. Die Entscheidung fällt am Entwurf der Startseite. Sagen Sie dort ab, zahlen Sie nichts. Sagen Sie zu, wird nach der Veröffentlichung abgerechnet.",
+                weiter: ["Wie läuft das ab?", "Was ist im Preis enthalten?"]
+            },
+            {
+                category: "PREIS",
+                label: "Fällt Mehrwertsteuer an / Kleinunternehmer?",
+                keywords: "mehrwertsteuer, umsatzsteuer, netto, brutto, mwst",
+                answer: "Ich bin Kleinunternehmer nach § 19 UStG und weise keine Umsatzsteuer aus. Der genannte Preis ist der Endpreis.",
+                weiter: ["Was kostet das?", "Wann muss ich zahlen?"]
+            },
+            {
+                category: "PREIS",
+                label: "Was ist im Leistungsumfang enthalten?",
+                keywords: "was ist enthalten, leistungsumfang, inklusive, im preis drin",
+                answer: "Individuelles Design, Aufbau fürs Handy zuerst, Objektübersicht, Kontaktweg, Impressum und Datenschutz eingebunden, zwei Korrekturrunden und eine Einweisung. Keine Baukastenvorlage.",
+                weiter: ["Was kostet das?", "Wie lange dauert es?"]
+            },
+            {
+                category: "PREIS",
+                label: "Laufende Kosten, Monatsabos oder Mindestlaufzeit?",
+                keywords: "laufende kosten, monatlich, abo, mindestlaufzeit, vertrag",
+                answer: "Für die Website zahlen Sie einmalig, ohne Mindestlaufzeit. Laufend fällt nur Ihre Domain an, wenige Euro im Jahr, und die Rechnung geht direkt an Sie. Laufende Betreuung gibt es als eigenes Angebot, das Sie nicht buchen müssen.",
+                weiter: ["Was kostet das?", "Wann muss ich zahlen?"]
+            },
+
+            // --- ABLAUF ---
+            {
+                category: "ABLAUF",
+                label: "Wie läuft die Zusammenarbeit ab?",
+                keywords: "wie laeuft, ablauf, vorgehen, schritte, prozess",
+                answer: "In drei Schritten. Erst sehe ich mir Ihre Seite und Ihre aktuellen Inserate an und sage Ihnen konkret, was funktioniert und was nicht. Dann bauen wir die Startseite, bevor Sie zahlen. Erst wenn die sitzt, geht es weiter.",
+                weiter: ["Wie lange dauert es?", "Was muss ich selbst tun?"]
+            },
+            {
+                category: "ABLAUF",
+                label: "Wie lange dauert die Fertigstellung?",
+                keywords: "wie lange, dauer, wann fertig, zeitraum, wochen",
+                answer: "Zwei bis vier Wochen, je nach Umfang und gewünschten Funktionen.",
+                weiter: ["Was muss ich selbst tun?", "Wie läuft das ab?"]
+            },
+            {
+                category: "ABLAUF",
+                label: "Wann kann das Projekt starten / Kapazitäten?",
+                keywords: "wann losgehen, ab wann, naechster termin, kapazitaet",
+                answer: "In der Regel innerhalb von ein bis zwei Wochen. Schreiben Sie mir, dann sage ich Ihnen einen konkreten Termin.",
+                weiter: ["Wie läuft das ab?", "Termin anfragen"]
+            },
+            {
+                category: "ABLAUF",
+                label: "Was muss ich selbst tun / Mein Aufwand?",
+                keywords: "was muss ich tun, aufwand, mitarbeit, mein aufwand, zuarbeit, wie viel arbeit, wie viel aufwand, wie viel zeit, arbeit fuer uns, unser aufwand",
+                answer: "Ein Gespräch zu Beginn, danach zwei kurze Durchsichten. Die Texte schreibe ich, die Objektdaten hole ich mir selbst. Fragebögen bekommen Sie von mir keine.",
+                weiter: ["Wie lange dauert es?", "Wer schreibt die Texte?"]
+            },
+            {
+                category: "ABLAUF",
+                label: "Korrekturen und Revisionsrunden",
+                keywords: "korrektur, aenderungen, revisionen, korrekturrunden",
+                answer: "Zwei Korrekturrunden sind eingeplant und werden schriftlich festgehalten — damit für beide Seiten klar ist, wann ein Projekt fertig ist.",
+                weiter: ["Wie läuft das ab?", "Was passiert wenn es nicht gefällt?"]
+            },
+            {
+                category: "ABLAUF",
+                label: "Was passiert, wenn der Entwurf nicht gefällt?",
+                keywords: "gefaellt nicht, nicht zufrieden, risiko, absagen, storno",
+                answer: "Dann zahlen Sie nichts und wir gehen auseinander. Sie sehen die fertige Startseite, bevor Geld fließt.",
+                weiter: ["Wie läuft das ab?", "Was kostet das?"]
+            },
+            {
+                category: "ABLAUF",
+                label: "Wer schreibt die Texte für die Website?",
+                keywords: "wer schreibt texte, texte, inhalte, formulieren",
+                answer: "Die Texte schreibe ich. Sie lesen gegen und sagen, was nicht stimmt. Sie müssen nichts vorformulieren.",
+                weiter: ["Was muss ich selbst tun?", "Wer macht die Fotos?"]
+            },
+            {
+                category: "ABLAUF",
+                label: "Wer macht die Fotos / Fotograf?",
+                keywords: "wer macht fotos, fotograf, fotos machen, aufnahmen",
+                answer: "Vorhandene Fotos bereite ich auf. Wenn neue gebraucht werden, klären wir das im Erstgespräch — das ist ein eigener Posten.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+
+            // --- LEISTUNGEN ---
+            {
+                category: "LEISTUNGEN",
+                label: "Objektübersicht & Immobilien-Liste",
+                keywords: "objektuebersicht, objekte anzeigen, immobilien liste",
+                answer: "Ihre Objekte bekommen eine eigene Übersicht auf der Seite. Wenn Sie eine Maklersoftware nutzen, lassen sie sich über die OpenImmo-Schnittstelle einbinden, damit Sie nichts doppelt pflegen.",
+                weiter: ["Binden Sie onOffice an?", "Was kostet das?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "360°-Rundgänge / Virtuelle Besichtigung",
+                keywords: "rundgang, 360, virtuelle besichtigung, matterport",
+                answer: "Ein bestehender Rundgang lässt sich in die Objektseite einbetten. Ich erstelle selbst keine Rundgänge.",
+                weiter: ["Was ist im Preis enthalten?", "Was kostet das?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Mehrsprachige Website / Englisch",
+                keywords: "mehrsprachig, englisch, uebersetzung, zweisprachig",
+                answer: "Eine zweite Sprache ist möglich und wird als eigener Posten kalkuliert.",
+                weiter: ["Was ist im Preis enthalten?", "Was kostet das?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Blog, News & Ratgeber-Bereich",
+                keywords: "blog, news, artikel, ratgeber",
+                answer: "Möglich. Sinnvoll ist es nur, wenn Sie ihn auch pflegen — sonst steht ein alter Beitrag auf Ihrer Seite und schadet mehr, als er nützt.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Google-Rezensionen & Kundenbewertungen",
+                keywords: "bewertungen, google rezensionen, referenzen einbinden",
+                answer: "Ja, Kundenstimmen können eingebunden werden. Echte, mit Freigabe — erfundene kommen mir nicht auf eine Seite.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Kontaktformulare und Anfragen",
+                keywords: "formular, kontaktformular, anfragen, wo landen anfragen",
+                answer: "Anfragen gehen direkt in Ihr Postfach. Kein Zwischenkonto, in das Sie sich einloggen müssen.",
+                weiter: ["Wie läuft das ab?", "Was kostet das?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Newsletter & Mailverteiler",
+                keywords: "newsletter, mailing, verteiler",
+                answer: "Nicht Teil des Standardumfangs. Wenn Sie es brauchen, besprechen wir es im Erstgespräch.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Logo & Corporate Design Gestaltung",
+                keywords: "logo, branding, gestaltung, corporate design",
+                answer: "Ich gestalte seit fünf Jahren. Ein Logo oder eine Auffrischung Ihres Auftritts ist möglich — das ist ein eigenes Projekt neben der Website.",
+                weiter: ["Was kostet das?", "Visitenkarten & Exposés?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Visitenkarten, Drucksachen & Exposé-Gestaltung",
+                keywords: "visitenkarten, print, drucksachen, flyer, expose gestalten",
+                answer: "Exposés und Drucksachen gestalte ich. Das ist tatsächlich der Bereich, aus dem ich komme.",
+                weiter: ["Wer steckt hinter CÉ Studios?", "Was kostet das?"]
+            },
+
+            // --- TECHNIK ---
+            {
+                category: "TECHNIK",
+                label: "Maklersoftware (onOffice, Propstack, FlowFact)",
+                keywords: "onoffice, propstack, flowfact, fio, maklersoftware, crm",
+                answer: "Ihre Objekte lassen sich über die OpenImmo-Schnittstelle einbinden. Ob das bei Ihrer Software sinnvoll ist und was es kostet, klären wir im Erstgespräch.",
+                weiter: ["Was ist OpenImmo?", "Was kostet das?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "OpenImmo Schnittstelle & Daten-Import",
+                keywords: "openimmo, schnittstelle, import, xml",
+                answer: "OpenImmo ist der deutsche Standard dafür. Ihre Software exportiert die Objekte, die Website übernimmt sie. Sie pflegen weiter dort, wo Sie es gewohnt sind.",
+                weiter: ["Binden Sie onOffice an?", "Was kostet das?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "ImmoScout24, Immowelt & Portale",
+                keywords: "immoscout, is24, portal, immowelt",
+                answer: "Ihre Website ersetzt die Portale nicht, sie macht Sie von ihnen unabhängiger. Wer Sie über Google oder eine Empfehlung findet, landet bei Ihnen statt bei einem Portal mit zwanzig Wettbewerbern daneben.",
+                weiter: ["Wie läuft das ab?", "Was kostet das?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Domain & Wunschadresse",
+                keywords: "domain, adresse, wunschadresse, url",
+                answer: "Die Domain läuft auf Ihren Namen, nicht auf meinen. Bei der Auswahl und Einrichtung helfe ich.",
+                weiter: ["Wo liegt die Website gehostet?", "Was kostet das?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Hosting & Server-Standort",
+                keywords: "hosting, server, wo liegt die seite",
+                answer: "Die Seite liegt bei einem Hoster auf Ihrem eigenen Konto. Welcher das ist, besprechen wir — Sie bleiben Inhaber.",
+                weiter: ["Wem gehört die Seite?", "Was kostet das?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "E-Mail-Adressen auf eigener Domain",
+                keywords: "email adresse, postfach, info at",
+                answer: "E-Mail-Adressen auf Ihrer Domain richte ich mit ein.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Umzug einer bestehenden Website / Migration",
+                keywords: "umziehen, bestehende seite, alte seite, migration",
+                answer: "Inhalte einer bestehenden Seite kann ich übernehmen. Alte Adressen leite ich weiter, damit nichts ins Leere läuft.",
+                weiter: ["Wie läuft das ab?", "Was kostet das?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Website selbst pflegen oder CMS?",
+                keywords: "selbst pflegen, selber aendern, cms, bearbeiten, pflege",
+                answer: "Objekte laufen über die Schnittstelle aus Ihrer Software, da müssen Sie nichts tun. Texte, Team und Bilder ändere ich für Sie — eine Mail genügt, meist am selben Tag erledigt. Wenn Sie es lieber selbst machen wollen, besprechen wir die Möglichkeiten.",
+                weiter: ["Gibt es laufende Kosten?", "Wie läuft das ab?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Optimierung fürs Handy / Responsivität",
+                keywords: "handy, mobil, smartphone, responsive, tablet",
+                answer: "Zuerst fürs Handy gebaut, weil dort entschieden wird. Danach für Tablet und Rechner.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Ladezeit & Schnelligkeit",
+                keywords: "ladezeit, schnell, geschwindigkeit, performance",
+                answer: "Handgeschriebener Code ohne Ballast, Bilder komprimiert, keine externen Dienste, die beim Aufruf laden. Konkrete Sekundenwerte verspreche ich nicht — die hängen auch an Ihrer Verbindung.",
+                weiter: ["Wie sieht es mit Datenschutz aus?", "Was kostet das?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Barrierefreiheit & Lesbarkeit",
+                keywords: "barrierefrei, accessibility, lesbarkeit",
+                answer: "Ich achte auf lesbare Schriftgrößen, Kontraste und Bedienbarkeit mit der Tastatur. Eine förmliche Barrierefreiheits-Zertifizierung ist das nicht.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+
+            // --- RECHT ---
+            {
+                category: "RECHT",
+                label: "Datenschutz, DSGVO, Tracking & Schriften",
+                keywords: "datenschutz, dsgvo, tracking, cookies, schriften",
+                answer: "Ich baue technisch datenschutzfreundlich: Schriften liegen lokal, kein Tracking, keine externen Dienste, die beim Aufruf Daten übertragen. Impressum und Datenschutzerklärung binde ich ein — die Texte lassen Sie bitte rechtlich prüfen, das darf ich als Gestalter nicht leisten.",
+                weiter: ["Brauche ich ein Cookie-Banner?", "Was sind die Pflichtangaben?"]
+            },
+            {
+                category: "RECHT",
+                label: "Brauche ich ein Cookie-Banner?",
+                keywords: "cookie banner, einwilligung, consent",
+                answer: "Wenn keine Cookies zu Analyse- oder Werbezwecken gesetzt werden, braucht es auch kein Banner. Sobald Sie später ein Tool einbauen, ändert sich das.",
+                weiter: ["Wie sieht es mit DSGVO aus?", "Was kostet das?"]
+            },
+            {
+                category: "RECHT",
+                label: "Impressum & Anbieterkennzeichnung",
+                keywords: "impressum, anbieterkennzeichnung",
+                answer: "Impressum und Datenschutzerklärung binde ich ein und verlinke sie von jeder Seite. Die Inhalte liefern Sie beziehungsweise Ihr Anwalt.",
+                weiter: ["Wie sieht es mit DSGVO aus?", "Was sind die Pflichtangaben?"]
+            },
+            {
+                category: "RECHT",
+                label: "Pflichtangaben nach § 87 GEG / GModG",
+                keywords: "pflichtangaben, energieausweis, gmodg, geg, energieeffizienzklasse",
+                answer: "Nach § 87 GModG müssen fünf Angaben in jede Anzeige, wenn ein Energieausweis vorliegt: Art des Ausweises, Endenergiewert, wesentlicher Energieträger, Baujahr und Energieeffizienzklasse. Ich habe dazu eine Checkliste zum Abhaken — kostenlos.",
+                weiter: ["Checkliste herunterladen"]
+            },
+            {
+                category: "RECHT",
+                label: "Abmahnungen & Bußgelder vermeiden",
+                keywords: "abmahnung, bussgeld, ordnungswidrigkeit, abmahnverein",
+                answer: "In der Praxis sind Abmahnungen durch Wettbewerber und Verbände das häufigere Risiko, nicht das Bußgeld. Meine Checkliste zeigt Ihnen in zwei Minuten pro Objekt, ob etwas fehlt. Eine Rechtsberatung ist das nicht.",
+                weiter: ["Checkliste herunterladen", "Was sind die Pflichtangaben?"]
+            },
+            {
+                category: "RECHT",
+                label: "Wem gehören die Website & Dateien?",
+                keywords: "wem gehoert, eigentum, rechte, quellcode",
+                answer: "Die Dateien Ihrer Website gehören Ihnen. Sie können jederzeit umziehen und mit jedem anderen weiterarbeiten.",
+                weiter: ["Gibt es eine Kündigungsfrist?", "Was kostet das?"]
+            },
+            {
+                category: "RECHT",
+                label: "Kündigung & Vertragsbeendigung",
+                keywords: "kuendigen, vertrag beenden, ausstieg",
+                answer: "Für die Website gibt es nichts zu kündigen — sie ist bezahlt und gehört Ihnen. Eine laufende Betreuung wäre monatlich kündbar.",
+                weiter: ["Gibt es laufende Kosten?", "Was kostet das?"]
+            },
+
+            // --- SICHTBARKEIT ---
+            {
+                category: "SICHTBARKEIT",
+                label: "Google-Ranking & SEO",
+                keywords: "google, seo, gefunden werden, suchmaschine, ranking",
+                answer: "Ich baue die Seite technisch sauber: sinnvolle Titel, klare Struktur, schnelle Ladezeit. Platzierungen bei Google kann und will Ihnen niemand seriös versprechen — wer das tut, sollte Sie misstrauisch machen.",
+                weiter: ["Was bringt Google Business?", "Wie läuft das ab?"]
+            },
+            {
+                category: "SICHTBARKEIT",
+                label: "Google Unternehmensprofil (Maps / Brancheneintrag)",
+                keywords: "google business, maps, brancheneintrag",
+                answer: "Ihr Google-Unternehmensprofil ist für ein lokales Maklerbüro oft wichtiger als die Website selbst. Ich zeige Ihnen gern, was dort zu tun ist.",
+                weiter: ["Google Ranking & SEO?", "Was kostet das?"]
+            },
+            {
+                category: "SICHTBARKEIT",
+                label: "Social Media Kanäle",
+                keywords: "social media, instagram, facebook, linkedin",
+                answer: "Kanäle bespiele ich nicht. Ich kann Ihre Seite so aufbauen, dass sie beim Teilen ordentlich aussieht.",
+                weiter: ["Schalten Sie Google Ads?", "Was ist im Preis enthalten?"]
+            },
+            {
+                category: "SICHTBARKEIT",
+                label: "Werbung schalten & Google Ads",
+                keywords: "werbung, ads, anzeigen schalten, google ads",
+                answer: "Keine Werbeschaltung. Ich baue die Seite, auf der Werbung landen würde.",
+                weiter: ["Bringt eine neue Website mehr Anfragen?", "Was kostet das?"]
+            },
+            {
+                category: "SICHTBARKEIT",
+                label: "Bringt eine Website mehr Anfragen & Kunden?",
+                keywords: "mehr anfragen, mehr kunden, bringt das was, erfolg",
+                answer: "Ich verspreche Ihnen keine Anfragen — das hängt an Ihrem Markt, Ihrem Ruf und daran, wie schnell Sie ans Telefon gehen. Was ich zusage: Die Leute, die schon kommen, sollen nicht mehr abspringen, weil die Seite am Handy nicht funktioniert.",
+                weiter: ["Wie läuft das ab?", "Was kostet das?"]
+            },
+
+            // --- ÜBER CÉ STUDIOS ---
+            {
+                category: "ÜBER CÉ STUDIOS",
+                label: "Wer steckt hinter CÉ Studios?",
+                keywords: "wer bist du, cyril, wer steckt dahinter, ueber euch",
+                answer: "Cyril Portmann, Wiesbaden. Immobilienkaufmann in Ausbildung und seit fünf Jahren Gestalter. Ich sitze selbst im Maklerbüro — was in ein Exposé gehört und wie ein Verkauf abläuft, muss mir niemand erklären.",
+                weiter: ["Habt ihr Referenzen?", "Wo sitzt ihr?"]
+            },
+            {
+                category: "ÜBER CÉ STUDIOS",
+                label: "Referenzen & Portfolio",
+                keywords: "referenzen, beispiele, projekte, portfolio, wen habt ihr",
+                answer: "Ich baue CÉ Studios gerade in der Immobiliennische auf, deshalb zeige ich Ihnen lieber etwas Konkretes als eine Liste: Schicken Sie mir den Link zu Ihrer Seite, dann bekommen Sie eine ehrliche Einschätzung — und auf Wunsch einen Entwurf, bevor Sie zahlen.",
+                weiter: ["Wie lange sind Sie dabei?", "Kostenlose Einschätzung anfragen"]
+            },
+            {
+                category: "ÜBER CÉ STUDIOS",
+                label: "Erfahrung & Werdegang",
+                keywords: "wie lange dabei, erfahrung, seit wann",
+                answer: "Fünf Jahre Gestaltung, dazu die Ausbildung im Immobilienbereich. Die Verbindung aus beidem ist der Punkt.",
+                weiter: ["Arbeiten Sie allein oder im Team?", "Was kostet das?"]
+            },
+            {
+                category: "ÜBER CÉ STUDIOS",
+                label: "Allein oder Agentur-Team?",
+                keywords: "allein, team, mitarbeiter, agentur groesse",
+                answer: "Ich arbeite allein. Das heißt: Sie sprechen immer mit demselben Menschen, und der kennt Ihr Projekt.",
+                weiter: ["Wo sitzt ihr?", "Wie läuft die Zusammenarbeit ab?"]
+            },
+            // --- REGION ---
+            {
+                category: "REGION",
+                label: "Standort & Firmensitz",
+                keywords: "wo sitzt ihr, standort, wo seid ihr, adresse, buero, wiesbaden",
+                answer: "CÉ Studios sitzt in Wiesbaden und arbeitet für Maklerbüros in ganz Deutschland.",
+                weiter: ["Arbeiten Sie deutschlandweit?", "Treffen vor Ort möglich?"]
+            },
+            {
+                category: "REGION",
+                label: "Deutschlandweite Zusammenarbeit",
+                keywords: "deutschlandweit, bundesweit, ueberall, auch in, entfernung, kommt ihr nach, weit weg, andere stadt",
+                answer: "Ja, deutschlandweit. Der Ablauf läuft ohnehin über Telefon, Mail und Bildschirmfreigabe — wo Ihr Büro steht, spielt für die Zusammenarbeit keine Rolle.",
+                weiter: ["Wie läuft die Zusammenarbeit ab?", "Treffen vor Ort möglich?"]
+            },
+            {
+                category: "REGION",
+                label: "Zusammenarbeit nach Städten & Regionen",
+                keywords: "berlin, hamburg, muenchen, koeln, frankfurt, stuttgart, duesseldorf, leipzig, dresden, hannover, nuernberg, bremen, essen, dortmund, mainz, darmstadt, mannheim, karlsruhe, freiburg, muenster, augsburg, bonn, kiel, rostock, erfurt, oesterreich, schweiz",
+                answer: "Ja, dort arbeite ich auch. CÉ Studios sitzt in Wiesbaden und betreut Maklerbüros in ganz Deutschland.",
+                weiter: ["Wie läuft die Zusammenarbeit ab?", "Was kostet das?"]
+            },
+            {
+                category: "REGION",
+                label: "Persönliches Treffen vor Ort",
+                keywords: "vor ort, persoenlich treffen, besuch, vorbeikommen",
+                answer: "Ein Treffen vor Ort geht im Rhein-Main-Gebiet unkompliziert. Darüber hinaus auf Absprache — meistens reicht ein Telefonat mit Bildschirmfreigabe völlig aus.",
+                weiter: ["Wo sitzt ihr?", "Wie läuft das Erstgespräch ab?"]
+            },
+            // --- WARUM CÉ STUDIOS ---
+            {
+                category: "WARUM CÉ STUDIOS",
+                label: "Warum CÉ Studios?",
+                keywords: "warum ce studios, warum cé studios, warum ihr, warum sie, warum wir, warum dich, warum du, ueberzeugen, warum sollte ich, wieso sie",
+                answer: "Weil ich das Geschäft kenne, in dem Sie arbeiten. Eine Agentur baut Ihnen eine schöne Seite und lässt sich dann erklären, was ein Alleinauftrag ist. Ich sitze selbst im Maklerbüro. Und Sie sehen die fertige Startseite, bevor Sie zahlen — das kann ein Betrieb mit Gehältern gar nicht anbieten.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "WARUM CÉ STUDIOS",
+                label: "Warum nicht jemand anderen / Konkurrenz?",
+                keywords: "warum nicht jemand anderen, warum nicht agentur, konkurrenz, andere anbieter, vergleich anbieter",
+                answer: "Ehrliche Antwort: Wenn Sie jemanden haben, der Ihr Geschäft versteht und dessen Arbeit Ihnen gefällt, nehmen Sie den. Falls nicht — schicken Sie mir den Link zu Ihrer Seite. Sie bekommen eine Einschätzung und danach einen Entwurf, bevor Geld fließt. Dann müssen Sie nicht glauben, sondern können sehen.",
+                weiter: ["Was zeichnet Sie aus?", "Kostenlose Einschätzung anfragen"]
+            },
+            {
+                category: "WARUM CÉ STUDIOS",
+                label: "Was macht Sie besser als eine Agentur?",
+                keywords: "besser als agentur, was macht euch besser, staerken",
+                answer: "Nicht besser, anders. Eine Agentur hat mehr Leute und mehr Referenzen als ich. Ich habe das Fachwissen Ihrer Branche, keinen Overhead — und Sie tragen kein Risiko, weil Sie erst nach dem Entwurf entscheiden.",
+                weiter: ["Wie läuft das ab ohne Anzahlung?", "Was kostet das?"]
+            },
+            {
+                category: "WARUM CÉ STUDIOS",
+                label: "Alleinstellungsmerkmal von CÉ Studios",
+                keywords: "alleinstellung, was macht euch besonders, unterschied, was koennt ihr was andere nicht",
+                answer: "Zwei Dinge, die zusammen selten sind: Ich gestalte seit fünf Jahren, und ich arbeite in der Immobilienwirtschaft. Die meisten Agenturen können das eine, die meisten Fotografen das andere. Deshalb müssen Sie sonst zwei Leute beauftragen und beiden erklären, was Sie eigentlich brauchen.",
+                weiter: ["Wie läuft die Zusammenarbeit ab?", "Was kostet das?"]
+            },
+            {
+                category: "WARUM CÉ STUDIOS",
+                label: "Entstehung und Motivation von CÉ Studios",
+                keywords: "warum gibt es euch, warum macht ihr das, geschichte, wie kam es dazu, motivation",
+                answer: "Weil mir bei der Arbeit ständig Maklerseiten begegnen, die gut gemachte Objekte schlecht aussehen lassen. Ich kann gestalten und ich kenne die Branche — es lag nahe, beides zu verbinden.",
+                weiter: ["Wer steckt hinter CÉ Studios?", "Was kostet das?"]
+            },
+            {
+                category: "WARUM CÉ STUDIOS",
+                label: "Warum nur Immobilien?",
+                keywords: "warum nur immobilien, nische, spezialisierung, nur makler",
+                answer: "Weil man eine Branche entweder kennt oder nicht. Wer heute eine Zahnarztpraxis und morgen ein Maklerbüro baut, kennt keine von beiden richtig.",
+                weiter: ["Was zeichnet Sie aus?", "Wie läuft das ab?"]
+            },
+            {
+                category: "WARUM CÉ STUDIOS",
+                label: "Zu jung / Ausbildung / Fehlende Erfahrung?",
+                keywords: "zu jung, ausbildung, azubi, erfahrung fehlt, anfaenger",
+                answer: "Stimmt, ich stehe am Anfang. Das heißt aber auch: Sie bekommen meine volle Aufmerksamkeit statt eines Praktikanten, einen Preis, den eine Agentur mit Angestellten nicht machen kann — und Sie sehen die Arbeit, bevor Sie zahlen.",
+                weiter: ["Was kostet das?", "Wie läuft das ab ohne Anzahlung?"]
+            },
+            {
+                category: "WARUM CÉ STUDIOS",
+                label: "Was wenn Sie aufhören / Ausfall?",
+                keywords: "was wenn sie aufhoeren, hoeren sie auf, was ist wenn sie weg sind, abhaengigkeit, ausfall",
+                answer: "Die Dateien gehören Ihnen und die Seite läuft auf Ihrem Konto. Wenn ich morgen aufhöre, kann jeder andere damit weiterarbeiten. Genau deshalb setze ich es so auf.",
+                weiter: ["Wem gehört die Website?", "Wie läuft das ab?"]
+            },
+            {
+                category: "ÜBER CÉ STUDIOS",
+                label: "Erreichbarkeit & Telefon",
+                keywords: "erreichbar, telefon, wann erreichbar, rueckruf",
+                answer: "Schreiben Sie mir an service@ce-studios.de, gern mit Ihrer Nummer und wann es Ihnen passt. Ich melde mich innerhalb von zwei Werktagen.",
+                weiter: ["Erstgespräch vereinbaren", "Was kostet das?"]
+            },
+
+            // --- EINWÄNDE ---
+            {
+                category: "EINWÄNDE",
+                label: "Wir haben schon eine Website",
+                keywords: "haben schon eine website, brauchen keine, schon eine seite",
+                answer: "Dann ist die Frage nicht, ob Sie eine haben, sondern was sie verliert. Schicken Sie mir den Link — ich sage Ihnen in drei Punkten, wo Interessenten abspringen. Kostenlos, ohne dass Sie danach etwas bestellen müssen.",
+                weiter: ["Kostenlose Einschätzung anfragen", "Was kostet das?"]
+            },
+            {
+                category: "EINWÄNDE",
+                label: "Keine Zeit / Zu viel Stress",
+                keywords: "keine zeit, zu viel aufwand, stress, kein kopf dafuer",
+                answer: "Deshalb ist Ihr Anteil klein gehalten: ein Gespräch, danach zwei kurze Durchsichten. Alles andere mache ich.",
+                weiter: ["Was muss ich selbst tun?", "Wie lange dauert es?"]
+            },
+            {
+                category: "Preis & Zahlung",
+                label: "Ist das Erstgespräch kostenlos?",
+                keywords: "kostenlos, gratis, umsonst, unverbindlich, ohne kosten",
+                answer: "Das Erstgespräch und die Einschätzung Ihrer Seite kosten nichts, auch dann nicht, wenn Sie danach absagen. Ebenso die Checkliste zu den Pflichtangaben.",
+                weiter: ["Wie läuft das ab?", "Was kostet die Website?"]
+            },
+            {
+                category: "EINWÄNDE",
+                label: "Zu teuer / Kein Budget",
+                keywords: "zu teuer, kein budget, zu viel geld, lohnt nicht",
+                answer: "Verständlich. Fragen Sie sich einmal, was Sie im Monat an Portalgebühren zahlen — und stellen Sie einen einmaligen Betrag daneben. Wenn es dann immer noch nicht passt, sagen Sie ab, das ist völlig in Ordnung.",
+                weiter: ["Ratenzahlung möglich?", "Wie läuft das ab ohne Anzahlung?"]
+            },
+            {
+                category: "EINWÄNDE",
+                label: "Machen wir selbst / Verwandter / Neffe",
+                keywords: "machen wir selbst, neffe, bekannter, intern",
+                answer: "Kann gut funktionieren. Was dabei meistens fehlt, ist jemand, der weiß, was ein Eigentümer sehen will, bevor er einen Alleinauftrag vergibt.",
+                weiter: ["Was unterscheidet CÉ Studios?", "Kostenlose Einschätzung anfragen"]
+            },
+            {
+                category: "EINWÄNDE",
+                label: "Wir sind nur ein kleines Büro",
+                keywords: "zu klein, nur zwei leute, kleines buero, lohnt sich das",
+                answer: "Gerade kleine Büros profitieren, weil sie nicht über Masse gewinnen, sondern über Vertrauen. Und Vertrauen entsteht in den ersten Sekunden auf dem Handy.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "EINWÄNDE",
+                label: "Später / Nächstes Jahr",
+                keywords: "spaeter, melde mich, nicht jetzt, naechstes jahr",
+                answer: "Gern. Nehmen Sie in der Zwischenzeit die Checkliste zu den Pflichtangaben mit — die kostet nichts und bringt Ihnen sofort etwas.",
+                weiter: ["Checkliste herunterladen", "Erstgespräch vereinbaren"]
+            },
+            {
+                category: "EINWÄNDE",
+                label: "Angebot einer anderen Agentur liegt vor",
+                keywords: "andere agentur, angebot vorliegen, vergleichen",
+                answer: "Holen Sie ruhig Angebote ein. Fragen Sie dabei drei Dinge: Wer schreibt die Texte, wem gehört die Seite am Ende, und was passiert, wenn Ihnen der Entwurf nicht gefällt.",
+                weiter: ["Wie läuft das bei Ihnen ab?", "Was kostet das?"]
+            },
+
+            // --- NÄCHSTER SCHRITT ---
+            {
+                category: "NÄCHSTER SCHRITT",
+                label: "Kontakt aufnehmen",
+                keywords: "kontakt, anfrage, melden, schreiben, erreichen",
+                answer: "Am einfachsten per Mail an service@ce-studios.de. Schicken Sie den Link zu Ihrer Seite mit, dann ist meine Antwort gleich konkret.",
+                weiter: ["Erstgespräch vereinbaren", "Was kostet das?"]
+            },
+            {
+                category: "NÄCHSTER SCHRITT",
+                label: "Kostenloses Erstgespräch vereinbaren",
+                keywords: "termin, gespraech, telefonat, beratung, kennenlernen",
+                answer: "Schreiben Sie mir zwei Zeitfenster, die Ihnen passen, dann bestätige ich eines. Das Erstgespräch kostet nichts.",
+                weiter: ["Wie läuft das Erstgespräch ab?", "Was kostet das?"]
+            },
+            {
+                category: "NÄCHSTER SCHRITT",
+                label: "Checkliste herunterladen",
+                keywords: "checkliste, download, pdf, unterlagen",
+                answer: "Die Checkliste zu den fünf Pflichtangaben nach § 87 GModG bekommen Sie kostenlos — zwei Seiten, zum Abhaken an einem Objekt.",
+                weiter: ["Checkliste herunterladen", "Was sind die Pflichtangaben?"]
+            },
+            {
+                category: "NÄCHSTER SCHRITT",
+                label: "Kostenlose Einschätzung der aktuellen Website",
+                keywords: "einschaetzung, analyse, pruefen sie meine seite, feedback",
+                answer: "Schicken Sie mir den Link. Sie bekommen innerhalb von zwei Werktagen eine schriftliche Einschätzung: drei Punkte, keine Verkaufspräsentation. Wenn Ihre Seite gut ist, sage ich Ihnen das auch.",
+                weiter: ["Kostenlose Einschätzung anfragen", "Wie läuft das ab?"]
+            },
+
+            // =========================================================================
+            // 4 — WEITERE KATALOG-EINTRÄGE (24 NEUE EINTRÄGE)
+            // =========================================================================
+            {
+                category: "TECHNIK",
+                label: "Website-Baukästen (Wix, Jimdo, WordPress, Squarespace)",
+                keywords: "wix, jimdo, baukasten, wordpress, squarespace, homepage baukasten",
+                answer: "Ein Baukasten ist günstig und schnell. Der Preis dafür ist, dass man Ihrer Seite ansieht, aus welchem Baukasten sie kommt — und dass Sie an den Anbieter gebunden sind.",
+                weiter: ["Was kostet eine Website?", "Wie sicher ist handgeschriebener Code?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Wartung, Updates & technische Pflege",
+                keywords: "wartung, updates, pflege der technik, sicherheitsupdates",
+                answer: "Weil ich ohne Baukasten und ohne Plugins baue, gibt es nichts, was regelmäßig aktualisiert werden müsste. Das ist einer der Vorteile dieser Bauweise.",
+                weiter: ["Gibt es laufende Kosten?", "Wie sicher ist die Seite?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Sicherheit gegen Hacker & Viren",
+                keywords: "sicherheit, gehackt, hacker, virus, schadsoftware",
+                answer: "Die Seite besteht aus festen Dateien ohne Datenbank und ohne Login — es gibt schlicht wenig, wo jemand ansetzen könnte.",
+                weiter: ["Gibt es Backups?", "Muss die Seite gewartet werden?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Backups & Datensicherung",
+                keywords: "backup, sicherung, datenverlust",
+                answer: "Alle Dateien liegen versioniert, ältere Stände lassen sich jederzeit wiederherstellen.",
+                weiter: ["Wem gehört die Seite?", "Wo liegt die Seite gehostet?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Besucherstatistiken & Analytics",
+                keywords: "statistik, besucherzahlen, wie viele besucher, analytics",
+                answer: "Standardmäßig ist kein Tracking eingebaut. Wenn Sie Zahlen möchten, gibt es datenschutzfreundliche Lösungen — das besprechen wir dann, weil es in die Datenschutzerklärung muss.",
+                weiter: ["Wie steht es um Datenschutz?", "Brauche ich ein Cookie-Banner?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Videos, Imagefilme & Drohnenaufnahmen",
+                keywords: "video, imagefilm, drohne, luftaufnahme",
+                answer: "Videos binde ich ein, wenn Sie welche haben. Gedreht wird nicht von mir.",
+                weiter: ["Können 360°-Rundgänge eingebunden werden?", "Was ist im Preis enthalten?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Grundrisse & Raumaufteilung",
+                keywords: "grundriss, plan, raumaufteilung",
+                answer: "Grundrisse können auf der Objektseite eingebunden und optisch an Ihren Auftritt angepasst werden.",
+                weiter: ["Was kosten Objektseiten?", "Wer bereitet die Fotos auf?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Home Staging & virtuelles Möblieren",
+                keywords: "home staging, moebliert, virtuell einrichten",
+                answer: "Virtuelles Möblieren biete ich nicht an. Bildaufbereitung von vorhandenen Fotos schon.",
+                weiter: ["Was kostet Bildaufbereitung?", "Was ist im Preis enthalten?"]
+            },
+            {
+                category: "RECHT",
+                label: "Energieausweis erstellen lassen",
+                keywords: "energieausweis besorgen, ausweis erstellen, energieberater",
+                answer: "Energieausweise stellt ein Aussteller aus, nicht ich. Ich kann Ihnen nur sagen, welche Angaben daraus ins Inserat müssen.",
+                weiter: ["Checkliste herunterladen", "Was sind die Pflichtangaben?"]
+            },
+            {
+                category: "RECHT",
+                label: "Notar, Kaufvertrag & Beurkundung",
+                keywords: "notar, kaufvertrag, beurkundung",
+                answer: "Das gehört zum Verkaufsprozess, nicht zur Website. Ich weiß, wie es abläuft — beraten dürfen dazu andere.",
+                weiter: ["Wer steckt hinter CÉ Studios?", "Wie läuft die Zusammenarbeit ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Finanzierungsrechner einbinden",
+                keywords: "finanzierungsrechner, rechner einbinden, budgetrechner",
+                answer: "Ein Rechner eines Drittanbieters lässt sich einbinden. Das ist ein eigener Posten und muss in die Datenschutzerklärung.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Wertermittlungstool für Immobilien",
+                keywords: "wertermittlung, bewertungstool, was ist meine immobilie wert",
+                answer: "Ein Bewertungstool ist ein eigener Dienst, den man einbindet. Machbar, aber mit laufenden Kosten und Datenschutzaufwand — besprechen wir im Erstgespräch.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Chatbot für Makler-Website",
+                keywords: "chatbot, assistent, ki auf meiner seite",
+                answer: "So einer wie ich lässt sich auch auf Ihrer Seite einbauen. Was Sie hier sehen, ist die einfache Variante mit festen Antworten.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Online-Terminbuchung & Kalender",
+                keywords: "terminbuchung, kalender, online termin",
+                answer: "Ein Buchungskalender ist möglich, meist über einen Anbieter. Auch das ist ein eigener Posten mit Datenschutzbezug.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "WhatsApp-Button einbinden",
+                keywords: "whatsapp, messenger, direkt schreiben",
+                answer: "Ein WhatsApp-Knopf ist technisch einfach. Ob Sie das datenschutzrechtlich wollen, sollten Sie vorher klären.",
+                weiter: ["Wie steht es um Datenschutz?", "Wie landen Anfragen bei mir?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Karriereseite & Stellenangebote",
+                keywords: "bewerbung, job, stelle, mitarbeiter gesucht, karriereseite",
+                answer: "Eine Karriereseite gehört oft dazu — Maklerbüros suchen ständig Leute. Sagen Sie Bescheid, wenn Sie eine brauchen.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Kooperationspartner & Partnerfirmen",
+                keywords: "kooperation, partner, zusammenarbeit, empfehlung",
+                answer: "Wenn Sie mit anderen Gewerken oder Büros zusammenarbeiten und das zeigen möchten, bauen wir das ein.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Hausverwaltung & WEG-Verwaltung",
+                keywords: "hausverwaltung, verwaltung, wev, weg",
+                answer: "Wenn Sie neben der Vermittlung verwalten, bekommt das einen eigenen Bereich mit eigenem Kontaktweg.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Websites für Bauträger & Projektentwickler",
+                keywords: "bautraeger, projektentwickler, neubau, projekt",
+                answer: "Für Bauträger und Projektentwickler baue ich Projektseiten mit eigenem Auftritt je Vorhaben — das ist etwas anderes als eine Objektliste.",
+                weiter: ["Was kostet das?", "Erstgespräch vereinbaren"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Gewerbeimmobilien darstellen",
+                keywords: "gewerbe, buero, halle, gewerbeimmobilie",
+                answer: "Gewerbeobjekte gehen genauso. Achtung: dort gelten andere Pflichtangaben als bei Wohngebäuden — drei statt fünf.",
+                weiter: ["Was sind die Pflichtangaben?", "Was kosten Objektseiten?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Vermietungsobjekte separat darstellen",
+                keywords: "vermietung, mieter, mietobjekt",
+                answer: "Vermietungsobjekte lassen sich getrennt von Verkaufsobjekten darstellen, damit sich Interessenten nicht durchklicken müssen.",
+                weiter: ["Wie läuft das ab?", "Binden Sie Maklersoftware an?"]
+            },
+            {
+                category: "RECHT",
+                label: "Datenschutzbeauftragter / DSB",
+                keywords: "datenschutzbeauftragter, dsb, verarbeitungsverzeichnis",
+                answer: "Dazu kann ich nichts sagen — das ist eine Frage an Ihre Datenschutzbeauftragte oder Ihren Anwalt.",
+                weiter: ["Wie sieht es mit DSGVO aus?", "Brauche ich ein Cookie-Banner?"]
+            },
+            {
+                category: "ÜBER CÉ STUDIOS",
+                label: "Wie viele Kunden oder Projekte?",
+                keywords: "wie viele kunden habt ihr, wie viele projekte, auftraege",
+                answer: "Ich baue CÉ Studios gerade in dieser Nische auf und nenne keine Zahlen, die ich nicht belegen kann. Urteilen Sie lieber an einem Entwurf — den bekommen Sie, bevor Sie zahlen.",
+                weiter: ["Wie läuft das ab ohne Anzahlung?", "Was kostet das?"]
+            },
+            {
+                category: "ABLAUF",
+                label: "Erfolgsgarantie / Geld-zurück-Garantie",
+                keywords: "garantie, geld zurueck, zufriedenheitsgarantie",
+                answer: "Eine Erfolgsgarantie gibt es nicht, die wäre unseriös. Was es gibt: Sie sehen die Startseite, bevor Sie zahlen, und können kostenlos absagen.",
+                weiter: ["Wie läuft das ab ohne Anzahlung?", "Was kostet das?"]
+            }
+        ];
+
+        // =========================================================================
+        // ERKENNUNGSLOGIK & ZUSTAND
+        // =========================================================================
+        function normalizeText(str) {
+            return str
+                .toLowerCase()
+                .replace(/ä/g, 'ae')
+                .replace(/ö/g, 'oe')
+                .replace(/ü/g, 'ue')
+                .replace(/ß/g, 'ss')
+                .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'«»„“’–—]/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function commonPrefixLen(a, b) {
+            let len = 0;
+            const min = Math.min(a.length, b.length);
+            while (len < min && a[len] === b[len]) len++;
+            return len;
+        }
+
+        function levenshtein(a, b) {
+            const m = a.length, n = b.length;
+            const d = [];
+            for (let i = 0; i <= m; i++) d[i] = [i];
+            for (let j = 0; j <= n; j++) d[0][j] = j;
+            for (let i = 1; i <= m; i++) {
+                for (let j = 1; j <= n; j++) {
+                    const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+                    d[i][j] = Math.min(
+                        d[i - 1][j] + 1,
+                        d[i][j - 1] + 1,
+                        d[i - 1][j - 1] + cost
+                    );
+                }
+            }
+            return d[m][n];
+        }
+
+        const catalog = rawCatalog.map((entry, index) => {
+            const kwList = entry.keywords
+                .split(',')
+                .map(k => normalizeText(k))
+                .filter(k => k.length > 0);
+            return {
+                index,
+                category: entry.category,
+                label: entry.label,
+                rawKeywords: entry.keywords,
+                keywords: kwList,
+                answer: entry.answer,
+                weiter: entry.weiter
+            };
+        });
+
+        let lastPoolIndex = -1;
+        let consecutiveMisses = 0;
+        let pendingClarification = null;
+
+        const standardFollowups = [
+            "Was kostet das?",
+            "Wie lange dauert es?",
+            "Wie läuft das ab?",
+            "Was muss ich selbst tun?",
+            "Warum CÉ Studios?"
+        ];
+
+        function getRandomPoolAnswer() {
+            let idx;
+            do {
+                idx = Math.floor(Math.random() * fallbackPool.length);
+            } while (idx === lastPoolIndex);
+            lastPoolIndex = idx;
+            return fallbackPool[idx];
+        }
+
+        function processMessage(rawInput) {
+            const inputNorm = normalizeText(rawInput);
+            if (!inputNorm) return null;
+
+            // 1. Bearbeitung einer aktiven "Meinten Sie ...?" Klärung
+            if (pendingClarification) {
+                if (inputNorm === 'ja' || inputNorm === 'ja genau') {
+                    const entry = pendingClarification;
+                    pendingClarification = null;
+                    consecutiveMisses = 0;
+                    return {
+                        answer: entry.answer,
+                        buttons: entry.weiter
+                    };
+                }
+                if (inputNorm === 'nein' || inputNorm === 'nein etwas anderes') {
+                    pendingClarification = null;
+                    consecutiveMisses++;
+                    let text = getRandomPoolAnswer();
+                    let buttons = [...standardFollowups];
+                    if (consecutiveMisses >= 3) {
+                        text += "\n\nWir drehen uns im Kreis — das geht schneller direkt. Schreiben Sie kurz, worum es geht, ich antworte innerhalb von zwei Werktagen.";
+                        buttons = ["Anfrage schreiben", ...standardFollowups];
+                    }
+                    return {
+                        answer: text,
+                        buttons: buttons
+                    };
+                }
+                pendingClarification = null;
+            }
+
+            const inputWords = inputNorm.split(' ').filter(w => w.length > 0);
+
+            // 2. Treffer in den 109 Katalog-Einträgen prüfen
+            let strongMatches = [];
+            let weakMatches = [];
+
+            for (const entry of catalog) {
+                let strongHits = 0;
+                let exactHits = 0;
+                let phraseHits = 0;
+                let weakHits = 0;
+                let maxKwLen = 0;
+
+                for (const kw of entry.keywords) {
+                    // Mehrwort-Stichwort (Phrase): z.B. "was kostet", "zu teuer", "wer bist du"
+                    if (kw.includes(' ')) {
+                        if (inputNorm.includes(kw)) {
+                            strongHits++;
+                            phraseHits++;
+                            if (kw.length > maxKwLen) maxKwLen = kw.length;
+                        } else {
+                            const kwWords = kw.split(' ');
+                            const allFound = kwWords.every(kww => inputWords.includes(kww));
+                            if (allFound) {
+                                strongHits++;
+                                phraseHits++;
+                                if (kw.length > maxKwLen) maxKwLen = kw.length;
+                            }
+                        }
+                    } else {
+                        // Einzelwort-Stichwort
+                        if (inputWords.includes(kw)) {
+                            strongHits++;
+                            exactHits++;
+                            if (kw.length > maxKwLen) maxKwLen = kw.length;
+                        } else if (inputNorm.includes(kw) && kw.length >= 5) {
+                            strongHits++;
+                            if (kw.length > maxKwLen) maxKwLen = kw.length;
+                        } else {
+                            // Stamm- oder Tippfehler-Treffer prüfen
+                            for (const iw of inputWords) {
+                                if (iw.length >= 4 && kw.length >= 4) {
+                                    const cpl = commonPrefixLen(iw, kw);
+                                    if (cpl >= 4) {
+                                        // "kostet" trifft "kosten" -> voller Treffer
+                                        if ((iw.startsWith('kost') && kw.startsWith('kost')) ||
+                                            (iw.startsWith('preis') && kw.startsWith('preis')) ||
+                                            (iw.startsWith('termin') && kw.startsWith('termin')) ||
+                                            (iw.startsWith('kontakt') && kw.startsWith('kontakt'))) {
+                                            strongHits++;
+                                            if (kw.length > maxKwLen) maxKwLen = kw.length;
+                                        } else {
+                                            // Knapper / schwacher Treffer
+                                            weakHits++;
+                                            if (kw.length > maxKwLen) maxKwLen = kw.length;
+                                        }
+                                        break;
+                                    }
+                                }
+                                if (iw.length >= 6 && kw.length >= 6 && Math.abs(iw.length - kw.length) <= 1) {
+                                    if (levenshtein(iw, kw) === 1) {
+                                        weakHits++;
+                                        if (kw.length > maxKwLen) maxKwLen = kw.length;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (strongHits > 0) {
+                    strongMatches.push({ entry, hits: strongHits, phrase: phraseHits, exact: exactHits, maxKwLen });
+                } else if (weakHits > 0) {
+                    weakMatches.push({ entry, hits: weakHits, maxKwLen });
+                }
+            }
+
+            // 3. Starker Treffer gewinnt (mehr Treffer > Phrase > exaktes Wort > längeres Stichwort)
+            if (strongMatches.length > 0) {
+                strongMatches.sort((a, b) => b.hits - a.hits || b.phrase - a.phrase || b.exact - a.exact || b.maxKwLen - a.maxKwLen);
+                const best = strongMatches[0].entry;
+                consecutiveMisses = 0;
+                return {
+                    answer: best.answer,
+                    buttons: best.weiter
+                };
+            }
+
+            // 4. Themen-Ausweichantworten (Teil 3)
+            for (const tf of topicFallbacks) {
+                const hitsTf = tf.keywords.some(k => inputWords.includes(k) || (k.length >= 5 && inputNorm.includes(k)));
+                if (hitsTf) {
+                    return {
+                        answer: tf.answer,
+                        buttons: tf.buttons
+                    };
+                }
+            }
+
+            // 5. Knapper Treffer ("Meinten Sie …?") (Teil 2)
+            weakMatches.sort((a, b) => b.hits - a.hits || a.maxKwLen - b.maxKwLen);
+            if (weakMatches.length >= 1) {
+                const candidate = weakMatches[0].entry;
+                pendingClarification = candidate;
+                return {
+                    answer: `Meinten Sie: ${candidate.label}?`,
+                    buttons: ["Ja, genau", "Nein, etwas anderes"]
+                };
+            }
+
+            // 6. Ausweichantwort aus dem Pool (Teil 1)
+            consecutiveMisses++;
+            let text = getRandomPoolAnswer();
+            let buttons = [...standardFollowups];
+
+            if (consecutiveMisses >= 3) {
+                text += "\n\nWir drehen uns im Kreis — das geht schneller direkt. Schreiben Sie kurz, worum es geht, ich antworte innerhalb von zwei Werktagen.";
+                buttons = ["Anfrage schreiben", ...standardFollowups];
+            }
+
+            return {
+                answer: text,
+                buttons: buttons
+            };
+        }
+
+        // =========================================================================
+        // CHAT INTERAKTION
+        // =========================================================================
+        function handleKey(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function handleChipClick(chipText) {
+            if (chipText === 'Checkliste herunterladen') {
+                window.open('checkliste-pflichtangaben.pdf', '_blank');
+                return;
+            }
+            if (chipText === 'Anfrage schreiben') {
+                window.open('contact.html', '_blank');
+                return;
+            }
+            const input = document.getElementById('chatInput');
+            input.value = chipText;
+            sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            appendMessage('user', text);
+            input.value = '';
+            playChime('user');
+
+            // Typing Indikator
+            const typing = document.getElementById('typingIndicator');
+            typing.classList.add('active');
+            scrollToBottom();
+
+            setTimeout(() => {
+                typing.classList.remove('active');
+                const res = processMessage(text);
+                appendMessage('bot', res.answer, res.buttons);
+                playChime('bot');
+            }, 600);
+        }
+
+        function appendMessage(sender, text, buttons) {
+            const body = document.getElementById('chatBody');
+            const typing = document.getElementById('typingIndicator');
+            
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'ce-message ' + sender;
+
+            const bubble = document.createElement('div');
+            bubble.className = 'ce-bubble';
+            bubble.textContent = text;
+            msgDiv.appendChild(bubble);
+
+            const time = document.createElement('span');
+            time.className = 'ce-msg-time';
+            const now = new Date();
+            time.textContent = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+            msgDiv.appendChild(time);
+
+            if (buttons && buttons.length > 0) {
+                const fDiv = document.createElement('div');
+                fDiv.className = 'ce-followups';
+                buttons.forEach(btnText => {
+                    const btn = document.createElement('button');
+                    btn.className = 'ce-chip';
+                    if (btnText === 'Anfrage schreiben' || btnText === 'Checkliste herunterladen') {
+                        btn.classList.add('special-action');
+                    }
+                    btn.textContent = btnText;
+                    btn.onclick = () => handleChipClick(btnText);
+                    fDiv.appendChild(btn);
+                });
+                msgDiv.appendChild(fDiv);
+            }
+
+            body.insertBefore(msgDiv, typing);
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            const body = document.getElementById('chatBody');
+            body.scrollTop = body.scrollHeight;
+        }
+
+        // =========================================================================
+        // WISSENSBASIS VIEW GENERIEREN
+        // =========================================================================
+        function renderKbGrid(filterTerm = '') {
+            const container = document.getElementById('kbContent');
+            const term = normalizeText(filterTerm);
+
+            const groups = {};
+            catalog.forEach(item => {
+                if (term) {
+                    const matchQ = normalizeText(item.label).includes(term) || normalizeText(item.rawKeywords).includes(term);
+                    const matchA = normalizeText(item.answer).includes(term);
+                    const matchC = normalizeText(item.category).includes(term);
+                    if (!matchQ && !matchA && !matchC) return;
+                }
+                if (!groups[item.category]) groups[item.category] = [];
+                groups[item.category].push(item);
+            });
+
+            let html = '';
+            for (const cat in groups) {
+                html += `
+                    <div class="kb-category-section">
+                        <div class="kb-category-title">${cat} (${groups[cat].length})</div>
+                        <div class="kb-grid">
+                `;
+                groups[cat].forEach(item => {
+                    const weiterHtml = item.weiter && item.weiter.length > 0 
+                        ? `<div class="kb-card-weiter"><strong>Weiter:</strong> ${item.weiter.map(w => `<span>${w}</span>`).join('')}</div>`
+                        : '';
+                    html += `
+                        <div class="kb-card">
+                            <div class="kb-card-q">${item.label}</div>
+                            <div class="kb-card-kw">${item.rawKeywords}</div>
+                            <div class="kb-card-a">${item.answer}</div>
+                            ${weiterHtml}
+                        </div>
+                    `;
+                });
+                html += `
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (Object.keys(groups).length === 0) {
+                html = `<p style="color: var(--text-secondary); padding: 40px 0; text-align: center;">Keine passenden Antworten für "${filterTerm}" gefunden.</p>`;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function filterKb() {
+            const term = document.getElementById('kbSearch').value;
+            renderKbGrid(term);
+        }
+    </script>
+</body>
+</html>

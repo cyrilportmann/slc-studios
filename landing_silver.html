@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CÉ Studios | Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Syncopate', sans-serif;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #111111 0%, #000000 70%);
+        }
+
+        .logo-large {
+            height: 40vh;
+            width: auto;
+            max-width: 80vw;
+            object-fit: contain;
+            filter: drop-shadow(0 0 30px rgba(192,192,192,0.15));
+            animation: float 6s ease-in-out infinite, glow 4s ease-in-out infinite alternate;
+            margin-bottom: 4rem;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .link-wrapper:hover .logo-large {
+            transform: scale(1.03);
+            filter: drop-shadow(0 0 50px rgba(192,192,192,0.3));
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(192,192,192,0.1)); }
+            to { filter: drop-shadow(0 0 40px rgba(192,192,192,0.25)); }
+        }
+
+        @keyframes liquidChrome {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        .enter-text {
+            font-size: 1rem;
+            letter-spacing: 0.6em;
+            text-transform: uppercase;
+            text-decoration: none;
+            background: linear-gradient(
+                135deg,
+                #FFFFFF 0%,
+                #A0A0A0 20%,
+                #333333 48%,
+                #F0F0F0 50%,
+                #FFFFFF 70%,
+                #808080 100%
+            );
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 5px 10px rgba(255,255,255,0.15));
+            opacity: 0;
+            transform: translateY(20px);
+            animation: liquidChrome 5s ease-in-out infinite, fadeUp 1.5s ease 0.5s forwards;
+            transition: filter 0.4s ease;
+        }
+
+        .link-wrapper:hover .enter-text {
+            filter: drop-shadow(0 5px 20px rgba(255,255,255,0.4));
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .link-wrapper {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <a href="cd_portfolio_silver.html" class="link-wrapper">
+        <img src="logo_ce_needle.png" alt="CÉ Logo" class="logo-large">
+        <div class="enter-text">ENTER STUDIOS</div>
+    </a>
+</body>
+</html>
+

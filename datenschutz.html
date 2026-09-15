@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CÉ Studios — Datenschutzerklärung</title>
+    
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta name="theme-color" content="#FFFFFF">
+
+    <!-- Open Graph / Link Preview -->
+    <meta property="og:title" content="CÉ Studios — Websites für ihr Immobilienunternehmen">
+    <meta property="og:description" content="Ihre Objekte verdienen mehr als eine Liste.">
+    <meta property="og:image" content="og-bild.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <style>
+        /* =========================================================================
+           LOKALE SCHRIFTARTEN (DSGVO-KONFORM)
+           ========================================================================= */
+        @font-face {
+            font-family: 'Archivo';
+            font-style: normal;
+            font-weight: 400;
+            src: url('fonts/archivo-400.ttf') format('truetype');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Archivo';
+            font-style: normal;
+            font-weight: 500;
+            src: url('fonts/archivo-500.ttf') format('truetype');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Bodoni Moda';
+            font-style: normal;
+            font-weight: 400;
+            src: url('fonts/bodoni-moda-400.ttf') format('truetype');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Bodoni Moda';
+            font-weight: 600;
+            src: url('fonts/bodoni-moda-600.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        /* =========================================================================
+           THEME & RESET (STRICKTE FARBPALETTE)
+           ========================================================================= */
+        :root {
+            --bg: #FFFFFF;
+            --bg-secondary: #FAF9F7;
+            --text: #0A0A0A;
+            --text-secondary: #767370;
+            --line: #E8E6E2;
+            --font-display: 'Bodoni Moda', serif;
+            --font-sans: 'Archivo', sans-serif;
+            --max-width: 800px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Keyboard Focus Style */
+        *:focus-visible {
+            outline: 2px solid var(--text);
+            outline-offset: 4px;
+        }
+
+        /* =========================================================================
+           TYPOGRAFIE & BASIS-ELEMENTE
+           ========================================================================= */
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            color: var(--text);
+        }
+
+        p, address, ul {
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            font-style: normal;
+        }
+
+        address {
+            line-height: 1.8;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 1.25rem;
+        }
+
+        ul li {
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        ul li::before {
+            content: "—";
+            position: absolute;
+            left: -1.25rem;
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: var(--text);
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+
+        /* Underline effect from left to right */
+        a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: currentColor;
+            transform-origin: bottom left;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        a:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Labels / Kickers */
+        .label {
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--text-secondary);
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        /* =========================================================================
+           LAYOUT UTILITIES
+           ========================================================================= */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 120px 40px;
+            width: 100%;
+        }
+
+        /* =========================================================================
+           KOPFZEILE (HEADER)
+           ========================================================================= */
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 40px 0;
+        }
+
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo-img {
+            height: 30px;
+            width: auto;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .brand-logo:hover .brand-logo-img {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 900px) {
+            .brand-logo-img {
+                height: 24px;
+            }
+        }
+
+        .contact-link {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 10px 0;
+        }
+
+        /* =========================================================================
+           CONTENT SECTIONS
+           ========================================================================= */
+        .legal-title {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            margin-bottom: 4rem;
+            font-weight: 400;
+        }
+
+        .legal-section {
+            margin-bottom: 4rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .legal-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .legal-section h2 {
+            font-family: var(--font-sans);
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--text-secondary);
+            margin-bottom: 1.8rem;
+        }
+
+        .legal-section h3 {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* =========================================================================
+           FUSSZEILE (FOOTER)
+           ========================================================================= */
+        .footer {
+            padding: 80px 0;
+            border-top: 1px solid var(--line);
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 40px;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 400px;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .footer-tagline {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .footer-link {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .footer-link:hover {
+            color: var(--text);
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                padding: 100px 20px 40px 20px;
+            }
+            .header-nav, .footer-grid {
+                padding: 0 20px;
+            }
+            .footer-grid {
+                flex-direction: column;
+                gap: 32px;
+            }
+            .footer-right {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- KOPFZEILE -->
+    <header class="header">
+        <div class="header-nav">
+            <a href="index.html" class="brand-logo" aria-label="CÉ Studios Startseite">
+                <img src="logo_transparent.png" alt="CÉ Studios" class="brand-logo-img">
+            </a>
+            <a href="contact.html" class="contact-link">Kontakt</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="legal-title">Datenschutzerklärung</h1>
+        
+        <div class="legal-section">
+            <h2>1. Verantwortlicher</h2>
+            <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist:</p>
+            <address>
+                Cyril Portmann<br>
+                Geschäftsbezeichnung: CÉ Studios<br>
+                c/o IP-Management #10806<br>
+                Ludwig-Erhard-Straße 18<br>
+                20459 Hamburg<br>
+                Deutschland<br><br>
+                E-Mail: <a href="mailto:service@ce-studios.de">service@ce-studios.de</a><br>
+                Telefon: 015904366388
+            </address>
+        </div>
+        
+        <div class="legal-section">
+            <h2>2. Allgemeines zur Datenverarbeitung</h2>
+            <p>
+                Wir verarbeiten personenbezogene Daten unserer Nutzer grundsätzlich nur, soweit dies zur Bereitstellung einer funktionsfähigen Website sowie unserer Inhalte und Leistungen erforderlich ist. Die Verarbeitung personenbezogener Daten erfolgt regelmäßig nur mit Einwilligung des Nutzers, soweit nicht eine gesetzliche Erlaubnisvorschrift vorliegt (Art. 6 Abs. 1 lit. a, b, f DSGVO).
+            </p>
+        </div>
+        
+        <div class="legal-section">
+            <h2>3. Hosting durch Netlify (Auftragsverarbeiter &amp; Drittlandübermittlung USA)</h2>
+            <p>
+                Wir setzen für das Hosting und die Auslieferung dieser Website den Dienstleister Netlify, Inc., 44 Montgomery Street, Suite 300, San Francisco, CA 94104, USA, als Auftragsverarbeiter gemäß Art. 28 DSGVO ein.
+            </p>
+            <p>
+                Im Rahmen des technischen Betriebs können Verbindungsdaten (z. B. IP-Adresse, Datum und Uhrzeit des Zugriffs) an Server von Netlify in die USA übermittelt werden. Die Datenübermittlung in die USA wird auf die Standardvertragsklauseln der EU-Kommission gestützt sowie auf das EU-U.S. Data Privacy Framework, soweit eine Zertifizierung des Anbieters vorliegt.
+            </p>
+            <p>
+                Rechtsgrundlage für den Einsatz dieses Hosting-Dienstleisters ist Art. 6 Abs. 1 lit. f DSGVO (unser berechtigtes Interesse an einer sicheren, schnellen und zuverlässigen Bereitstellung unseres Online-Angebots).
+            </p>
+            <p>
+                Weitere Informationen zum Datenschutz bei Netlify: <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer">https://www.netlify.com/privacy/</a>
+            </p>
+        </div>
+        
+        <div class="legal-section">
+            <h2>4. Server-Log-Dateien</h2>
+            <p>
+                Beim Aufruf dieser Website erfasst der Hosting-Provider automatisch allgemeine technische Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisiert übermittelt. Dies umfasst:
+            </p>
+            <ul>
+                <li>Browsertyp und Version</li>
+                <li>verwendetes Betriebssystem</li>
+                <li>Referrer URL (zuvor besuchte Seite)</li>
+                <li>Hostname des zugreifenden Rechners</li>
+                <li>Uhrzeit der Serveranfrage</li>
+                <li>IP-Adresse</li>
+            </ul>
+            <p>
+                Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der technischen Administration, Sicherheit und Stabilität unseres Webangebots).
+            </p>
+        </div>
+        
+        <div class="legal-section">
+            <h2>5. Kontaktformular und Kontaktaufnahme</h2>
+            <p>
+                Wenn Sie uns über das Kontaktformular auf unserer Website eine Anfrage zukommen lassen, verarbeiten wir die folgenden Daten:
+            </p>
+            <ul>
+                <li>Name (Pflichtfeld)</li>
+                <li>E-Mail-Adresse (Pflichtfeld)</li>
+                <li>Gewünschte Leistung (Website, Objektseite, Bildaufbereitung)</li>
+                <li>Ihre Nachricht / Details zu Ihren Objekten und Wünschen (Pflichtfeld)</li>
+            </ul>
+            <p>
+                <strong>Zweck der Verarbeitung:</strong> Die Verarbeitung dient der Beantwortung und Bearbeitung Ihrer individuellen Projektanfrage.
+            </p>
+            <p>
+                <strong>Rechtsgrundlage:</strong> Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (Durchführung vorvertraglicher Maßnahmen bzw. Erfüllung eines Vertrags).
+            </p>
+            <p>
+                <strong>Speicherdauer:</strong> Die Daten verbleiben bei uns, bis der Zweck für die Datenspeicherung entfällt (nach abgeschlossener Bearbeitung Ihrer Anfrage). Gesetzliche Aufbewahrungspflichten — insbesondere nach HGB und AO — bleiben unberührt.
+            </p>
+        </div>
+        
+        <div class="legal-section">
+            <h2>6. Digitaler Assistent auf dieser Website</h2>
+            <p>
+                Diese Website bietet ein Chat-Fenster an, über das häufige Fragen beantwortet werden. Der Assistent läuft vollständig im Browser des Nutzers. Ihre Eingaben werden nicht an einen Server übertragen und nicht gespeichert. Es findet keine Verarbeitung durch Dritte und kein Einsatz eines externen KI-Dienstes statt. Der Gesprächsverlauf wird beim Schließen oder Neuladen der Seite verworfen. Eine Verarbeitung personenbezogener Daten findet durch den Assistenten nicht statt.
+            </p>
+        </div>
+
+        <div class="legal-section">
+            <h2>7. Checklisten-Download</h2>
+            <p>
+                Wenn Sie unsere Checkliste zu den Pflichtangaben in Immobilienanzeigen anfordern, werden über das Formular folgende Daten erhoben:
+            </p>
+            <ul>
+                <li>Name (Pflichtfeld)</li>
+                <li>Maklerbüro / Unternehmen (Pflichtfeld)</li>
+                <li>E-Mail-Adresse (Pflichtfeld)</li>
+                <li>Telefonnummer (optional)</li>
+                <li>Einwilligung zum einmaligen Rückruf (optionale Checkbox)</li>
+            </ul>
+            <p>
+                <strong>Zweck der Verarbeitung:</strong> Bereitstellung und Auslieferung der Checkliste. Sofern Sie die optionale Checkbox für einen Anruf aktivieren, wird Ihre Telefonnummer ausschließlich für einen einmaligen telefonischen Rückruf zur Checkliste verwendet. Ohne Aktivierung dieser Checkbox erfolgt kein Rückruf.
+            </p>
+            <p>
+                <strong>Rechtsgrundlage:</strong> Die Übermittlung der Checkliste stützt sich auf Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahme). Die telefonische Kontaktaufnahme erfolgt ausschließlich auf Grundlage Ihrer ausdrücklichen Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO.
+            </p>
+            <p>
+                <strong>Widerruf:</strong> Sie können eine erteilte Einwilligung zur telefonischen Kontaktaufnahme jederzeit mit Wirkung für die Zukunft formlos widerrufen, z. B. per E-Mail an <a href="mailto:service@ce-studios.de">service@ce-studios.de</a>.
+            </p>
+        </div>
+        
+        <div class="legal-section">
+            <h2>8. Keine Analyse- oder Werbe-Cookies / Keine externen Schriftarten oder Tracker</h2>
+            <p>
+                Diese Website verwendet keinerlei Cookies zu Analyse-, Tracking- oder Marketingzwecken. Es werden keine Webanalyse-Tools, Werbetracker oder Social-Media-Plugins eingesetzt.
+            </p>
+            <p>
+                Alle Schriftarten (Fonts) sind lokal auf unserem Webserver gespeichert und eingebunden. Es findet keinerlei Verbindungsaufbau zu externen Servern (wie Google Fonts oder Adobe Fonts) statt. Beim Aufruf der Seite werden keine Daten an fremde Werbe- oder Analysenetzwerke übertragen.
+            </p>
+        </div>
+        
+        <div class="legal-section">
+            <h2>9. SSL-/TLS-Verschlüsselung</h2>
+            <p>
+                Diese Website nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine TLS-Verschlüsselung (Transport Layer Security). Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von "http://" auf "https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.
+            </p>
+        </div>
+        
+        <div class="legal-section">
+            <h2>10. Ihre Rechte als betroffene Person</h2>
+            <p>Sie haben jederzeit das Recht:</p>
+            <ul>
+                <li>Auskunft über Ihre bei uns gespeicherten personenbezogenen Daten zu erhalten (Art. 15 DSGVO),</li>
+                <li>die Berichtigung unrichtiger Daten zu verlangen (Art. 16 DSGVO),</li>
+                <li>die Löschung Ihrer Daten zu verlangen (Art. 17 DSGVO),</li>
+                <li>die Einschränkung der Verarbeitung zu verlangen (Art. 18 DSGVO),</li>
+                <li>der Verarbeitung zu widersprechen (Art. 21 DSGVO),</li>
+                <li>Ihre Daten in einem strukturierten, gängigen Format zu erhalten (Datenübertragbarkeit, Art. 20 DSGVO),</li>
+                <li>eine erteilte Einwilligung jederzeit mit Wirkung für die Zukunft zu widerrufen (Art. 7 Abs. 3 DSGVO).</li>
+            </ul>
+            <p>
+                Zur Ausübung dieser Rechte können Sie sich jederzeit an die oben genannte Kontaktadresse wenden.
+            </p>
+        </div>
+        
+        <div class="legal-section">
+            <h2>11. Beschwerderecht bei der Aufsichtsbehörde</h2>
+            <p>
+                Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten durch uns zu beschweren. Zuständig ist:
+            </p>
+            <address style="margin-top: 1rem;">
+                Der Hessische Beauftragte für Datenschutz und Informationsfreiheit<br>
+                Gustav-Stresemann-Ring 1<br>
+                65189 Wiesbaden<br>
+                Telefon: 0611 1408-0<br>
+                E-Mail: <a href="mailto:poststelle@datenschutz.hessen.de">poststelle@datenschutz.hessen.de</a>
+            </address>
+        </div>
+        
+        <div class="legal-section">
+            <h2>12. Aktualität und Änderung dieser Datenschutzerklärung</h2>
+            <p>
+                Diese Datenschutzerklärung ist aktuell gültig (Stand: September 2026). Durch die Weiterentwicklung unserer Website oder aufgrund geänderter gesetzlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern.
+            </p>
+        </div>
+    </main>
+
+    <!-- FUSSZEILE -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <img src="logo_transparent.png" alt="CÉ Studios" style="height: 24px; width: auto; display: block; filter: invert(47%) sepia(5%) saturate(163%) hue-rotate(328deg) brightness(97%) contrast(85%);">
+                </div>
+                <div class="footer-tagline">Aus Wiesbaden, für Immobilienunternehmen in ganz Deutschland</div>
+            </div>
+            <div class="footer-right">
+                <a href="impressum.html" class="footer-link">Impressum</a>
+                <a href="datenschutz.html" class="footer-link">Datenschutz</a>
+                <a href="contact.html" class="footer-link">Kontakt</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const logo = document.querySelector('.brand-logo');
+            if (logo) {
+                logo.addEventListener('click', (e) => {
+                    if (e.button === 0 && !e.ctrlKey && !e.shiftKey && !e.metaKey && !e.altKey) {
+                        e.preventDefault();
+                        sessionStorage.removeItem('ce_intro_gesehen');
+                        window.location.href = logo.getAttribute('href') || 'index.html';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CÉ Studios — Webdesign & Digitale Ästhetik</title>
+    <meta name="description" content="CÉ Studios gestaltet digitale Räume für Marken. Editorial, präzise, unverwechselbar. Ein Hybrid aus High-End-Ästhetik und kompromissloser Funktion.">
+
+    <!-- Fonts: Premium Luxury Blend -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&family=Italiana&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           1. DESIGN SYSTEM & RESET (WARM Noir & CHAMPAGNE)
+           ============================================================ */
+        :root {
+            --bg: #060504;           /* Deep obsidian-noir with warm undertone */
+            --bg-soft: #0e0d0b;      /* Muted space black */
+            --text: #ece7df;         /* Bone white */
+            --text-dim: #9b948a;     /* Warm grey */
+            --accent: #cfc0a8;       /* Champagne gold */
+            --accent-dark: #b8a080;  /* Muted brass */
+            --hairline: rgba(236, 231, 223, 0.12);
+            --hairline-gold: rgba(207, 192, 168, 0.2);
+            
+            /* Typography */
+            --font-display: 'Syncopate', sans-serif;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-editorial: 'Playfair Display', serif;
+            --font-logo: 'Italiana', serif;
+            --font-sans: 'Jost', sans-serif;
+            
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none; /* Let custom cursor handle mouse pointer */
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg);
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-sans);
+            font-weight: 300;
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-dark);
+        }
+
+        /* ============================================================
+           2. UTILITIES & REVEALS
+           ============================================================ */
+        .label {
+            font-family: var(--font-display);
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 0.45em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        .serif-display {
+            font-family: var(--font-serif);
+            font-weight: 300;
+            line-height: 1.05;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .champagne {
+            color: var(--accent);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.4s var(--ease), transform 1.4s var(--ease);
+        }
+        .reveal.in {
+            opacity: 1;
+            transform: none;
+        }
+        .d-1 { transition-delay: 0.1s; }
+        .d-2 { transition-delay: 0.2s; }
+        .d-3 { transition-delay: 0.3s; }
+        .d-4 { transition-delay: 0.4s; }
+
+        /* ============================================================
+           3. CURVED ENTRANCE (GATE)
+           ============================================================ */
+        #gate {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2.5rem;
+            transition: opacity 1.5s var(--ease-in-out), visibility 1.5s var(--ease-in-out);
+        }
+        #gate.open {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .gate-monogram {
+            font-family: var(--font-logo);
+            font-size: clamp(4.5rem, 12vw, 9.5rem);
+            letter-spacing: 0.2em;
+            margin-right: -0.2em;
+            color: var(--text);
+            font-weight: 200;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: gateElementFade 2s var(--ease) 0.3s forwards;
+        }
+        .gate-line {
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+            opacity: 0;
+            transform: scaleY(0);
+            animation: gateLineFade 2s var(--ease) 0.8s forwards;
+        }
+        .gate-sub {
+            font-family: var(--font-display);
+            font-size: 0.6rem;
+            letter-spacing: 0.6em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: gateElementFade 2s var(--ease) 1.2s forwards;
+        }
+        @media (max-width: 768px) {
+            .gate-monogram { font-size: clamp(3.5rem, 15vw, 6rem); }
+            .gate-sub { letter-spacing: 0.3em; font-size: 0.55rem; }
+        }
+        @keyframes gateElementFade {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes gateLineFade {
+            to { opacity: 0.8; transform: scaleY(1); }
+        }
+
+        /* ============================================================
+           4. CUSTOM CURSOR
+           ============================================================ */
+        .cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 5px;
+            background: #ffffff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            transition: opacity 0.3s;
+        }
+        .cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(230, 218, 195, 0.35);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999998;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: width 0.5s var(--ease), height 0.5s var(--ease), background-color 0.3s, border-color 0.3s;
+            mix-blend-mode: difference;
+        }
+        .cursor-text {
+            font-family: var(--font-display);
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            opacity: 0;
+            color: #000000;
+            transition: opacity 0.3s;
+        }
+        
+        /* Interactive States for Cursor */
+        body.hover-link .cursor-ring {
+            width: 70px;
+            height: 70px;
+            border-color: var(--accent);
+            background-color: rgba(207, 192, 168, 0.05);
+        }
+        body.hover-project .cursor-ring {
+            width: 95px;
+            height: 95px;
+            background: #ffffff;
+            border-color: #ffffff;
+            mix-blend-mode: normal;
+        }
+        body.hover-project .cursor-text {
+            opacity: 1;
+        }
+
+        /* ============================================================
+           5. WEBGL BACKGROUND (STARS)
+           ============================================================ */
+        #webgl-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.2; /* Faint in main body */
+            transition: opacity 1.2s var(--ease);
+        }
+        body.in-footer #webgl-canvas {
+            opacity: 0.95; /* Bright in the footer */
+        }
+
+        /* ============================================================
+           6. NAVIGATION
+           ============================================================ */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 2rem 4vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            mix-blend-mode: difference;
+            pointer-events: none;
+        }
+        header * {
+            pointer-events: auto;
+        }
+        .nav-logo {
+            font-family: var(--font-logo);
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.25em;
+            color: var(--text);
+            text-decoration: none;
+            transition: transform 0.4s var(--ease);
+        }
+        .nav-logo:hover {
+            transform: scale(1.05);
+        }
+        nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+        nav a {
+            font-family: var(--font-display);
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 5px;
+            transition: color 0.4s var(--ease);
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.5s var(--ease);
+        }
+        nav a:hover {
+            color: var(--text);
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ============================================================
+           7. HERO SECTION (TYPOGRAPHY OVER PARALLAX PORTRAIT)
+           ============================================================ */
+        .hero {
+            height: 100vh;
+            min-height: 100svh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 2;
+            padding: 0 6vw;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: url('vibe_portrait.png') center/cover no-repeat;
+            opacity: 0.38;
+            filter: grayscale(100%) contrast(1.15) brightness(0.9);
+            transform: scale(1.05);
+            will-change: transform;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(6,5,4,0) 60%, rgba(6,5,4,1) 98%);
+            z-index: 2;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            margin-top: 2rem;
+            max-width: 1200px;
+            width: 100%;
+        }
+        .hero-eyebrow {
+            margin-bottom: 2.2rem;
+            display: block;
+        }
+        .hero-title {
+            font-size: clamp(2.8rem, 8.8vw, 8.2rem);
+            letter-spacing: -0.01em;
+            margin-bottom: 3.5rem;
+        }
+        .hero-title .line {
+            display: block;
+            overflow: hidden;
+            line-height: 1.08;
+        }
+        .hero-title .word {
+            display: inline-block;
+            transform: translateY(110%);
+            animation: heroWordReveal 1.6s var(--ease) 0.5s forwards;
+        }
+        .hero-title .line:nth-child(2) .word { animation-delay: 0.65s; }
+        .hero-title .line:nth-child(3) .word { animation-delay: 0.8s; }
+        
+        @keyframes heroWordReveal {
+            to { transform: translateY(0); }
+        }
+
+        .hero-foot {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 2rem;
+            width: 100%;
+        }
+        .hero-foot p {
+            max-width: 38ch;
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            font-weight: 300;
+            line-height: 1.65;
+        }
+        .scroll-hint {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .scroll-hint span {
+            font-family: var(--font-display);
+            font-size: 0.55rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            writing-mode: vertical-rl;
+        }
+        .scroll-hint .thread {
+            width: 1px;
+            height: 50px;
+            background: var(--hairline);
+            position: relative;
+            overflow: hidden;
+        }
+        .scroll-hint .thread::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: var(--accent);
+            animation: threadFallAnim 2.8s var(--ease) infinite;
+        }
+        @keyframes threadFallAnim {
+            0% { top: -40%; }
+            60%, 100% { top: 110%; }
+        }
+
+        /* ============================================================
+           8. CHAPTER STRUCTURING
+           ============================================================ */
+        .chapter {
+            padding: 12rem 6vw;
+            border-top: 1px solid var(--hairline);
+            position: relative;
+            z-index: 2;
+            background: var(--bg);
+        }
+        .chapter-head {
+            display: flex;
+            align-items: baseline;
+            gap: 2.2rem;
+            margin-bottom: 5rem;
+        }
+        .chapter-roman {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.15rem;
+            color: var(--accent);
+        }
+
+        /* ============================================================
+           9. CHAPTER I: HALTUNG (CREATIVE PRINCIPLES)
+           ============================================================ */
+        .haltung-quote {
+            font-size: clamp(1.8rem, 4.6vw, 3.8rem);
+            max-width: 25ch;
+            margin-bottom: 7rem;
+            line-height: 1.15;
+        }
+        .haltung-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .haltung-cell {
+            background: rgba(14, 13, 11, 0.3);
+            border: 1px solid var(--hairline);
+            padding: 3.5rem 2.8rem;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.6s var(--ease), background 0.6s var(--ease), transform 0.6s var(--ease);
+        }
+        .haltung-cell:hover {
+            border-color: var(--accent-dark);
+            background: rgba(207, 192, 168, 0.03);
+            transform: translateY(-5px);
+        }
+        .haltung-cell .chapter-roman {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        .haltung-cell h3 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            font-size: 1.65rem;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.01em;
+        }
+        .haltung-cell p {
+            font-size: 0.92rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+        }
+
+        /* ============================================================
+           10. CHAPTER II: ARBEITEN (HYBRID BACKGROUND REVEAL)
+           ============================================================ */
+        .works-container {
+            position: relative;
+            margin-top: 2rem;
+        }
+        
+        /* Fullscreen Hover Backgrounds Container */
+        .projects-bg-container {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.8s var(--ease);
+        }
+        /* Make background visible only when hovering over the works section */
+        .chapter-works-hovered .projects-bg-container {
+            opacity: 0.28;
+        }
+        .bg-img {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            filter: grayscale(100%) contrast(1.2) brightness(0.7);
+            transform: scale(1.06);
+            transition: opacity 0.8s var(--ease), transform 1.8s var(--ease);
+        }
+        .bg-img.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .werk {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6vw;
+            align-items: center;
+            padding: 6rem 0;
+            border-bottom: 1px solid var(--hairline);
+            position: relative;
+            z-index: 3;
+            transition: padding-left 0.6s var(--ease), padding-right 0.6s var(--ease);
+        }
+        .werk:first-of-type {
+            border-top: 1px solid var(--hairline);
+        }
+        .werk:nth-child(even) .werk-plate {
+            order: 2;
+        }
+        
+        /* Interactive Card Plate */
+        .werk-plate {
+            aspect-ratio: 4 / 5;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(236, 231, 223, 0.08);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transition: transform 1.2s var(--ease), border-color 0.8s var(--ease);
+        }
+        .werk:hover .werk-plate {
+            transform: scale(0.98);
+            border-color: var(--accent-dark);
+        }
+        
+        /* Background overlays for visual aesthetics inside cards */
+        .plate-imbiss { background: radial-gradient(circle at center, #2c251e 0%, #0e0d0b 100%); }
+        .plate-nailbar { background: radial-gradient(circle at center, #2e2621 0%, #0e0d0b 100%); }
+        .plate-eloria { background: radial-gradient(circle at center, #242220 0%, #0e0d0b 100%); }
+
+        .plate-frame {
+            position: absolute;
+            inset: 1.5rem;
+            border: 1px solid rgba(236, 231, 223, 0.07);
+            pointer-events: none;
+            transition: inset 0.8s var(--ease), border-color 0.8s var(--ease);
+        }
+        .werk:hover .plate-frame {
+            inset: 2rem;
+            border-color: var(--accent);
+        }
+
+        .plate-word {
+            font-family: var(--font-serif);
+            font-weight: 300;
+            font-style: italic;
+            font-size: clamp(2.2rem, 4.4vw, 3.8rem);
+            letter-spacing: 0.02em;
+            text-align: center;
+            line-height: 1.1;
+            padding: 0 1.5rem;
+            color: var(--accent);
+            z-index: 2;
+            transition: transform 1.2s var(--ease), color 0.6s var(--ease);
+        }
+        .werk:hover .plate-word {
+            transform: scale(1.04);
+            color: #ffffff;
+        }
+
+        .plate-meta {
+            position: absolute;
+            bottom: 2.2rem;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 0.58rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            transition: color 0.6s var(--ease);
+        }
+        .werk:hover .plate-meta {
+            color: var(--accent);
+        }
+
+        .werk-info {
+            padding: 1rem 0;
+            transition: transform 0.6s var(--ease);
+        }
+        .werk:hover .werk-info {
+            transform: translateX(1.5vw);
+        }
+        .werk:nth-child(even):hover .werk-info {
+            transform: translateX(-1.5vw);
+        }
+
+        .werk-info .label {
+            display: block;
+            margin-bottom: 1.6rem;
+            color: var(--accent-dark);
+        }
+        .werk-info h3 {
+            font-family: var(--font-serif);
+            font-weight: 300;
+            font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+        .werk-info p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            max-width: 44ch;
+            margin-bottom: 2.4rem;
+            line-height: 1.7;
+        }
+        .werk-tags {
+            display: flex;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+        }
+        .werk-tags span {
+            font-family: var(--font-display);
+            font-size: 0.58rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        /* ============================================================
+           11. COLLAGE VIBE SECTION (CINEMATIC PARALLAX)
+           ============================================================ */
+        .vibe-collage {
+            position: relative;
+            z-index: 2;
+            background: var(--bg);
+            padding: 14rem 6vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-top: 1px solid var(--hairline);
+        }
+        .collage-center {
+            text-align: center;
+            z-index: 3;
+            mix-blend-mode: difference;
+        }
+        .collage-center h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.4rem, 7.5vw, 6.5rem);
+            color: #ffffff;
+            line-height: 1.05;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        .collage-center p {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--accent);
+        }
+        .collage-img-left {
+            position: absolute;
+            top: 8%;
+            left: 4%;
+            width: 32vw;
+            filter: grayscale(100%) brightness(0.75) contrast(1.1);
+            z-index: 1;
+            opacity: 0.65;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            will-change: transform;
+        }
+        .collage-img-right {
+            position: absolute;
+            bottom: 8%;
+            right: 4%;
+            width: 36vw;
+            filter: grayscale(100%) brightness(0.65) contrast(1.15);
+            z-index: 1;
+            opacity: 0.6;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            will-change: transform;
+        }
+
+        /* ============================================================
+           12. CHAPTER III: VORGEHEN (PROCESS STEPS)
+           ============================================================ */
+        .steps {
+            border-top: 1px solid var(--hairline);
+            margin-top: 1rem;
+        }
+        .step {
+            display: grid;
+            grid-template-columns: 100px 1.2fr 1.6fr;
+            gap: 3rem;
+            padding: 3.5rem 0;
+            border-bottom: 1px solid var(--hairline);
+            align-items: baseline;
+            transition: padding-left 0.6s var(--ease), background-color 0.6s var(--ease);
+        }
+        .step:hover {
+            padding-left: 2rem;
+            background-color: rgba(207, 192, 168, 0.01);
+        }
+        .step-num {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+        .step h3 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            font-size: 1.8rem;
+            letter-spacing: 0.01em;
+        }
+        .step p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.75;
+            max-width: 500px;
+        }
+
+        /* ============================================================
+           13. CHAPTER IV: KONDITIONEN (PRICING CARDS)
+           ============================================================ */
+        .tarife {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .tarif {
+            background: rgba(14, 13, 11, 0.4);
+            border: 1px solid var(--hairline);
+            padding: 4.5rem 3rem;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(12px);
+            transition: border-color 0.6s var(--ease), background 0.6s var(--ease), transform 0.6s var(--ease);
+        }
+        .tarif:hover {
+            border-color: var(--accent);
+            background: rgba(207, 192, 168, 0.02);
+            transform: translateY(-8px);
+        }
+        .tarif-name {
+            font-family: var(--font-display);
+            font-size: 0.65rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            display: block;
+        }
+        .tarif-preis {
+            font-family: var(--font-serif);
+            font-weight: 300;
+            font-size: 3.8rem;
+            line-height: 1;
+            margin-bottom: 3rem;
+            color: #ffffff;
+        }
+        .tarif-preis small {
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--text-dim);
+            margin-left: 0.5rem;
+            font-family: var(--font-serif);
+        }
+        .tarif ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+            margin-bottom: 3.5rem;
+        }
+        .tarif li {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.5;
+        }
+        .tarif li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+        .tarif-note {
+            margin-top: auto;
+            font-size: 0.8rem;
+            font-style: italic;
+            font-family: var(--font-serif);
+            color: var(--accent);
+        }
+        .tarife-foot {
+            margin-top: 3.5rem;
+            font-size: 0.88rem;
+            color: var(--text-dim);
+            font-style: italic;
+            font-family: var(--font-serif);
+            text-align: center;
+        }
+
+        /* ============================================================
+           14. CHAPTER V: KONTAKT (ATELIER BRANDING & CTA)
+           ============================================================ */
+        .kontakt {
+            min-height: 80svh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 6vw 2rem 6vw;
+            position: relative;
+            z-index: 2;
+        }
+        .kontakt-label {
+            margin-bottom: 1.5rem;
+        }
+        .kontakt-title {
+            font-size: clamp(2.4rem, 6.8vw, 6.2rem);
+            margin-bottom: 4.5rem;
+            line-height: 1.1;
+        }
+        .kontakt-wege {
+            display: flex;
+            gap: 4.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 5.5rem;
+        }
+        .kontakt-weg {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            text-decoration: none;
+            position: relative;
+        }
+        .kontakt-weg .label {
+            font-size: 0.58rem;
+        }
+        .kontakt-weg strong {
+            font-family: var(--font-serif);
+            font-weight: 300;
+            font-style: italic;
+            font-size: 1.6rem;
+            color: var(--text);
+            transition: color 0.4s var(--ease), transform 0.4s var(--ease);
+        }
+        .kontakt-weg:hover strong {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+        .kontakt-antwort {
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            display: block;
+        }
+
+        /* Large Magnetic Call to Action Footer */
+        .footer-cta {
+            margin-top: 5rem;
+            margin-bottom: 8rem;
+            text-align: center;
+            mix-blend-mode: difference;
+        }
+        .magnetic-btn {
+            display: inline-block;
+            padding: 2.2rem 4.5rem;
+            border: 1px solid rgba(236, 231, 223, 0.35);
+            border-radius: 100px;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 0.25em;
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: background 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
+        }
+        .magnetic-btn:hover {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+        }
+
+        /* ============================================================
+           15. FOOTER
+           ============================================================ */
+        footer {
+            border-top: 1px solid var(--hairline);
+            padding: 3.5rem 6vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+            background: transparent; /* WebGL stars shine here */
+        }
+        .footer-logo {
+            font-family: var(--font-logo);
+            font-size: 1.2rem;
+            letter-spacing: 0.3em;
+            color: var(--text);
+        }
+        footer .small {
+            font-family: var(--font-sans);
+            font-size: 0.68rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+        footer a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.4s var(--ease);
+        }
+        footer a:hover {
+            color: var(--accent);
+        }
+
+        /* ============================================================
+           16. MEDIA QUERIES (RESPONSIVE POLISH)
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .haltung-grid, .tarife {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .haltung-cell {
+                padding: 3rem 2rem;
+            }
+            .werk {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .werk:nth-child(even) .werk-plate {
+                order: 0;
+            }
+            .step {
+                grid-template-columns: 60px 1fr;
+                gap: 2rem;
+            }
+            .step p {
+                grid-column: 2;
+            }
+            .collage-img-left {
+                width: 45vw;
+                top: 5%;
+            }
+            .collage-img-right {
+                width: 48vw;
+                bottom: 5%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header nav {
+                display: none; /* Hide top nav links on mobile */
+            }
+            .chapter {
+                padding: 7rem 6vw;
+            }
+            .hero-foot {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+            .scroll-hint {
+                display: none;
+            }
+            .vibe-collage {
+                padding: 10rem 6vw;
+            }
+            .collage-img-left {
+                width: 60vw;
+                left: -10%;
+            }
+            .collage-img-right {
+                width: 70vw;
+                right: -10%;
+            }
+            .kontakt-wege {
+                gap: 2.5rem;
+            }
+            .tarif {
+                padding: 3rem 2rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+            .hero-title .word {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CURTAIN Vorhang -->
+    <div id="gate">
+        <div class="gate-monogram">CÉ</div>
+        <div class="gate-line"></div>
+        <div class="gate-sub">Studios &nbsp;·&nbsp; Wiesbaden</div>
+    </div>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"><span class="cursor-text">VIEW</span></div>
+
+    <!-- WEBGL STARS BACKGROUND -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- HEADER NAVIGATION -->
+    <header>
+        <a href="#hero" class="nav-logo interactive">CÉ</a>
+        <nav>
+            <a href="#haltung" class="interactive">Haltung</a>
+            <a href="#arbeiten" class="interactive">Arbeiten</a>
+            <a href="#vorgehen" class="interactive">Vorgehen</a>
+            <a href="#konditionen" class="interactive">Konditionen</a>
+            <a href="#kontakt" class="interactive">Kontakt</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- HERO SECTION -->
+        <section class="hero" id="hero">
+            <div class="hero-bg parallax-hero"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <span class="label hero-eyebrow">Webdesign-Atelier · Wiesbaden</span>
+                <h1 class="serif-display hero-title">
+                    <span class="line"><span class="word">Websites,</span></span>
+                    <span class="line"><span class="word">die man nicht</span></span>
+                    <span class="line"><span class="word italic champagne">vergisst.</span></span>
+                </h1>
+                <div class="hero-foot">
+                    <p>CÉ Studios gestaltet digitale Räume für lokale Marken — editorial, präzise, unverwechselbar. Keine Templates. Keine Kompromisse.</p>
+                    <div class="scroll-hint">
+                        <span>Scroll</span>
+                        <div class="thread"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPTER I: HALTUNG -->
+        <section class="chapter" id="haltung">
+            <div class="chapter-head reveal">
+                <span class="chapter-roman">I.</span>
+                <span class="label">Haltung</span>
+            </div>
+            <h2 class="serif-display haltung-quote reveal d-1">
+                Eine Website ist der erste Händedruck deiner Marke.
+                <span class="italic champagne">Wir sorgen dafür, dass man ihn spürt.</span>
+            </h2>
+            <div class="haltung-grid">
+                <div class="haltung-cell reveal d-1">
+                    <span class="chapter-roman">α</span>
+                    <h3>Klarheit</h3>
+                    <p>Jedes Element hat einen Grund, da zu sein. Was keinen hat, fliegt raus.</p>
+                </div>
+                <div class="haltung-cell reveal d-2">
+                    <span class="chapter-roman">β</span>
+                    <h3>Charakter</h3>
+                    <p>Jede Marke verdient eine eigene visuelle Sprache — keine austauschbaren Baukästen.</p>
+                </div>
+                <div class="haltung-cell reveal d-3">
+                    <span class="chapter-roman">γ</span>
+                    <h3>Nähe</h3>
+                    <p>Persönlich erreichbar, lokal verwurzelt. Ein Ansprechpartner, kein Ticketsystem.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPTER II: Arbeiten (HYBRID EXPERT PORTFOLIO REVEAL) -->
+        <section class="chapter" id="arbeiten">
+            
+            <!-- Full-screen hover background photos -->
+            <div class="projects-bg-container">
+                <div class="bg-img" id="bg-1" style="background-image: url('project_imbiss.png');"></div>
+                <div class="bg-img" id="bg-2" style="background-image: url('project_nailbar.png');"></div>
+                <div class="bg-img" id="bg-3" style="background-image: url('project_eloria.png');"></div>
+            </div>
+
+            <div class="chapter-head reveal">
+                <span class="chapter-roman">II.</span>
+                <span class="label">Ausgewählte Arbeiten</span>
+            </div>
+
+            <div class="works-container">
+                
+                <!-- Project 1: Dein Imbiss -->
+                <article class="werk reveal project-trigger" data-target="bg-1">
+                    <div class="werk-plate plate-imbiss interactive">
+                        <div class="plate-frame"></div>
+                        <div class="plate-word">Dein<br>Imbiss</div>
+                        <div class="plate-meta">Editorial Web · Biebrich</div>
+                    </div>
+                    <div class="werk-info">
+                        <span class="label">Familienbetrieb seit 1999</span>
+                        <h3>Ein Imbiss wird zum <span class="italic champagne">Magazin.</span></h3>
+                        <p>Bold-editorial Design für einen 26 Jahre alten Familienbetrieb am Hornbach Biebrich. Risograph-Ästhetik, verspielte Interaktionen, echte Stimmen echter Gäste.</p>
+                        <div class="werk-tags">
+                            <span>Editorial</span>
+                            <span>Gastronomie</span>
+                            <span>Lokal</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2: Nailbar -->
+                <article class="werk reveal project-trigger" data-target="bg-2">
+                    <div class="werk-plate plate-nailbar interactive">
+                        <div class="plate-frame"></div>
+                        <div class="plate-word">Nail<br>Bár</div>
+                        <div class="plate-meta">Quiet Luxury · Luisenstraße</div>
+                    </div>
+                    <div class="werk-info">
+                        <span class="label">Beauty-Lounge · Wiesbaden Mitte</span>
+                        <h3>Ruhe als <span class="italic champagne">Designprinzip.</span></h3>
+                        <p>Quiet-Luxury-Auftritt für eine Beauty-Lounge in der Luisenstraße. Warme Nude-Töne, sanfte Bewegung, ein Buchungserlebnis das sich wie eine Auszeit anfühlt.</p>
+                        <div class="werk-tags">
+                            <span>Beauty</span>
+                            <span>Premium</span>
+                            <span>Booking</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3: Eloria (Monogram & Typo styled for Vogue version) -->
+                <article class="werk reveal project-trigger" data-target="bg-3">
+                    <div class="werk-plate plate-eloria interactive">
+                        <div class="plate-frame"></div>
+                        <div class="plate-word">Eloria</div>
+                        <div class="plate-meta">Luxury Branding · Inhouse</div>
+                    </div>
+                    <div class="werk-info">
+                        <span class="label">Edelstahl Schmuck · E-Commerce</span>
+                        <h3>Luxus als <span class="italic champagne">Standard.</span></h3>
+                        <p>Zeitloser christlicher Schmuck aus wasserfestem Edelstahl (316L). Gold-Schmuck Design, kontrastreiches Typografie-System und digitale Markenidentität für ein exklusives Einkaufserlebnis.</p>
+                        <div class="werk-tags">
+                            <span>E-Commerce</span>
+                            <span>Luxury</span>
+                            <span>Branding</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- THE AESTHETIC COLLAGE (Vogue Edition Assets) -->
+        <section class="vibe-collage">
+            <img src="vibe_ysl.png" alt="YSL Aesthetic" class="collage-img-left parallax-img-slow">
+            <img src="vibe_surfer.jpg" alt="Surfer Aesthetic" class="collage-img-right parallax-img-fast">
+            
+            <div class="collage-center reveal">
+                <h2>The Aesthetic</h2>
+                <p>Raw. Cinematic. Unapologetic.</p>
+            </div>
+        </section>
+
+        <!-- CHAPTER III: VORGEHEN -->
+        <section class="chapter" id="vorgehen">
+            <div class="chapter-head reveal">
+                <span class="chapter-roman">III.</span>
+                <span class="label">Vorgehen</span>
+            </div>
+            <div class="steps">
+                <div class="step reveal">
+                    <span class="step-num">i.</span>
+                    <h3>Gespräch</h3>
+                    <p>Wir hören zu. Was macht dein Geschäft besonders, wer sind deine Gäste, wohin willst du? Persönlich oder per Nachricht — wie es dir passt.</p>
+                </div>
+                <div class="step reveal d-1">
+                    <span class="step-num">ii.</span>
+                    <h3>Entwurf</h3>
+                    <p>Du bekommst eine vollständige Demo deiner Website zu sehen, bevor du dich entscheidest. Erst überzeugen, dann beauftragen.</p>
+                </div>
+                <div class="step reveal d-2">
+                    <span class="step-num">iii.</span>
+                    <h3>Umsetzung</h3>
+                    <p>Innerhalb von sieben Tagen steht deine Website — mit echten Inhalten, echten Öffnungszeiten, echten Stimmen deiner Kundschaft.</p>
+                </div>
+                <div class="step reveal d-3">
+                    <span class="step-num">iv.</span>
+                    <h3>Übergabe</h3>
+                    <p>Alles gehört dir: der Code, das Hosting, eine kurze Einweisung. Keine laufenden Kosten, keine Abhängigkeit.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPTER IV: KONDITIONEN -->
+        <section class="chapter" id="konditionen">
+            <div class="chapter-head reveal">
+                <span class="chapter-roman">IV.</span>
+                <span class="label">Konditionen</span>
+            </div>
+            <div class="tarife">
+                <!-- Tariff 1: Essential -->
+                <div class="tarif reveal">
+                    <span class="tarif-name">Essential</span>
+                    <div class="tarif-preis serif-display">1250<small>€ einmalig</small></div>
+                    <ul>
+                        <li>One-Page-Website</li>
+                        <li>Mobil optimiert</li>
+                        <li>Bis zu fünf Sektionen</li>
+                        <li>Hosting-Einrichtung inklusive</li>
+                        <li>Eine Korrekturrunde</li>
+                    </ul>
+                    <span class="tarif-note">Der ehrliche Einstieg.</span>
+                </div>
+                
+                <!-- Tariff 2: Signature -->
+                <div class="tarif reveal d-1">
+                    <span class="tarif-name">Signature</span>
+                    <div class="tarif-preis serif-display">1500<small>€ einmalig</small></div>
+                    <ul>
+                        <li>Bis zu fünf Unterseiten</li>
+                        <li>Maßgeschneiderte Animationen</li>
+                        <li>Editorial-Design</li>
+                        <li>Drei Korrekturrunden</li>
+                        <li>30 Tage Begleitung</li>
+                    </ul>
+                    <span class="tarif-note">Die meistgewählte Stufe.</span>
+                </div>
+
+                <!-- Tariff 3: Maßgeschneidert -->
+                <div class="tarif reveal d-2">
+                    <span class="tarif-name">Maßgeschneidert</span>
+                    <div class="tarif-preis serif-display italic" style="font-size: 2.3rem; margin-top: 1.5rem; margin-bottom: 3rem;">Auf Anfrage</div>
+                    <ul>
+                        <li>Vollständige Markenidentität</li>
+                        <li>Unbegrenzter Umfang</li>
+                        <li>Individuelle Interaktionen</li>
+                        <li>90 Tage Begleitung</li>
+                        <li>Persönliche Beratung</li>
+                    </ul>
+                    <span class="tarif-note">Für Marken mit Ambition.</span>
+                </div>
+            </div>
+            <p class="tarife-foot reveal">Alle Preise einmalig. Die Hälfte zu Beginn, die Hälfte bei Übergabe — kein Risiko für dich.</p>
+        </section>
+
+        <!-- CHAPTER V: KONTAKT -->
+        <section class="chapter kontakt" id="kontakt">
+            <div class="kontakt-label reveal">
+                <span class="chapter-roman">V.</span> &nbsp;·&nbsp; <span class="label">Kontakt</span>
+            </div>
+            <h2 class="serif-display kontakt-title reveal d-1">
+                Lass uns deine Website <span class="italic champagne">bauen.</span>
+            </h2>
+            <div class="kontakt-wege reveal d-2">
+                <a class="kontakt-weg interactive" href="https://instagram.com/ce.studios" target="_blank" rel="noopener">
+                    <span class="label">Instagram</span>
+                    <strong>@ce.studios</strong>
+                </a>
+                <a class="kontakt-weg interactive" href="https://wa.me/49176XXXXXXXX" target="_blank" rel="noopener">
+                    <span class="label">WhatsApp</span>
+                    <strong>Nachricht schreiben</strong>
+                </a>
+                <a class="kontakt-weg interactive" href="mailto:hello@ce-studios.de">
+                    <span class="label">E-Mail</span>
+                    <strong>hello@ce-studios.de</strong>
+                </a>
+            </div>
+            
+            <div class="footer-cta reveal d-3">
+                <a href="mailto:hello@ce-studios.de" class="magnetic-btn magnetic interactive">Contact Us</a>
+            </div>
+
+            <span class="kontakt-antwort reveal d-4">Antwort innerhalb von 24 Stunden</span>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <span class="footer-logo">CÉ STUDIOS</span>
+        <span class="small">Webdesign aus Wiesbaden</span>
+        <span class="small">© 2026 · <a href="#" onclick="alert('Impressum wird ergänzt.'); return false;" class="interactive">Impressum</a></span>
+    </footer>
+
+    <!-- LIBRARIES -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+
+    <!-- LOGIC -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ============================================================
+        // 1. GATE ENTRANCE CONTROL
+        // ============================================================
+        const gate = document.getElementById('gate');
+        const openGate = () => {
+            gate.classList.add('open');
+            // Init animations for hero elements once gate starts opening
+            gsap.to('.hero-bg', {
+                scale: 1,
+                opacity: 0.38,
+                duration: 2.2,
+                ease: 'power3.out'
+            });
+        };
+        gate.addEventListener('click', openGate);
+        setTimeout(openGate, 2800); // Auto open if no click in 2.8s
+
+        // ============================================================
+        // 2. LENIS SMOOTH SCROLLING
+        // ============================================================
+        const lenis = new Lenis({
+            duration: 1.4,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+            smoothTouch: false
+        });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0, 0);
+
+        // ============================================================
+        // 3. CUSTOM CURSOR & MAGNETIC BUTTON
+        // ============================================================
+        const dot = document.getElementById('cursor-dot');
+        const ring = document.getElementById('cursor-ring');
+        let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            
+            gsap.to(dot, { x: mouse.x, y: mouse.y, duration: 0.08 });
+            gsap.to(ring, { x: mouse.x, y: mouse.y, duration: 0.32, ease: "power2.out" });
+        });
+
+        // Hover effect bounds
+        document.querySelectorAll('.interactive').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hover-link'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hover-link'));
+        });
+
+        // Magnetic trigger elements
+        const magneticElements = document.querySelectorAll('.magnetic');
+        magneticElements.forEach(item => {
+            item.addEventListener('mousemove', (e) => {
+                const rect = item.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(item, { x: x * 0.45, y: y * 0.45, duration: 0.45, ease: "power2.out" });
+            });
+            item.addEventListener('mouseleave', () => {
+                gsap.to(item, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.4)" });
+            });
+        });
+
+        // ============================================================
+        // 4. SCROLL REVEALS (Intersection Observer)
+        // ============================================================
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+        const revealObserver = new IntersectionObserver(revealCallback, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // ============================================================
+        // 5. PARALLAX EFFECTS
+        // ============================================================
+        // Hero Background Parallax
+        gsap.to('.parallax-hero', {
+            yPercent: 25,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // Collage Left Image Parallax
+        gsap.to('.collage-img-left', {
+            yPercent: -22,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".vibe-collage",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // Collage Right Image Parallax
+        gsap.to('.collage-img-right', {
+            yPercent: -35,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".vibe-collage",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // ============================================================
+        // 6. HYBRID PROJECT HOVER BACKGROUND REVEAL
+        // ============================================================
+        const worksSection = document.getElementById('arbeiten');
+        const projectTriggers = document.querySelectorAll('.project-trigger');
+        const bgImages = document.querySelectorAll('.bg-img');
+
+        projectTriggers.forEach(trigger => {
+            trigger.addEventListener('mouseenter', () => {
+                // Add active states to cursor and parent section
+                document.body.classList.add('hover-project');
+                worksSection.classList.add('chapter-works-hovered');
+
+                const targetId = trigger.getAttribute('data-target');
+                bgImages.forEach(img => {
+                    if (img.id === targetId) {
+                        img.classList.add('active');
+                    } else {
+                        img.classList.remove('active');
+                    }
+                });
+            });
+
+            trigger.addEventListener('mouseleave', () => {
+                document.body.classList.remove('hover-project');
+                worksSection.classList.remove('chapter-works-hovered');
+                
+                bgImages.forEach(img => {
+                    img.classList.remove('active');
+                });
+            });
+        });
+
+        // ============================================================
+        // 7. FOOTER BRIGHTNESS TRIGGER
+        // ============================================================
+        ScrollTrigger.create({
+            trigger: "#kontakt",
+            start: "top 60%",
+            onEnter: () => document.body.classList.add('in-footer'),
+            onLeaveBack: () => document.body.classList.remove('in-footer')
+        });
+
+        // ============================================================
+        // 8. INTERACTIVE STARFIELD BACKGROUND (THREE.JS)
+        // ============================================================
+        const canvas = document.getElementById('webgl-canvas');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x060504, 0.0022); // Match noir bg
+
+        const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 95;
+
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const particlesCount = 3800;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particlesCount * 3);
+        const randoms = new Float32Array(particlesCount);
+        const basePositions = new Float32Array(particlesCount * 3);
+
+        for (let i = 0; i < particlesCount * 3; i += 3) {
+            const radius = 140 * Math.sqrt(Math.random());
+            const theta = Math.random() * 2 * Math.PI;
+
+            const x = radius * Math.cos(theta);
+            const y = (Math.random() - 0.5) * 55 - 15;
+            const z = radius * Math.sin(theta);
+
+            positions[i] = x;
+            positions[i+1] = y;
+            positions[i+2] = z;
+
+            basePositions[i] = x;
+            basePositions[i+1] = y;
+            basePositions[i+2] = z;
+
+            randoms[i/3] = Math.random();
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('aBasePosition', new THREE.BufferAttribute(basePositions, 3));
+        geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1));
+
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                uTime: { value: 0 },
+                uMouse: { value: new THREE.Vector3(0, 0, 0) },
+                uScroll: { value: 0 }
+            },
+            vertexShader: `
+                uniform float uTime;
+                uniform vec3 uMouse;
+                uniform float uScroll;
+                
+                attribute vec3 aBasePosition;
+                attribute float aRandom;
+                
+                varying float vAlpha;
+
+                void main() {
+                    vec3 pos = position;
+                    
+                    // Star rotation speed
+                    float angle = uTime * 0.045 + aRandom * 2.0;
+                    float s = sin(angle);
+                    float c = cos(angle);
+                    
+                    vec3 rotatedPos = vec3(
+                        aBasePosition.x * c - aBasePosition.z * s,
+                        aBasePosition.y,
+                        aBasePosition.x * s + aBasePosition.z * c
+                    );
+                    
+                    pos = rotatedPos;
+
+                    // Push slightly based on scroll position
+                    pos.y += uScroll * 0.016 * (aRandom + 0.4) - 10.0;
+
+                    vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+                    gl_PointSize = (2.2 / -mvPosition.z) * 120.0;
+                    gl_Position = projectionMatrix * mvPosition;
+                    
+                    vAlpha = 0.55 + 0.45 * sin(uTime * 1.6 + aRandom * 8.0);
+                }
+            `,
+            fragmentShader: `
+                varying float vAlpha;
+                void main() {
+                    float dist = distance(gl_PointCoord, vec2(0.5));
+                    if(dist > 0.5) discard;
+                    
+                    // Brilliant starry color
+                    vec3 color = vec3(0.96, 0.93, 0.88); 
+                    gl_FragColor = vec4(color, vAlpha * (1.0 - dist * 1.8));
+                }
+            `,
+            transparent: true,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending
+        });
+
+        const points = new THREE.Points(geometry, material);
+        points.rotation.x = 0.45;
+        scene.add(points);
+
+        const clock = new THREE.Clock();
+
+        function animate() {
+            const elapsedTime = clock.getElapsedTime();
+            
+            material.uniforms.uTime.value = elapsedTime;
+            material.uniforms.uScroll.value = window.scrollY;
+
+            // Slow rotate scene
+            scene.rotation.y = Math.sin(elapsedTime * 0.03) * 0.08;
+
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Window resize event handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        });
+    </script>
+</body>
+</html>

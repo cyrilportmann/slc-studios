@@ -1,0 +1,4668 @@
+<!DOCTYPE html>
+<html lang="de" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CÉ Studios — Websites für Ihr Immobilienunternehmen</title>
+    
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta name="theme-color" content="#FFFFFF">
+
+    <!-- Open Graph / Link Preview -->
+    <meta property="og:title" content="CÉ Studios — Websites für Ihr Immobilienunternehmen">
+    <meta property="og:description" content="Die Website, mit der Ihr Maklerbüro Eigentümer überzeugt, bevor der Wettbewerb überhaupt anruft.">
+    <meta property="og:image" content="og-bild.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script>
+        document.documentElement.className = 'js-enabled';
+        document.documentElement.style.overflow = 'hidden';
+    </script>
+    
+    <style>
+        /* =========================================================================
+           LOKALE SCHRIFTARTEN (DSGVO-KONFORM)
+           ========================================================================= */
+        @font-face {
+            font-family: 'Archivo';
+            font-style: normal;
+            font-weight: 400;
+            src: url('fonts/archivo-400.ttf') format('truetype');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Archivo';
+            font-style: normal;
+            font-weight: 500;
+            src: url('fonts/archivo-500.ttf') format('truetype');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Bodoni Moda';
+            font-style: normal;
+            font-weight: 400;
+            src: url('fonts/bodoni-moda-400.ttf') format('truetype');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Bodoni Moda';
+            font-style: normal;
+            font-weight: 600;
+            src: url('fonts/bodoni-moda-600.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        /* =========================================================================
+           THEME & RESET (STRICKTE, MONOCHROME FARBPALETTE)
+           ========================================================================= */
+        :root {
+            --bg: #FFFFFF;
+            --bg-secondary: #FAF9F7;
+            --text: #0A0A0A;
+            --text-secondary: #767370;
+            --line: #E8E6E2;
+            --font-display: 'Bodoni Moda', Georgia, serif;
+            --font-sans: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+            --max-width: 1440px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        [id] {
+            scroll-margin-top: 100px;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        *:focus-visible {
+            outline: 2px solid var(--text);
+            outline-offset: 4px;
+        }
+
+        /* Typografie */
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            font-weight: 400;
+            color: var(--text);
+            max-width: 65ch;
+        }
+
+        a {
+            color: var(--text);
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+
+        a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: currentColor;
+            transform-origin: bottom left;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        a:hover::after {
+            transform: scaleX(1);
+        }
+
+        .label {
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--text-secondary);
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-separator {
+            border: none;
+            border-top: 1px solid var(--line);
+            margin: 0 auto;
+            max-width: var(--max-width);
+            width: 100%;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 60px;
+            width: 100%;
+        }
+
+        .section-spacing {
+            padding: 140px 0;
+        }
+
+        .grid-12 {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 32px;
+        }
+
+        /* =========================================================================
+           KOPFZEILE (HEADER)
+           ========================================================================= */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 30px 0;
+            color: #FFFFFF;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, padding 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .header.scrolled {
+            background-color: var(--bg);
+            border-bottom-color: var(--line);
+            color: var(--text);
+            padding: 20px 0;
+        }
+
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo-img {
+            height: 30px;
+            width: auto;
+            display: block;
+            filter: brightness(0) invert(1);
+            transition: filter 0.3s ease, opacity 0.3s ease;
+        }
+
+        .brand-logo:hover .brand-logo-img {
+            opacity: 0.7;
+        }
+
+        .header.scrolled .brand-logo-img {
+            filter: none;
+        }
+
+        .header-menu {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .header-link {
+            font-size: 12.5px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: inherit;
+            padding: 5px 0;
+        }
+
+        .header-btn {
+            background-color: #FFFFFF;
+            color: var(--text);
+            border: 1px solid transparent;
+            padding: 12px 24px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        .header-btn::after {
+            display: none;
+        }
+
+        .header.scrolled .header-btn {
+            background-color: var(--text);
+            color: #FFFFFF;
+            border-color: var(--text);
+        }
+
+        .header.scrolled .header-btn:hover {
+            background-color: transparent;
+            color: var(--text);
+        }
+
+        /* =========================================================================
+           2 · HERO SEKTION
+           ========================================================================= */
+        .hero {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            height: 100svh;
+            background-color: var(--text);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 1;
+            filter: brightness(0.65);
+        }
+
+        .hero-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.4) 0%, rgba(10, 10, 10, 0.6) 100%);
+            z-index: 2;
+        }
+
+        .hero-container {
+            position: relative;
+            z-index: 3;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 60px;
+            width: 100%;
+        }
+
+        .hero-text-container {
+            max-width: 920px;
+            color: #FFFFFF;
+        }
+
+        .hero-text-container .label {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .hero-title {
+            font-size: clamp(2.4rem, 5.2vw, 4.4rem);
+            color: #FFFFFF;
+            margin-bottom: 2rem;
+            line-height: 1.08;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 1.35vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 65ch;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .hero-actions-row {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .hero-link {
+            color: var(--text);
+            background-color: #FFFFFF;
+            padding: 16px 32px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: 1px solid #FFFFFF;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .hero-link::after {
+            display: none;
+        }
+
+        .hero-link:hover {
+            background-color: transparent;
+            color: #FFFFFF;
+        }
+
+        .hero-secondary-link {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 16px 0;
+            transition: color 0.3s ease;
+        }
+
+        .hero-secondary-link:hover {
+            color: #FFFFFF;
+        }
+
+        /* =========================================================================
+           LADEBILDSCHIRM / PRELOADER (DSGVO-KONFORM, LOKAL)
+           ========================================================================= */
+        .preloader-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: #FFFFFF; color: #0A0A0A;
+            z-index: 99999; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            clip-path: inset(0 0 0 0);
+            transition: clip-path 900ms cubic-bezier(.76,0,.24,1);
+        }
+        .preloader-overlay.hide-curtain {
+            clip-path: inset(0 0 100% 0);
+        }
+        .preloader-overlay.instant-hide {
+            display: none !important;
+        }
+        .no-js .preloader-overlay {
+            display: none !important;
+        }
+        .preloader-overlay.fallback-active {
+            animation: preloader-fallback-fade 4s forwards;
+        }
+        @keyframes preloader-fallback-fade {
+            0% { clip-path: inset(0 0 0 0); }
+            90% { clip-path: inset(0 0 0 0); }
+            100% { clip-path: inset(0 0 100% 0); visibility: hidden; pointer-events: none; }
+        }
+        .preloader-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .loader-masked-logo {
+            -webkit-mask-image: 
+                linear-gradient(to right, transparent 36px, #000 36px),
+                conic-gradient(from 120deg at 40px 40px, #000 0%, #000 var(--progress, 0%), transparent var(--progress, 0%), transparent 100%);
+            -webkit-mask-composite: source-over;
+            mask-image: 
+                linear-gradient(to right, transparent 36px, #000 36px),
+                conic-gradient(from 120deg at 40px 40px, #000 0%, #000 var(--progress, 0%), transparent var(--progress, 0%), transparent 100%);
+            mask-composite: add;
+        }
+        .preloader-counter {
+            position: absolute; bottom: 40px; right: 40px;
+            font-family: 'Archivo', sans-serif; font-size: 11px;
+            font-weight: 500; text-transform: uppercase;
+            letter-spacing: 0.18em; color: #767370;
+            font-variant-numeric: tabular-nums;
+        }
+        .preloader-loading-text {
+            position: absolute; bottom: 40px; left: 40px;
+            font-family: 'Archivo', sans-serif; font-size: 11px;
+            font-weight: 500; text-transform: uppercase;
+            letter-spacing: 0.18em; color: #767370;
+        }
+        @media (max-width: 480px) {
+            .preloader-counter {
+                bottom: 24px;
+                right: 24px;
+            }
+            .preloader-loading-text {
+                bottom: 24px;
+                left: 24px;
+            }
+        }
+
+        /* Smooth Entrance Animationen für Hero nach Ladebildschirm */
+        .js-enabled .hero-title,
+        .js-enabled .hero-subtitle,
+        .js-enabled .hero-actions-row {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .js-enabled .hero-title.start-anim {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .js-enabled .hero-title.start-anim ~ .hero-subtitle {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.2s;
+        }
+        .js-enabled .hero-title.start-anim ~ .hero-actions-row {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.35s;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .scroll-hint-label {
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            font-weight: 500;
+        }
+
+
+
+        /* =========================================================================
+           3 / 5 / 7 · CTA-BÄNDER (DREIMAL IDENTISCH)
+           ========================================================================= */
+        .cta-band {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            padding: 56px 0;
+        }
+
+        .cta-band-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .cta-band-text {
+            font-family: var(--font-display);
+            font-size: clamp(1.15rem, 1.45vw, 1.35rem);
+            line-height: 1.55;
+            max-width: 920px;
+            color: var(--text);
+        }
+
+        .cta-band-btn {
+            background-color: var(--text);
+            color: #FFFFFF;
+            border: 1px solid var(--text);
+            padding: 16px 32px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .cta-band-btn::after {
+            display: none;
+        }
+
+        .cta-band-btn:hover {
+            background-color: transparent;
+            color: var(--text);
+        }
+
+        /* =========================================================================
+           RANDLOSE BILDER (FULL-WIDTH SEPARATORS)
+           ========================================================================= */
+        .full-width-separator-img {
+            width: 100vw;
+            height: 60vh;
+            min-height: 400px;
+            overflow: hidden;
+            background-color: var(--bg-secondary);
+        }
+
+        .full-width-separator-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        /* =========================================================================
+           4 · LEISTUNG IN DREI SCHRITTEN (id="ablauf")
+           ========================================================================= */
+        .process-section {
+            background-color: var(--bg);
+        }
+
+        .process-header {
+            grid-column: span 12;
+            margin-bottom: 48px;
+        }
+
+        .process-header h2 {
+            font-size: clamp(2rem, 3.8vw, 3.2rem);
+            margin-top: 0.5rem;
+        }
+
+        .process-steps-list {
+            grid-column: span 12;
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+            margin-bottom: 40px;
+        }
+
+        .process-step-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .service-img-wrapper {
+            aspect-ratio: 3 / 2;
+            overflow: hidden;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--line);
+        }
+
+        .service-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .service-img-wrapper:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.03);
+        }
+
+        .process-step-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .process-num {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .process-step-title {
+            font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+            margin-bottom: 1rem;
+            color: var(--text);
+            line-height: 1.15;
+        }
+
+        .process-step-desc {
+            font-size: 1.02rem;
+            line-height: 1.65;
+            color: var(--text-secondary);
+        }
+
+        .process-step-pricing {
+            margin-top: 18px;
+            font-size: 1.02rem;
+            line-height: 1.6;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* =========================================================================
+           5 · OHNE RISIKO (id="ohne-risiko")
+           ========================================================================= */
+        .risk-section {
+            background-color: var(--bg);
+        }
+
+        .risk-header {
+            grid-column: span 12;
+            margin-bottom: 48px;
+        }
+
+        .risk-header h2 {
+            font-size: clamp(2rem, 3.8vw, 3.2rem);
+            margin-top: 0.5rem;
+        }
+
+        .risk-grid {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+        }
+
+        .risk-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .risk-item-lead {
+            font-weight: 600;
+            font-size: 1.15rem;
+            line-height: 1.35;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+        }
+
+        .risk-item-text {
+            font-size: 1.02rem;
+            line-height: 1.65;
+            color: var(--text-secondary);
+        }
+
+        /* =========================================================================
+           6 · VERGLEICH (id="vergleich")
+           ========================================================================= */
+        .comparison-section {
+            background-color: var(--bg);
+        }
+
+        .comparison-header {
+            grid-column: span 12;
+            margin-bottom: 56px;
+        }
+
+        .comparison-header h2 {
+            font-size: clamp(2rem, 3.8vw, 3.2rem);
+            margin-top: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .comparison-intro {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            max-width: 780px;
+        }
+
+        .comparison-table-wrapper {
+            grid-column: span 12;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 80px;
+            row-gap: 24px;
+            position: relative;
+        }
+
+        /* Feine senkrechte Trennlinie in der Mitte */
+        .comparison-grid::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: calc(50% - 0.5px);
+            width: 1px;
+            background-color: var(--line);
+        }
+
+        .comparison-col-header {
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 8px;
+        }
+
+        .comparison-col-title {
+            font-size: 1.45rem;
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
+        .comparison-row-item {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            font-size: 1.02rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        .comparison-bullet {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .comparison-text {
+            flex: 1;
+        }
+
+        .comparison-mobile-divider {
+            display: none;
+        }
+
+        /* =========================================================================
+           8 · ARBEITEN (REFERENZEN OHNE LINKS)
+           ========================================================================= */
+        .works-section {
+            background-color: var(--bg);
+        }
+
+        .works-header {
+            grid-column: span 12;
+            margin-bottom: 20px;
+        }
+
+        .works-header h2 {
+            font-size: clamp(2rem, 3.8vw, 3.2rem);
+            margin-top: 0.5rem;
+        }
+
+        .works-grid {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .work-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Versetztes asymmetrisches Raster wie im Original */
+        .work-item-1 {
+            grid-column: 1 / 7;
+            margin-top: 80px;
+        }
+
+        .work-item-2 {
+            grid-column: 7 / 13;
+        }
+
+        .work-img-wrapper {
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--line);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .work-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            display: block;
+        }
+
+        .work-img-wrapper:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.03);
+        }
+
+        .work-placeholder-badge {
+            position: absolute;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            background-color: var(--text);
+            color: #FFFFFF;
+            padding: 8px 16px;
+            z-index: 10;
+            top: 20px;
+            left: 20px;
+        }
+
+        .work-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .work-category {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* =========================================================================
+           9 · FACHBEITRAG (GENAU EIN BEITRAG, HEUTIGES DATUM)
+           ========================================================================= */
+        .article-section {
+            background-color: var(--bg);
+        }
+
+        .article-header {
+            grid-column: span 12;
+            margin-bottom: 20px;
+        }
+
+        .article-header h2 {
+            font-size: clamp(2rem, 3.8vw, 3.2rem);
+            margin-top: 0.5rem;
+        }
+
+        .article-layout {
+            grid-column: span 12;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--line);
+            padding: 64px;
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 72px;
+            align-items: start;
+        }
+
+        .article-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 26px;
+        }
+
+        .article-date-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--text);
+            color: #FFFFFF;
+            padding: 6px 14px;
+            border-radius: 1px;
+        }
+
+        .article-status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #FFFFFF;
+            display: inline-block;
+            opacity: 0.9;
+        }
+
+        .article-date-prefix {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            opacity: 0.75;
+        }
+
+        .article-date-value {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #FFFFFF;
+        }
+
+        .article-meta-divider {
+            color: var(--line);
+            font-size: 12px;
+        }
+
+        .article-tag {
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .article-cycle-badge {
+            font-size: 10.5px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            border: 1px solid var(--line);
+            padding: 4px 10px;
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .article-main-title {
+            font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+            margin-bottom: 24px;
+            line-height: 1.2;
+            color: var(--text);
+        }
+
+        .article-lead {
+            font-size: 1.05rem;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .article-warning-box {
+            border-left: 2px solid var(--text);
+            padding: 20px 24px;
+            background-color: rgba(10, 10, 10, 0.02);
+            margin-bottom: 32px;
+        }
+
+        .article-warning-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .article-warning-text {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .article-action-hint {
+            margin-top: 24px;
+        }
+
+        .article-checklist-link {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--text);
+            transition: opacity 0.2s ease;
+        }
+
+        .article-checklist-link:hover {
+            opacity: 0.65;
+        }
+
+        .article-checklist-link .arrow-symbol {
+            font-family: var(--font-sans);
+            transition: transform 0.2s ease;
+        }
+
+        .article-checklist-link:hover .arrow-symbol {
+            transform: translateY(2px);
+        }
+
+        /* Rechte Spalte: Spezifikationsliste */
+        .article-details-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-details-header {
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .article-details-kicker {
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .article-details-heading {
+            font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .article-details-sub {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .article-spec-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-spec-item {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .article-spec-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .spec-num {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            line-height: 1;
+            width: 32px;
+            flex-shrink: 0;
+            padding-top: 2px;
+        }
+
+        .spec-body {
+            flex-grow: 1;
+        }
+
+        .spec-title {
+            font-family: var(--font-sans);
+            font-size: 1.02rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
+        }
+
+        .spec-desc {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        .spec-desc em {
+            font-style: normal;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .article-footer-disclaimer {
+            grid-column: 1 / -1;
+            margin-top: 36px;
+            padding-top: 24px;
+            border-top: 1px solid var(--line);
+            font-size: 11.5px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .article-footer-disclaimer p {
+            margin: 0 0 6px 0;
+        }
+
+        .article-footer-disclaimer p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* =========================================================================
+           10 · FREEBIE (CHECKLISTE PFLICHTANGABEN)
+           ========================================================================= */
+        .freebie-section {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .freebie-wrapper {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .freebie-desc h2 {
+            font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+            margin-bottom: 18px;
+            color: var(--text);
+        }
+
+        .freebie-desc p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 24px;
+        }
+
+        .freebie-form-container {
+            background-color: var(--bg);
+            border: 1px solid var(--line);
+            padding: 40px;
+        }
+
+        .form-row {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .form-input-text {
+            width: 100%;
+            padding: 14px 16px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--line);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 14px;
+            transition: border-color 0.25s ease;
+        }
+
+        .form-input-text:focus {
+            outline: none;
+            border-color: var(--text);
+        }
+
+        .form-checkbox-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 14px;
+            margin-bottom: 24px;
+        }
+
+        .form-checkbox {
+            margin-top: 4px;
+            accent-color: var(--text);
+            cursor: pointer;
+        }
+
+        .form-checkbox-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.45;
+            cursor: pointer;
+        }
+
+        .privacy-hint {
+            font-size: 11.5px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            text-align: left;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .privacy-hint a {
+            color: var(--text);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: opacity 0.2s ease;
+        }
+
+        .privacy-hint a:hover {
+            opacity: 0.7;
+        }
+
+        .form-submit-btn {
+            width: 100%;
+            background-color: var(--text);
+            color: #FFFFFF;
+            border: 1px solid var(--text);
+            padding: 16px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .form-submit-btn:hover {
+            background-color: transparent;
+            color: var(--text);
+        }
+
+        .freebie-download-box {
+            display: none;
+            background-color: var(--bg);
+            border: 1px solid var(--line);
+            padding: 40px;
+            text-align: left;
+        }
+
+        .freebie-download-box h3 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .freebie-download-box p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .freebie-download-link {
+            display: inline-block;
+            background-color: var(--text);
+            color: #FFFFFF;
+            padding: 14px 28px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: 1px solid var(--text);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .freebie-download-link::after {
+            display: none;
+        }
+
+        .freebie-download-link:hover {
+            background-color: transparent;
+            color: var(--text);
+        }
+
+        /* =========================================================================
+           11 · ÜBER MICH (ORIGINALTEXT CYRIL PORTMANN)
+           ========================================================================= */
+        .about-section {
+            background-color: var(--bg);
+        }
+
+        .about-portrait {
+            grid-column: span 5;
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--line);
+        }
+
+        .about-portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            display: block;
+        }
+
+        .about-portrait:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.02);
+        }
+
+        .about-text {
+            grid-column: 7 / span 6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .about-title {
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            margin-bottom: 2rem;
+        }
+
+        .about-text p {
+            font-size: 1.05rem;
+            line-height: 1.65;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .about-text p:last-child {
+            margin-bottom: 0;
+            color: var(--text-secondary);
+        }
+
+        /* =========================================================================
+           12 · HÄUFIGE FRAGEN (FAQ)
+           ========================================================================= */
+        .faq-section {
+            background-color: var(--bg);
+        }
+
+        .faq-header {
+            grid-column: span 4;
+        }
+
+        .faq-header h2 {
+            font-size: clamp(2rem, 3.5vw, 3rem);
+        }
+
+        .faq-accordion {
+            grid-column: 5 / span 8;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-accordion details {
+            border-bottom: 1px solid var(--line);
+            padding: 24px 0;
+        }
+
+        .faq-accordion details:first-child {
+            padding-top: 0;
+        }
+
+        .faq-accordion summary {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text);
+            user-select: none;
+        }
+
+        .faq-accordion summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-accordion summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-accordion details[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding-top: 16px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            max-width: 60ch;
+        }
+
+        /* =========================================================================
+           13 · KONTAKT SEKTION & FUSSZEILE
+           ========================================================================= */
+        .contact-section {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .contact-container {
+            grid-column: span 12;
+            max-width: 800px;
+        }
+
+        .contact-title {
+            font-size: clamp(2.2rem, 4vw, 3.8rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .contact-desc {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .contact-mail-link {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 2.8vw, 2.4rem);
+            color: var(--text);
+            display: inline-block;
+            border-bottom: 1px solid var(--text);
+            padding-bottom: 4px;
+        }
+
+        .contact-mail-link::after {
+            display: none;
+        }
+
+        .contact-mail-link:hover {
+            opacity: 0.7;
+        }
+
+        .footer {
+            padding: 80px 0;
+            background-color: var(--bg);
+            border-top: 1px solid var(--line);
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 400px;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .footer-tagline {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .footer-link {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .footer-link:hover {
+            color: var(--text);
+        }
+
+        /* =========================================================================
+           SCROLL REVEAL ANIMATIONS
+           ========================================================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .no-js .reveal {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        /* =========================================================================
+           MOBILE SMARTPHONE ANPASSUNG (< 900px)
+           ========================================================================= */
+        .mobile-bottom-bar {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            .section-spacing {
+                padding: 64px 0;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            [id] {
+                scroll-margin-top: 80px;
+            }
+
+            .grid-12 {
+                display: flex;
+                flex-direction: column;
+                gap: 36px;
+            }
+
+            /* Header */
+            .header {
+                padding: 16px 0;
+            }
+
+            .header.scrolled {
+                padding: 12px 0;
+                background-color: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                border-bottom: 1px solid var(--line);
+            }
+
+            .brand-logo-img {
+                height: 22px;
+            }
+
+            .header-links {
+                display: none;
+            }
+
+            .header-btn {
+                padding: 8px 15px;
+                font-size: 10px;
+                letter-spacing: 0.08em;
+            }
+
+            /* Hero */
+            .hero {
+                min-height: 100svh;
+                height: auto;
+                padding-top: 105px;
+                padding-bottom: 48px;
+                display: flex;
+                align-items: center;
+            }
+
+            .hero-text-container {
+                padding-top: 0;
+                width: 100%;
+            }
+
+            .hero-title {
+                font-size: clamp(2rem, 7.6vw, 2.75rem);
+                line-height: 1.12;
+                letter-spacing: -0.02em;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.02rem;
+                line-height: 1.6;
+                margin-bottom: 2rem;
+                color: rgba(255, 255, 255, 0.88);
+            }
+
+            .hero-actions-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 14px;
+                width: 100%;
+            }
+
+            .hero-link {
+                width: 100%;
+                text-align: center;
+                padding: 16px 20px;
+                font-size: 11px;
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                letter-spacing: 0.1em;
+            }
+
+            .hero-actions-row .link-subtle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 44px;
+                padding: 10px 16px;
+                font-size: 11px;
+                text-align: center;
+                color: rgba(255, 255, 255, 0.85);
+            }
+
+            /* CTA-Bänder */
+            .cta-band {
+                padding: 44px 0;
+            }
+
+            .cta-band-content {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 20px;
+            }
+
+            .cta-band-text {
+                font-size: 1.15rem;
+                line-height: 1.45;
+            }
+
+            .cta-band-btn {
+                width: 100%;
+                text-align: center;
+                padding: 16px 20px;
+                font-size: 11px;
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Trennbilder */
+            .full-width-separator-img {
+                height: 38vh;
+                min-height: 220px;
+            }
+
+            /* 3 Ablaufschritte */
+            .process-steps-list {
+                gap: 44px;
+            }
+
+            .process-step-row {
+                display: flex;
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .process-step-row-reverse {
+                flex-direction: column-reverse;
+            }
+
+            .service-img-wrapper {
+                aspect-ratio: 16 / 10;
+                width: 100%;
+            }
+
+            .service-img-wrapper img {
+                filter: grayscale(15%);
+            }
+
+            .process-num {
+                font-size: 1.8rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .process-step-title {
+                font-size: 1.45rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .process-step-desc {
+                font-size: 0.98rem;
+                line-height: 1.6;
+            }
+
+            .process-step-pricing {
+                margin-top: 14px;
+                font-size: 0.98rem;
+                line-height: 1.5;
+            }
+
+            /* Ohne Risiko */
+            .risk-header {
+                margin-bottom: 32px;
+            }
+
+            .risk-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 36px;
+            }
+
+            .risk-item-lead {
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .risk-item-text {
+                font-size: 0.98rem;
+                line-height: 1.6;
+            }
+
+            /* Vergleich */
+            .comparison-header {
+                margin-bottom: 36px;
+            }
+
+            .comparison-header h2 {
+                font-size: clamp(1.8rem, 6.5vw, 2.4rem);
+                line-height: 1.2;
+                margin-bottom: 1rem;
+            }
+
+            .comparison-intro {
+                font-size: 1rem;
+                line-height: 1.55;
+            }
+
+            .comparison-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                position: static;
+            }
+
+            .comparison-grid::after {
+                display: none;
+            }
+
+            .col-left {
+                order: 1;
+            }
+
+            .comparison-mobile-divider {
+                display: block;
+                order: 2;
+                height: 1px;
+                background-color: var(--line);
+                margin: 28px 0;
+            }
+
+            .col-right {
+                order: 3;
+            }
+
+            .comparison-col-header {
+                padding-bottom: 14px;
+                margin-bottom: 6px;
+            }
+
+            .comparison-col-header.col-right {
+                margin-top: 0;
+            }
+
+            .comparison-col-title {
+                font-size: 1.3rem;
+            }
+
+            .comparison-row-item {
+                font-size: 0.95rem;
+                line-height: 1.55;
+                gap: 12px;
+            }
+
+            /* Referenzen / Arbeiten */
+            .works-header h2 {
+                font-size: clamp(1.8rem, 6.5vw, 2.4rem);
+                line-height: 1.2;
+            }
+
+            .works-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 32px;
+                margin-top: 20px;
+            }
+
+            .work-item-1 {
+                margin-top: 0;
+            }
+
+            .work-img-wrapper {
+                aspect-ratio: 16 / 10;
+                margin-bottom: 12px;
+            }
+
+            .work-img-wrapper img {
+                filter: grayscale(15%);
+            }
+
+            .work-title {
+                font-size: 1.25rem;
+            }
+
+            .work-category {
+                font-size: 12px;
+            }
+
+            /* Fachbeitrag */
+            .article-header h2 {
+                font-size: clamp(1.75rem, 6vw, 2.25rem);
+                line-height: 1.2;
+            }
+
+            .article-layout {
+                grid-template-columns: 1fr;
+                gap: 48px;
+                padding: 36px 20px;
+            }
+
+            .article-meta-bar {
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            .article-date-badge {
+                font-size: 11px;
+                padding: 5px 12px;
+            }
+
+            .article-main-title {
+                font-size: 1.5rem;
+                line-height: 1.25;
+                margin-bottom: 18px;
+            }
+
+            .article-lead {
+                font-size: 0.98rem;
+                line-height: 1.65;
+                margin-bottom: 24px;
+            }
+
+            .article-warning-box {
+                padding: 16px 18px;
+                margin-bottom: 24px;
+            }
+
+            .article-spec-item {
+                gap: 16px;
+                padding: 18px 0;
+            }
+
+            .spec-num {
+                font-size: 1.2rem;
+                width: 28px;
+            }
+
+            /* Freebie */
+            .freebie-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 32px;
+            }
+
+            .freebie-desc h2 {
+                font-size: clamp(1.65rem, 6vw, 2.15rem);
+                line-height: 1.2;
+                margin-bottom: 14px;
+            }
+
+            .freebie-desc p {
+                font-size: 0.96rem;
+                line-height: 1.6;
+                margin-bottom: 20px;
+            }
+
+            .freebie-form-container {
+                padding: 28px 20px;
+            }
+
+            .form-input-text {
+                font-size: 16px !important; /* Unterbindet iOS Safari Auto-Zoom bei Input-Fokus */
+                padding: 13px 14px;
+                border-radius: 0;
+                -webkit-appearance: none;
+            }
+
+            .form-checkbox-row {
+                align-items: flex-start;
+                gap: 10px;
+                margin-top: 12px;
+                margin-bottom: 20px;
+            }
+
+            .form-checkbox {
+                width: 18px;
+                height: 18px;
+                flex-shrink: 0;
+                margin-top: 2px;
+            }
+
+            .form-checkbox-label {
+                font-size: 12.5px;
+                line-height: 1.4;
+            }
+
+            .form-submit-btn {
+                width: 100%;
+                min-height: 48px;
+                font-size: 11px;
+                letter-spacing: 0.1em;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Über mich */
+            .about-portrait {
+                width: 100%;
+                max-width: 320px;
+                margin: 0 auto;
+                aspect-ratio: 4 / 5;
+            }
+
+            .about-portrait img {
+                filter: grayscale(15%);
+            }
+
+            .about-text {
+                width: 100%;
+            }
+
+            .about-text h2 {
+                font-size: clamp(1.75rem, 6vw, 2.25rem);
+                margin-bottom: 1.2rem;
+            }
+
+            .about-text p {
+                font-size: 0.98rem;
+                line-height: 1.65;
+                margin-bottom: 1.25rem;
+            }
+
+            /* FAQ */
+            .faq-header h2 {
+                font-size: clamp(1.75rem, 6vw, 2.25rem);
+                margin-bottom: 1rem;
+            }
+
+            .faq-accordion {
+                width: 100%;
+            }
+
+            .faq-accordion details {
+                padding: 18px 0;
+            }
+
+            .faq-accordion summary {
+                font-size: 1.12rem;
+                line-height: 1.35;
+                padding: 4px 0;
+                min-height: 44px;
+            }
+
+            .faq-answer p {
+                font-size: 0.95rem;
+                line-height: 1.6;
+                padding-top: 12px;
+            }
+
+            /* Kontakt */
+            .contact-title {
+                font-size: clamp(1.85rem, 6.5vw, 2.6rem);
+                line-height: 1.15;
+                margin-bottom: 1.2rem;
+            }
+
+            .contact-desc {
+                font-size: 0.98rem;
+                line-height: 1.6;
+                margin-bottom: 1.8rem;
+            }
+
+            .contact-mail-link {
+                font-size: clamp(1.15rem, 5.5vw, 1.8rem);
+                word-break: break-word;
+                display: inline-block;
+                max-width: 100%;
+            }
+
+            /* Footer mit Sicherheitsabstand für Sticky Bar */
+            .footer {
+                padding: 48px 0 calc(95px + env(safe-area-inset-bottom, 16px));
+            }
+
+            .footer-grid {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 22px;
+            }
+
+            .footer-logo {
+                font-size: 1.2rem;
+            }
+
+            .footer-right {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 14px 22px;
+            }
+
+            .footer-link {
+                font-size: 11.5px;
+                padding: 6px 0;
+                display: inline-block;
+                min-height: 36px;
+            }
+
+            /* Mobile Sticky Bottom Bar (gleitet erst nach dem Hero sanft ein) */
+            .mobile-bottom-bar {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border-top: 1px solid var(--line);
+                padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
+                z-index: 1000;
+                display: flex;
+                justify-content: center;
+                transform: translateY(105%);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            }
+
+            .mobile-bottom-bar.is-visible {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .mobile-bottom-btn {
+                background-color: var(--text);
+                color: #FFFFFF;
+                width: 100%;
+                text-align: center;
+                padding: 14px 0;
+                font-size: 11px;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                border: 1px solid var(--text);
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .mobile-bottom-btn::after {
+                display: none;
+            }
+        }
+
+        body{position:relative}
+
+        #faden{
+          position:absolute; top:0; left:0;
+          width:100%; height:100%;
+          pointer-events:none; z-index:3;
+        }
+        #faden svg{display:block; width:100%; height:100%}
+        #faden path{
+          fill:none;
+          stroke:#A8A5A0;
+          stroke-width:1;
+          opacity:.85;
+          vector-effect:non-scaling-stroke;
+          stroke-dasharray:1;
+          stroke-dashoffset:1;
+        }
+        @media (prefers-reduced-motion: reduce){
+          #faden path{stroke-dashoffset:0}
+        }
+        @media (max-width:900px){ #faden{display:none} }
+    
+        /* =========================================================================
+           DIGITALER ASSISTENT (CÉ CONCIERGE) — STYLES
+           ========================================================================= */
+        :root {
+            --chat-shadow: 0 16px 48px rgba(10, 10, 10, 0.16);
+            --chip-bg: #F0EEE9;
+            --chip-border: #E2DFD8;
+            --chip-text: #222222;
+            --accent-green: #2e7d32;
+        }
+
+        /* Floating Trigger Button */
+        .ce-chat-trigger {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background-color: var(--text);
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(10, 10, 10, 0.22);
+            transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s ease;
+            z-index: 1200;
+            user-select: none;
+        }
+
+        .ce-chat-trigger:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 32px rgba(10, 10, 10, 0.28);
+        }
+
+        .ce-chat-trigger-icon {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 1.15rem;
+            letter-spacing: 0.05em;
+            transition: transform 0.25s ease, opacity 0.2s ease;
+        }
+
+        .ce-chat-trigger-close {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0;
+            transform: rotate(-90deg) scale(0.6);
+            transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .ce-chat-trigger.open .ce-chat-trigger-icon {
+            opacity: 0;
+            transform: scale(0.6);
+        }
+
+        .ce-chat-trigger.open .ce-chat-trigger-close {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+
+        /* Chat Dialog Window */
+        .ce-chat-window {
+            position: fixed;
+            bottom: 96px;
+            right: 28px;
+            width: 400px;
+            height: 580px;
+            background-color: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            box-shadow: var(--chat-shadow);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1190;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(16px) scale(0.97);
+            transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .ce-chat-window.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Chat Header */
+        .ce-chat-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--line);
+            background-color: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .ce-chat-header-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .ce-chat-header-status {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: var(--accent-green);
+            display: inline-block;
+            box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+            animation: pulse-dot 2.5s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(46, 125, 50, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0); }
+        }
+
+        .ce-chat-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ce-header-btn {
+            background: none;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .ce-header-btn:hover {
+            background-color: var(--bg-secondary);
+            color: var(--text);
+        }
+
+        /* Chat Body & Messages */
+        .ce-chat-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            scroll-behavior: smooth;
+            background-color: var(--bg);
+        }
+
+        .ce-message {
+            display: flex;
+            flex-direction: column;
+            max-width: 86%;
+            animation: msg-fade 0.25s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        @keyframes msg-fade {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ce-message.bot {
+            align-self: flex-start;
+        }
+
+        .ce-message.user {
+            align-self: flex-end;
+        }
+
+        .ce-bubble {
+            padding: 12px 16px;
+            font-size: 13.5px;
+            line-height: 1.55;
+            border-radius: 12px;
+            white-space: pre-line;
+            word-break: break-word;
+        }
+
+        .ce-message.bot .ce-bubble {
+            background-color: var(--bg-secondary);
+            color: var(--text);
+            border: 1px solid var(--line);
+            border-top-left-radius: 2px;
+        }
+
+        .ce-message.user .ce-bubble {
+            background-color: var(--text);
+            color: #FFFFFF;
+            border-top-right-radius: 2px;
+        }
+
+        .ce-msg-time {
+            font-size: 10px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            padding: 0 2px;
+        }
+
+        .ce-message.user .ce-msg-time {
+            align-self: flex-end;
+        }
+
+        /* Folgefragen Knöpfe (Chips) unter Antworten */
+        .ce-followups {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .ce-chip {
+            background: var(--chip-bg);
+            border: 1px solid var(--chip-border);
+            color: var(--chip-text);
+            font-family: var(--font-sans);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            line-height: 1.3;
+        }
+
+        .ce-chip:hover {
+            border-color: var(--text);
+            background-color: #FFFFFF;
+            transform: translateY(-1px);
+        }
+
+        .ce-chip.special-action {
+            background-color: var(--text);
+            color: #FFFFFF;
+            border-color: var(--text);
+            font-weight: 600;
+        }
+
+        .ce-chip.special-action:hover {
+            opacity: 0.88;
+            background-color: #222222;
+        }
+
+        /* Typing Indicator */
+        .ce-typing {
+            display: none;
+            align-self: flex-start;
+            padding: 10px 14px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            border-top-left-radius: 2px;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .ce-typing.active {
+            display: flex;
+        }
+
+        .typing-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: var(--text-secondary);
+            animation: typing-blink 1.2s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing-blink {
+            0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+            40% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Chat Footer */
+        .ce-chat-footer {
+            padding: 14px 18px;
+            border-top: 1px solid var(--line);
+            background-color: var(--bg);
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .ce-input-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ce-input {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            background-color: var(--bg-secondary);
+            font-family: var(--font-sans);
+            font-size: 13.5px;
+            outline: none;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .ce-input:focus {
+            border-color: var(--text);
+            background: #FFFFFF;
+        }
+
+        .ce-send-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            background-color: var(--text);
+            color: #FFFFFF;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .ce-send-btn:hover {
+            opacity: 0.85;
+        }
+
+        .ce-send-btn svg {
+            width: 15px;
+            height: 15px;
+            fill: currentColor;
+        }
+
+        .ce-footer-hint {
+            font-size: 10.5px;
+            color: var(--text-secondary);
+            text-align: center;
+            letter-spacing: 0.02em;
+        }
+
+        /* Mobile Positionierung: Knopf darf untere Leiste (.mobile-bottom-bar) nicht überdecken */
+        @media (max-width: 900px) {
+            .ce-chat-trigger {
+                bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+                right: 18px;
+                width: 52px;
+                height: 52px;
+            }
+
+            .ce-chat-window {
+                right: 12px;
+                left: 12px;
+                bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+                width: auto;
+                height: calc(100dvh - 104px);
+                max-height: 580px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="faden" aria-hidden="true">
+      <svg viewBox="0 0 100 1000" preserveAspectRatio="none">
+        <path pathLength="1" d="M 50 0
+          C 50 60, 12 90, 12 150
+          C 12 220, 88 240, 88 320
+          C 88 400, 15 420, 15 500
+          C 15 580, 85 600, 85 680
+          C 85 760, 20 780, 20 860
+          C 20 930, 50 950, 50 1000"/>
+      </svg>
+    </div>
+
+    <!-- =========================================================================
+         LADEBILDSCHIRM / PRELOADER SCREEN
+         ========================================================================= -->
+    <div class="preloader-overlay fallback-active" id="preloaderOverlay">
+        <div class="preloader-logo-container" style="position: relative; width: 189px; height: 80px; display: block; margin: 0 auto 2rem;">
+            <!-- Faint PNG background placeholder -->
+            <img src="logo_transparent.png" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.12; display: block; pointer-events: none; user-select: none;">
+            
+            <!-- Animating PNG logo on top with conic gradient mask -->
+            <img src="logo_transparent.png" id="loader-png-logo" class="loader-masked-logo" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; pointer-events: none; user-select: none; --progress: 0%;">
+        </div>
+        <div class="preloader-loading-text">LADEN</div>
+        <div class="preloader-counter" id="preloader-count">000</div>
+    </div>
+
+    <!-- =========================================================================
+         1 · KOPFZEILE (UNVERÄNDERT)
+         ========================================================================= -->
+    <header class="header" id="main-header">
+        <div class="container header-nav">
+            <a href="index.html" class="brand-logo" aria-label="CÉ Studios Startseite">
+                <img src="logo_transparent.png" alt="CÉ Studios" class="brand-logo-img">
+            </a>
+            <div class="header-menu">
+                <nav class="header-links">
+                    <a href="#ablauf" class="header-link">Ablauf</a>
+                    <a href="#vergleich" class="header-link">Vergleich</a>
+                    <a href="#fachbeitrag" class="header-link">Fachbeitrag</a>
+                    <a href="#checkliste" class="header-link">Checkliste</a>
+                    <a href="#ueber-mich" class="header-link">Über mich</a>
+                </nav>
+                <a href="contact.html" class="header-btn">Projekt anfragen</a>
+            </div>
+        </div>
+    </header>
+
+
+
+    <main>
+        <!-- =========================================================================
+             2 · HERO SEKTION — NEUE H1 UND SUBLINE
+             ========================================================================= -->
+        <section class="hero" id="hero">
+            <img src="platzhalter_01.jpg" alt="Modernistische Architektur als Beispiel für anspruchsvolles Immobilien-Webdesign" class="hero-bg-img" loading="eager">
+            <div class="hero-gradient"></div>
+            <div class="hero-container">
+                <div class="hero-text-container">
+                    <span class="label">CÉ STUDIOS · WIESBADEN</span>
+                    <h1 class="hero-title">
+                        Die Seite, der Eigentümer ihr Objekt anvertrauen.
+                    </h1>
+                    <p class="hero-subtitle">
+                        Websites für Maklerbüros, Bauträger und Projektentwickler — zuerst fürs Handy gebaut.
+                    </p>
+                    <div class="hero-actions-row">
+                        <a href="contact.html" class="hero-link" aria-label="Kostenlose Einschätzung Ihrer Seite anfordern">
+                            Kostenlose Einschätzung Ihrer Seite
+                        </a>
+                        <a href="#ablauf" class="hero-secondary-link">
+                            So arbeite ich
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-hint">
+                <span class="scroll-hint-label">SCROLLEN</span>
+            </div>
+        </section>
+
+        <!-- =========================================================================
+             3 · CTA-BAND 1
+             ========================================================================= -->
+        <section class="cta-band" id="cta-band-1">
+            <div class="container cta-band-content">
+                <p class="cta-band-text">
+                    Schicken Sie mir den Link zu Ihrer Seite. Sie bekommen innerhalb von zwei Werktagen eine schriftliche Einschätzung: drei Punkte, keine Verkaufspräsentation.
+                </p>
+                <a href="contact.html" class="cta-band-btn">
+                    Kostenlose Einschätzung anfragen
+                </a>
+            </div>
+        </section>
+
+        <!-- RANDLOSES BILD (TRENNUNG 1) -->
+        <div class="full-width-separator-img reveal">
+            <img src="platzhalter_02.jpg" alt="Moderne minimalistische Hausfassade aus Sichtbeton" loading="lazy">
+        </div>
+
+        <!-- =========================================================================
+             4 · LEISTUNG IN DREI SCHRITTEN (id="ablauf")
+             ========================================================================= -->
+        <section class="process-section section-spacing container" id="ablauf">
+            <div class="grid-12">
+                <div class="process-header">
+                    <span class="label">Vorgehensweise</span>
+                    <h2>Wie ich arbeite</h2>
+                </div>
+                
+                <div class="process-steps-list">
+                    <!-- Schritt 01 (Bild links, Text rechts) -->
+                    <div class="process-step-row reveal">
+                        <div class="service-img-wrapper">
+                            <img src="platzhalter_04.jpg" alt="Bestandsaufnahme Ihrer aktuellen Website und Inserate" loading="lazy">
+                        </div>
+                        <div class="process-step-text">
+                            <span class="process-num">01</span>
+                            <h3 class="process-step-title">Bestandsaufnahme</h3>
+                            <p class="process-step-desc">
+                                Ich sehe mir Ihre Seite und Ihre aktuellen Inserate an und sage Ihnen konkret, was funktioniert und was nicht. Kostenlos, auch wenn Sie danach nicht mit mir arbeiten.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Schritt 02 (Text links, Bild rechts) -->
+                    <div class="process-step-row process-step-row-reverse reveal">
+                        <div class="process-step-text">
+                            <span class="process-num">02</span>
+                            <h3 class="process-step-title">Entwurf</h3>
+                            <p class="process-step-desc">
+                                Nach dem Erstgespräch baue ich Ihre Startseite fertig — bevor Sie einen Cent zahlen. Sie sehen sie live im Browser, auf Ihrem eigenen Handy. Gefällt sie Ihnen nicht, endet die Sache hier und es kostet Sie nichts. Sagen Sie ja, baue ich den Rest.
+                            </p>
+                        </div>
+                        <div class="service-img-wrapper">
+                            <img src="platzhalter_05.jpg" alt="Fertiger Entwurf der Startseite live im Browser" loading="lazy">
+                        </div>
+                    </div>
+
+                    <!-- Schritt 03 (Bild links, Text rechts) -->
+                    <div class="process-step-row reveal">
+                        <div class="service-img-wrapper">
+                            <img src="platzhalter_06.jpg" alt="Umsetzung und Pflege der fertigen Website" loading="lazy">
+                        </div>
+                        <div class="process-step-text">
+                            <span class="process-num">03</span>
+                            <h3 class="process-step-title">Umsetzung</h3>
+                            <p class="process-step-desc">
+                                Zwei bis vier Wochen. Danach pflegen Sie Ihre Inhalte selbst, ich zeige es Ihnen.
+                            </p>
+                            <p class="process-step-pricing">
+                                Website ab 1.900 €, einmalig. Einzelne Objektseiten ab 490 €.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================================
+             5 · OHNE RISIKO (id="ohne-risiko")
+             ========================================================================= -->
+        <section class="risk-section section-spacing container" id="ohne-risiko">
+            <div class="grid-12">
+                <div class="risk-header reveal">
+                    <span class="label">OHNE RISIKO</span>
+                    <h2>Was Sie nicht riskieren</h2>
+                </div>
+
+                <div class="risk-grid">
+                    <div class="risk-item reveal">
+                        <p class="risk-item-lead">Keine Anzahlung.</p>
+                        <p class="risk-item-text">
+                            Die Entscheidung fällt am Entwurf der Startseite, nicht am Ende. Sagen Sie dort ab, zahlen Sie nichts. Sagen Sie zu, wird nach der Veröffentlichung abgerechnet.
+                        </p>
+                    </div>
+
+                    <div class="risk-item reveal">
+                        <p class="risk-item-lead">Zwei Korrekturrunden, schriftlich festgehalten.</p>
+                        <p class="risk-item-text">
+                            Damit klar ist, was noch offen ist und wann ein Projekt fertig ist — für Sie und für mich.
+                        </p>
+                    </div>
+
+                    <div class="risk-item reveal">
+                        <p class="risk-item-lead">Ein Festpreis, keine Mindestlaufzeit.</p>
+                        <p class="risk-item-text">
+                            Was einmalig ist und was monatlich läuft, steht vor dem Start schriftlich fest. Nichts verlängert sich automatisch.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RANDLOSES BILD (TRENNUNG 2) -->
+        <div class="full-width-separator-img reveal">
+            <img src="platzhalter_03.jpg" alt="Innenraum einer modernistischen Luxusvilla mit Stadtblick" loading="lazy">
+        </div>
+
+        <!-- =========================================================================
+             6 · VERGLEICH (id="vergleich")
+             ========================================================================= -->
+        <section class="comparison-section section-spacing container" id="vergleich">
+            <div class="grid-12">
+                <div class="comparison-header reveal">
+                    <span class="label">Marktvergleich</span>
+                    <h2>Was Sie meistens bekommen — und was Sie bei mir bekommen</h2>
+                    <p class="comparison-intro">
+                        Ich rede keine Agentur schlecht. Aber es gibt ein Muster, und ich baue bewusst dagegen.
+                    </p>
+                </div>
+
+                <div class="comparison-table-wrapper reveal">
+                    <div class="comparison-grid">
+                        <!-- Spaltentitel -->
+                        <div class="comparison-col-header col-left">
+                            <h3 class="comparison-col-title">Die übliche Maklerseite</h3>
+                        </div>
+                        <div class="comparison-col-header col-right">
+                            <h3 class="comparison-col-title">Bei mir</h3>
+                        </div>
+
+                        <!-- Paar 1 -->
+                        <div class="comparison-row-item col-left">
+                            <span class="comparison-bullet">–</span>
+                            <span class="comparison-text">Sieht aus wie die vom Büro zwei Straßen weiter</span>
+                        </div>
+                        <div class="comparison-row-item col-right">
+                            <span class="comparison-bullet">–</span>
+                            <span class="comparison-text">Sieht aus wie Ihr Büro und wie kein anderes</span>
+                        </div>
+
+                        <!-- Paar 2 -->
+                        <div class="comparison-row-item col-left">
+                            <span class="comparison-bullet">–</span>
+                            <span class="comparison-text">Objekte als Liste — dasselbe wie im Portal, nur mit weniger Reichweite</span>
+                        </div>
+                        <div class="comparison-row-item col-right">
+                            <span class="comparison-bullet">–</span>
+                            <span class="comparison-text">Jedes wichtige Objekt bekommt eine eigene Seite mit Link zum Verschicken</span>
+                        </div>
+
+                        <!-- Paar 3 -->
+                        <div class="comparison-row-item col-left">
+                            <span class="comparison-bullet">–</span>
+                            <span class="comparison-text">Am Rechner entworfen, am Handy gerade noch benutzbar</span>
+                        </div>
+                        <div class="comparison-row-item col-right">
+                            <span class="comparison-bullet">–</span>
+                            <span class="comparison-text">Zuerst fürs Handy gebaut, weil dort entschieden wird</span>
+                        </div>
+
+                        <!-- Paar 4 -->
+                        <div class="comparison-row-item col-left">
+                            <span class="comparison-bullet">–</span>
+                            <span class="comparison-text">Ein Kontaktformular ganz unten, das man erst suchen muss</span>
+                        </div>
+                        <div class="comparison-row-item col-right">
+                            <span class="comparison-bullet">–</span>
+                            <span class="comparison-text">Auf jedem Bildschirm ein Weg zu Ihnen, nie mehr als ein Klick entfernt</span>
+                        </div>
+
+                        <!-- Paar 5 -->
+                        <div class="comparison-row-item col-left">
+                            <span class="comparison-bullet">–</span>
+                            <span class="comparison-text">Wer dahintersteht, lässt sich erklären, was ein Alleinauftrag ist</span>
+                        </div>
+                        <div class="comparison-row-item col-right">
+                            <span class="comparison-bullet">–</span>
+                            <span class="comparison-text">Ich sitze selbst im Maklerbüro. Mir muss das keiner erklären</span>
+                        </div>
+
+                        <!-- Paar 6 -->
+                        <div class="comparison-row-item col-left">
+                            <span class="comparison-bullet">–</span>
+                            <span class="comparison-text">Externe Schriften und Tracker, ohne dass jemand gefragt wurde</span>
+                        </div>
+                        <div class="comparison-row-item col-right">
+                            <span class="comparison-bullet">–</span>
+                            <span class="comparison-text">Schriften lokal, kein Tracking, keine externen Dienste</span>
+                        </div>
+
+                        <!-- Mobiler Trenner -->
+                        <div class="comparison-mobile-divider"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================================
+             8 · FACHBEITRAG (GENAU EIN BEITRAG, HEUTIGES DATUM: 6. SEPTEMBER 2026)
+             ========================================================================= -->
+        <section class="article-section section-spacing container" id="fachbeitrag">
+            <div class="grid-12">
+                <div class="article-header">
+                    <span class="label">Wissen</span>
+                    <h2>Fachbeitrag</h2>
+                </div>
+
+                <article class="article-layout reveal">
+                    <!-- Linke Spalte: Redaktionelle Einordnung & Rechtsgrundlage -->
+                    <div class="article-intro-col">
+                        <div class="article-meta-bar">
+                            <div class="article-date-badge">
+                                <span class="article-status-dot"></span>
+                                <span class="article-date-prefix">Stand:</span>
+                                <time class="article-date-value" datetime="2026-09-11">11. September 2026</time>
+                            </div>
+                        </div>
+
+                        <h3 class="article-main-title">
+                            Pflichtangaben in Immobilienanzeigen: die fünf Angaben aus § 87 GModG, die in jedem Inserat stehen müssen
+                        </h3>
+
+                        <p class="article-lead">
+                            Wer gewerblich oder privat ein Gebäude oder eine Wohnung über Printmedien oder elektronische Medien anbietet, muss nach dem Gebäudeenergiegesetz (§ 87 GEG bzw. GModG) bestimmte energetische Kennwerte veröffentlichen, sobald ein Energieausweis vorliegt.
+                        </p>
+
+                        <div class="article-warning-box">
+                            <div class="article-warning-label">Risiko bei Auslassung</div>
+                            <p class="article-warning-text">
+                                Fehlt eine dieser Pflichtangaben, stellt dies eine Ordnungswidrigkeit dar, die mit Geldbußen geahndet werden kann. In der Praxis sind Abmahnungen durch Wettbewerber und Verbände das häufigere Risiko. Der IVD berichtet von mehreren hundert Fällen pro Jahr.
+                            </p>
+                        </div>
+
+                        <div class="article-action-hint">
+                            <a href="#checkliste" class="article-checklist-link">
+                                <span>Zur passenden Checkliste</span>
+                                <span class="arrow-symbol">↓</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Rechte Spalte: Die fünf Pflichtangaben als strukturierte Spezifikationsliste -->
+                    <div class="article-details-col">
+                        <div class="article-details-header">
+                            <span class="article-details-kicker">Übersicht</span>
+                            <h4 class="article-details-heading">Die 5 Pflichtangaben im Detail</h4>
+                            <p class="article-details-sub">
+                                Zwingend erforderlich auf der eigenen Website sowie auf allen Immobilienportalen:
+                            </p>
+                        </div>
+
+                        <ol class="article-spec-list">
+                            <li class="article-spec-item">
+                                <span class="spec-num">01</span>
+                                <div class="spec-body">
+                                    <h5 class="spec-title">Art des Energieausweises</h5>
+                                    <p class="spec-desc">
+                                        Eindeutige Angabe, ob es sich um einen <em>Energiebedarfsausweis</em> oder einen <em>Energieverbrauchsausweis</em> handelt.
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="article-spec-item">
+                                <span class="spec-num">02</span>
+                                <div class="spec-body">
+                                    <h5 class="spec-title">Endenergiewert des Gebäudes</h5>
+                                    <p class="spec-desc">
+                                        Der im Energieausweis genannte konkrete Wert des Endenergiebedarfs oder des Endenergieverbrauchs (in kWh/(m²·a)).
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="article-spec-item">
+                                <span class="spec-num">03</span>
+                                <div class="spec-body">
+                                    <h5 class="spec-title">Wesentlicher Energieträger</h5>
+                                    <p class="spec-desc">
+                                        Der im Energieausweis genannte wesentliche Energieträger für die Heizung des Gebäudes (beispielsweise Gas, Öl, Wärmepumpe oder Fernwärme).
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="article-spec-item">
+                                <span class="spec-num">04</span>
+                                <div class="spec-body">
+                                    <h5 class="spec-title">Baujahr des Gebäudes</h5>
+                                    <p class="spec-desc">
+                                        Bei Wohngebäuden das im vorliegenden Energieausweis genannte Baujahr des Gebäudes.
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="article-spec-item">
+                                <span class="spec-num">05</span>
+                                <div class="spec-body">
+                                    <h5 class="spec-title">Energieeffizienzklasse</h5>
+                                    <p class="spec-desc">
+                                        Bei Wohngebäuden die im Energieausweis genannte offizielle Energieeffizienzklasse (von A+ bis H).
+                                    </p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="article-footer-disclaimer">
+                        <p>Quellen: § 87 Gebäudemodernisierungsgesetz (GModG, zuvor Gebäudeenergiegesetz GEG); Informationsportal des Bundes zum GModG, Abschnitt 'Angaben in Immobilienanzeigen'.</p>
+                        <p>Dieser Beitrag gibt den Stand zum genannten Datum wieder und dient der Orientierung. Er ist keine Rechtsberatung und ersetzt sie nicht.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- =========================================================================
+             10 · FREEBIE: CHECKLISTE (NETLIFY FORM)
+             ========================================================================= -->
+        <section class="freebie-section section-spacing" id="checkliste">
+            <div class="container">
+                <div class="freebie-wrapper">
+                    <div class="freebie-desc">
+                        <span class="label">Arbeitshilfe</span>
+                        <h2>Checkliste: Pflichtangaben im Immobilieninserat</h2>
+                        <p>
+                            Die fünf Angaben nach § 87 GModG, die in jeder Anzeige stehen müssen, mit dem typischen Fehler bei jeder einzelnen. Zwei Seiten, zum Abhaken an einem Objekt. Kostenlos.
+                        </p>
+                    </div>
+
+                    <div class="freebie-form-container" id="freebieFormContainer">
+                        <!-- Netlify Form mit gleicher Technik wie contact.html -->
+                        <form id="checklisteForm" data-netlify="true" name="checkliste" netlify-honeypot="bot-field">
+                            <input type="hidden" name="form-name" value="checkliste">
+                            <p hidden>
+                                <label>Nicht ausfüllen: <input name="bot-field"></label>
+                            </p>
+
+                            <div class="form-row">
+                                <label class="form-label" for="clName">Name</label>
+                                <input type="text" id="clName" name="name" class="form-input-text" required autocomplete="name">
+                            </div>
+
+                            <div class="form-row">
+                                <label class="form-label" for="clCompany">Maklerbüro</label>
+                                <input type="text" id="clCompany" name="maklerbuero" class="form-input-text" required>
+                            </div>
+
+                            <div class="form-row">
+                                <label class="form-label" for="clEmail">E-Mail</label>
+                                <input type="email" id="clEmail" name="email" class="form-input-text" required autocomplete="email">
+                            </div>
+
+                            <div class="form-row">
+                                <label class="form-label" for="clPhone">Telefon (optional)</label>
+                                <input type="tel" id="clPhone" name="telefon" class="form-input-text" autocomplete="tel">
+                            </div>
+
+                            <div class="form-checkbox-row">
+                                <input type="checkbox" id="clPhoneConsent" name="telefon_einwilligung" value="ja" class="form-checkbox">
+                                <label class="form-checkbox-label" for="clPhoneConsent">
+                                    Sie dürfen mich zur Checkliste einmal anrufen.
+                                </label>
+                            </div>
+
+                            <div class="privacy-hint">
+                                Mit dem Absenden dieses Formulars stimmen Sie der Verarbeitung Ihrer Daten gemäß unserer <a href="datenschutz.html">Datenschutzerklärung</a> zu.
+                            </div>
+
+                            <button type="submit" class="form-submit-btn">
+                                Checkliste herunterladen
+                            </button>
+                        </form>
+
+                        <!-- Download-Box nach dem Absenden -->
+                        <div class="freebie-download-box" id="freebieDownloadBox">
+                            <h3>Hier ist die Checkliste.</h3>
+                            <p>Sie können sie direkt herunterladen.</p>
+                            <a href="checkliste-pflichtangaben.pdf" download="checkliste-pflichtangaben.pdf" class="freebie-download-link">
+                                Checkliste öffnen (PDF, 2 Seiten)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================================
+             11 · ÜBER MICH (ORIGINALTEXT CYRIL PORTMANN)
+             ========================================================================= -->
+        <section class="about-section section-spacing container" id="ueber-mich">
+            <div class="grid-12">
+                <div class="about-portrait reveal">
+                    <img src="portrait_placeholder.svg" alt="Porträt Cyril Portmann — Gründer von CÉ Studios" loading="lazy">
+                </div>
+                <div class="about-text reveal">
+                    <span class="label">Hintergrund</span>
+                    <h2 class="about-title">Ich bin Cyril Portmann</h2>
+                    <p>Immobilienkaufmann in Ausbildung, seit fünf Jahren Gestalter.</p>
+                    <p>Ich weiß, was in ein Exposé gehört, was hinter einem Energieausweis steckt und wie ein Verkaufsprozess wirklich abläuft — und ich kann es gleichzeitig so aussehen lassen, wie Ihr Objekt es verdient.</p>
+                    <p>Die meisten Agenturen können das eine. Die meisten Fotografen das andere. Deshalb müssen Sie sonst zwei Leute beauftragen und beiden erklären, was Sie eigentlich brauchen.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================================
+             12 · HÄUFIGE FRAGEN (FAQ)
+             ========================================================================= -->
+        <section class="faq-section section-spacing container" id="faq">
+            <div class="grid-12">
+                <div class="faq-header">
+                    <span class="label">FAQ</span>
+                    <h2>Häufige Fragen</h2>
+                </div>
+                
+                <div class="faq-accordion">
+                    <details>
+                        <summary>Wie lange dauert die Umsetzung einer Website?</summary>
+                        <div class="faq-answer">
+                            Die Umsetzung dauert in der Regel zwei bis vier Wochen, je nach Umfang und gewünschten Funktionen.
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Binden Sie bestehende Maklersoftware wie onOffice oder Propstack an?</summary>
+                        <div class="faq-answer">
+                            Ihre Objekte lassen sich über die OpenImmo-Schnittstelle einbinden. Ob das bei Ihrer Software sinnvoll ist und was es kostet, klären wir im Erstgespräch.
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Ist die Website datenschutzfreundlich aufgebaut?</summary>
+                        <div class="faq-answer">
+                            Ich baue technisch datenschutzfreundlich: Schriften liegen lokal, es gibt kein Tracking und keine externen Dienste, die beim Aufruf Daten übertragen. Impressum und Datenschutzerklärung binde ich ein — die Texte lassen Sie bitte rechtlich prüfen, das darf ich als Gestalter nicht leisten.
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Gibt es laufende monatliche Kosten oder eine Mindestlaufzeit?</summary>
+                        <div class="faq-answer">
+                            Für die Website zahlen Sie einen einmaligen Festpreis, ohne Mindestlaufzeit. Laufende Kosten entstehen nur für Ihre Domain — das sind wenige Euro im Jahr, und die Rechnung geht direkt an Sie. Wenn Sie darüber hinaus laufende Betreuung möchten, ist das ein eigenes Angebot, das Sie nicht buchen müssen.
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Wir haben doch schon eine Website.</summary>
+                        <div class="faq-answer">
+                            Dann ist die Frage nicht, ob Sie eine haben, sondern was sie verliert. Schicken Sie mir den Link — ich sage Ihnen in drei Punkten, wo Interessenten abspringen. Kostenlos, und ohne dass Sie danach etwas bestellen müssen.
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Wie viel Arbeit kommt auf uns zu?</summary>
+                        <div class="faq-answer">
+                            Ein Gespräch zu Beginn, danach zwei kurze Durchsichten. Ich schreibe die Texte und hole mir die Objektdaten selbst. Fragebögen bekommen Sie von mir keine.
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Was passiert, wenn uns der Entwurf nicht gefällt?</summary>
+                        <div class="faq-answer">
+                            Dann zahlen Sie nichts und wir gehen auseinander. Sie sehen die fertige Startseite, bevor Geld fließt. Danach sind zwei Korrekturrunden eingeplant, damit für beide Seiten klar ist, wann das Projekt fertig ist.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================================
+             13 · KONTAKT SEKTION & FUSSZEILE
+             ========================================================================= -->
+        <section class="contact-section section-spacing container">
+            <div class="grid-12">
+                <div class="contact-container">
+                    <span class="label">Anfrage</span>
+                    <h2 class="contact-title">Schicken Sie mir den Link zu Ihrer Seite</h2>
+                    <p class="contact-desc">
+                        Sie bekommen innerhalb von zwei Werktagen eine ehrliche Einschätzung. Schriftlich, drei Punkte, keine Verkaufspräsentation. Wenn Ihre Seite gut ist, sage ich Ihnen das auch.
+                    </p>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=service@ce-studios.de" target="_blank" rel="noopener noreferrer" class="contact-mail-link" aria-label="E-Mail auf Gmail schreiben an service@ce-studios.de">
+                        service@ce-studios.de
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FUSSZEILE -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <img src="logo_transparent.png" alt="CÉ Studios" style="height: 24px; width: auto; display: block; filter: invert(47%) sepia(5%) saturate(163%) hue-rotate(328deg) brightness(97%) contrast(85%);">
+                </div>
+                <div class="footer-tagline">Aus Wiesbaden, für Immobilienunternehmen in ganz Deutschland</div>
+            </div>
+            <div class="footer-right">
+                <a href="impressum.html" class="footer-link">Impressum</a>
+                <a href="datenschutz.html" class="footer-link">Datenschutz</a>
+                <a href="contact.html" class="footer-link">Kontakt</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MOBILE STICKY BAR -->
+    <div class="mobile-bottom-bar">
+        <a href="contact.html" class="mobile-bottom-btn">
+            Kostenlose Einschätzung anfragen
+        </a>
+    </div>
+
+    <!-- =========================================================================
+         JAVASCRIPT (SCROLL-LINIE, HEADER, FREEBIE AJAX FORM)
+         ========================================================================= */ -->
+    <script>
+        // Header & Mobile Sticky Bar Scroll-Logik
+        const headerEl = document.getElementById('main-header');
+        const mobileBarEl = document.querySelector('.mobile-bottom-bar');
+
+        const handleHeaderAndBarScroll = () => {
+            const scrollY = window.scrollY || window.pageYOffset;
+            if (headerEl) {
+                if (scrollY > 30) {
+                    headerEl.classList.add('scrolled');
+                } else {
+                    headerEl.classList.remove('scrolled');
+                }
+            }
+            if (mobileBarEl) {
+                // Erscheint erst nach dem Hero, um den Einstieg nicht zu verdecken
+                if (scrollY > 320) {
+                    mobileBarEl.classList.add('is-visible');
+                } else {
+                    mobileBarEl.classList.remove('is-visible');
+                }
+            }
+        };
+
+        window.addEventListener('scroll', handleHeaderAndBarScroll, { passive: true });
+        handleHeaderAndBarScroll();
+
+        // Freebie Netlify AJAX Submit
+        const checklisteForm = document.getElementById('checklisteForm');
+        const downloadBox = document.getElementById('freebieDownloadBox');
+
+        if (checklisteForm) {
+            checklisteForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const formData = new FormData(checklisteForm);
+                const encodedData = new URLSearchParams(formData).toString();
+
+                try {
+                    await fetch("/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        body: encodedData
+                    });
+                } catch (err) {
+                    console.log("Netlify Form submission caught:", err);
+                }
+
+                // Gemäß Vorgabe: Formular ausblenden und Download-Link anzeigen
+                checklisteForm.style.display = 'none';
+                if (downloadBox) {
+                    downloadBox.style.display = 'block';
+                }
+
+            });
+        }
+
+        // Scroll Reveal
+        document.addEventListener('DOMContentLoaded', () => {
+            // Einblenden beim Scrollen (.reveal -> .revealed)
+            if ('IntersectionObserver' in window) {
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('revealed');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { rootMargin: '0px 0px -40px 0px', threshold: 0.08 });
+
+                document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+            } else {
+                document.querySelectorAll('.reveal').forEach(el => el.classList.add('revealed'));
+            }
+        });
+    </script>
+
+    <!-- =========================================================================
+         LADEBILDSCHIRM / DYNAMIC PRELOADER CONTROLLER
+         ========================================================================= -->
+    <script>
+        (function() {
+            if (history.scrollRestoration) {
+                history.scrollRestoration = 'manual';
+            }
+            window.scrollTo(0, 0);
+            document.documentElement.style.overflow = 'hidden';
+            if (document.body) document.body.style.overflow = 'hidden';
+
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const overlay = document.getElementById('preloaderOverlay');
+            if (!overlay) return;
+
+            // Logo-Klick fängt Neuladen ab und startet Ladebildschirm erneut
+            document.addEventListener('DOMContentLoaded', () => {
+                if (document.body) document.body.style.overflow = 'hidden';
+                const logo = document.querySelector('.brand-logo');
+                if (logo) {
+                    logo.addEventListener('click', (e) => {
+                        if (e.button === 0 && !e.ctrlKey && !e.shiftKey && !e.metaKey && !e.altKey) {
+                            e.preventDefault();
+                            sessionStorage.removeItem('ce_intro_gesehen');
+                            window.location.href = logo.getAttribute('href') || 'index.html';
+                        }
+                    });
+                }
+            });
+
+            // Wichtige Bilder vorladen
+            const preloadList = [
+                'platzhalter_01.jpg',
+                'platzhalter_02.jpg',
+                'platzhalter_04.jpg'
+            ];
+
+            let loaded = 0;
+            const total = preloadList.length;
+            const startTime = Date.now();
+            const minDuration = 1100;
+            const maxDuration = 4000;
+            let unveiled = false;
+            let currentPct = 0;
+            let targetPct = 0;
+
+            const updateProgress = () => {
+                targetPct = Math.round((loaded / total) * 100);
+            };
+
+            const ticker = setInterval(() => {
+                if (currentPct < targetPct) {
+                    currentPct += 1;
+                } else if (loaded === total && currentPct < 100) {
+                    currentPct += 1;
+                }
+                
+                const count = document.getElementById('preloader-count');
+                const logoImg = document.getElementById('loader-png-logo');
+                
+                if (count) count.textContent = String(currentPct).padStart(3, '0');
+                if (logoImg) {
+                    logoImg.style.setProperty('--progress', currentPct + '%');
+                }
+
+                if (currentPct >= 100) {
+                    clearInterval(ticker);
+                    const elapsed = Date.now() - startTime;
+                    const remaining = Math.max(0, minDuration - elapsed);
+                    setTimeout(triggerUnveil, remaining);
+                }
+            }, 11);
+
+            const triggerUnveil = () => {
+                if (unveiled) return;
+                unveiled = true;
+
+                sessionStorage.setItem('ce_intro_gesehen', 'true');
+
+                const count = document.getElementById('preloader-count');
+                const logoImg = document.getElementById('loader-png-logo');
+                if (count) count.textContent = '100';
+                if (logoImg) logoImg.style.setProperty('--progress', '100%');
+
+                setTimeout(() => {
+                    if (prefersReduced) {
+                        overlay.classList.add('instant-hide');
+                        document.documentElement.style.overflow = '';
+                        document.body.style.overflow = '';
+                        window.scrollTo(0, 0);
+                        const title = document.querySelector('.hero-title');
+                        if (title) title.classList.add('start-anim');
+                        if (typeof window.updateFaden === 'function') window.updateFaden();
+                    } else {
+                        overlay.classList.remove('fallback-active');
+                        overlay.classList.add('hide-curtain');
+                        document.documentElement.style.overflow = '';
+                        document.body.style.overflow = '';
+                        window.scrollTo(0, 0);
+
+                        setTimeout(() => {
+                            const title = document.querySelector('.hero-title');
+                            if (title) title.classList.add('start-anim');
+                            overlay.remove();
+                            if (typeof window.updateFaden === 'function') window.updateFaden();
+                        }, 900);
+                    }
+                }, 600);
+            };
+
+            preloadList.forEach(src => {
+                const img = new Image();
+                img.onload = () => {
+                    loaded++;
+                    updateProgress();
+                };
+                img.onerror = () => {
+                    loaded++;
+                    updateProgress();
+                };
+                img.src = src;
+            });
+
+            setTimeout(() => {
+                loaded = total;
+                updateProgress();
+            }, maxDuration);
+        })();
+    </script>
+
+    <!-- FADEN CONTROLLER (REIN SCROLL-GESTEUERT) -->
+    <script>
+        (function(){
+            var p = document.querySelector("#faden path");
+            if (!p) return;
+            if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches){
+                p.style.strokeDashoffset = "0";
+                return;
+            }
+            var laeuft = false;
+            function zeichne(){
+                var scrollY = window.scrollY || window.pageYOffset || 0;
+                var max = document.documentElement.scrollHeight - window.innerHeight;
+                var t = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+                p.style.strokeDashoffset = String(1 - t);
+                laeuft = false;
+            }
+            window.addEventListener("scroll", function(){
+                if (!laeuft){
+                    laeuft = true;
+                    requestAnimationFrame(zeichne);
+                }
+            }, { passive: true });
+            window.addEventListener("resize", function(){
+                if (!laeuft){
+                    laeuft = true;
+                    requestAnimationFrame(zeichne);
+                }
+            }, { passive: true });
+            window.updateFaden = zeichne;
+            zeichne();
+        })();
+    </script>
+
+    <!-- =========================================================================
+         DIGITALER ASSISTENT (CÉ CONCIERGE)
+         ========================================================================= -->
+    <!-- Floating Trigger Button -->
+    <div class="ce-chat-trigger" id="chatTrigger" onclick="toggleChatWindow()" aria-label="Digitalen Assistenten öffnen">
+        <span class="ce-chat-trigger-icon">CÉ</span>
+        <span class="ce-chat-trigger-close">&times;</span>
+    </div>
+
+    <!-- Chat Dialog Window -->
+    <div class="ce-chat-window" id="chatWindow" role="dialog" aria-label="CÉ Concierge">
+        <!-- Header -->
+        <div class="ce-chat-header">
+            <div class="ce-chat-header-info">
+                <div class="ce-chat-header-title">CÉ Concierge</div>
+                <div class="ce-chat-header-status">
+                    <span class="status-dot"></span>
+                    <span>Antwortet sofort</span>
+                </div>
+            </div>
+            <div class="ce-chat-header-actions">
+                <button type="button" class="ce-header-btn" onclick="toggleSound()" id="soundBtn" title="Ton an/aus" aria-label="Ton an/aus">🔇</button>
+                <button type="button" class="ce-header-btn" onclick="toggleChatWindow()" title="Schließen" aria-label="Schließen">&times;</button>
+            </div>
+        </div>
+
+        <!-- Nachrichtenverlauf -->
+        <div class="ce-chat-body" id="chatBody">
+            <div class="ce-message bot">
+                <div class="ce-bubble">Guten Tag. Ich bin der digitale Assistent von CÉ Studios. Wie kann ich Ihnen zu Ihrer Immobilien-Website helfen?</div>
+                <span class="ce-msg-time">Gerade eben</span>
+                
+                <div class="ce-followups">
+                    <button type="button" class="ce-chip" onclick="handleChipClick('Was kostet das?')">Was kostet das?</button>
+                    <button type="button" class="ce-chip" onclick="handleChipClick('Wie lange dauert es?')">Wie lange dauert es?</button>
+                    <button type="button" class="ce-chip" onclick="handleChipClick('Wie läuft das ab?')">Wie läuft das ab?</button>
+                    <button type="button" class="ce-chip" onclick="handleChipClick('Was muss ich selbst tun?')">Was muss ich selbst tun?</button>
+                    <button type="button" class="ce-chip" onclick="handleChipClick('Warum CÉ Studios?')">Warum CÉ Studios?</button>
+                </div>
+            </div>
+
+            <!-- Schreibindikator -->
+            <div class="ce-typing" id="typingIndicator">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+        </div>
+
+        <!-- Footer Eingabe -->
+        <div class="ce-chat-footer">
+            <div class="ce-input-row">
+                <input type="text" class="ce-input" id="chatInput" placeholder="Ihre Frage eintippen..." onkeypress="handleKey(event)" autocomplete="off">
+                <button type="button" class="ce-send-btn" onclick="sendMessage()" aria-label="Senden">
+                    <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </button>
+            </div>
+            <div class="ce-footer-hint">100% lokal &amp; datenschutzfreundlich · Keine Speicherung Dritter</div>
+        </div>
+    </div>
+
+
+    <!-- =========================================================================
+         DIGITALER ASSISTENT (CÉ CONCIERGE) — LOGIK & KATALOG
+         ========================================================================= -->
+    <script>
+        // Ton standardmäßig AUS gemäß Vorgabe
+        let soundEnabled = false;
+
+        function playChime(type) {
+            if (!soundEnabled) return;
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'bot') {
+                    osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.035, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.22);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 0.22);
+                } else {
+                    osc.frequency.setValueAtTime(440, ctx.currentTime);
+                    gain.gain.setValueAtTime(0.025, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 0.12);
+                }
+            } catch (e) {}
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('soundBtn');
+            if (btn) btn.textContent = soundEnabled ? '🔊' : '🔇';
+        }
+
+        function toggleChatWindow() {
+            const win = document.getElementById('chatWindow');
+            const trigger = document.getElementById('chatTrigger');
+            if (!win || !trigger) return;
+
+            const isOpen = win.classList.contains('active');
+            if (isOpen) {
+                win.classList.remove('active');
+                trigger.classList.remove('open');
+            } else {
+                win.classList.add('active');
+                trigger.classList.add('open');
+                setTimeout(() => {
+                    const inp = document.getElementById('chatInput');
+                    if (inp) inp.focus();
+                }, 300);
+            }
+        }
+
+        const fallbackPool = [
+            "Dazu habe ich keine hinterlegte Antwort. Ich kann Ihnen etwas sagen zu Preisen, Ablauf, Leistungen, Technik und Datenschutz.",
+            "Das steht nicht in meinen Antworten. Fragen Sie mich lieber nach dem Ablauf, den Kosten oder dem, was Sie selbst tun müssen.",
+            "Da komme ich nicht weiter. Versuchen Sie es anders formuliert — oder wählen Sie unten ein Thema.",
+            "Das kann ich nicht beantworten, ohne zu raten, und raten möchte ich nicht. Fragen Sie mich etwas Konkretes zum Projekt.",
+            "Dafür bin ich nicht gebaut. Ich kenne mich mit Websites für Maklerbüros aus — probieren Sie es damit.",
+            "Keine Antwort hinterlegt. Wenn Sie mir sagen, worum es ungefähr geht, finde ich vielleicht doch etwas.",
+            "Das habe ich nicht verstanden. Ein einzelnes Stichwort hilft mir oft mehr als ein ganzer Satz — zum Beispiel 'Preis' oder 'Datenschutz'.",
+            "Dazu weiß ich nichts. Cyril Portmann schon — schreiben Sie ihm an service@ce-studios.de.",
+            "Steht nicht in meinem Katalog. Soll ich Ihnen zeigen, was ich kann?",
+            "Damit kann ich nichts anfangen. Formulieren Sie es gern kürzer, dann klappt es meist."
+        ];
+
+        // =========================================================================
+        // 3 — THEMEN-AUSWEICHANTWORTEN
+        // =========================================================================
+        const topicFallbacks = [
+            {
+                topic: "Geld",
+                keywords: ['geld', 'zahlen', 'rechnung', 'finanzierung', 'budget', 'bezahlung'],
+                answer: "Es geht ums Geld — sagen Sie mir, worum genau: Preis der Website, Objektseiten, Zahlungszeitpunkt oder laufende Kosten?",
+                buttons: ["Was kostet eine Website?", "Was kosten Objektseiten?", "Wann muss ich zahlen?", "Gibt es laufende Kosten?"]
+            },
+            {
+                topic: "Zeit",
+                keywords: ['zeit', 'termin', 'schnell', 'dauer', 'wann', 'frist'],
+                answer: "Es geht um Zeit. Meinen Sie die Dauer des Projekts, den möglichen Starttermin oder Ihren eigenen Aufwand?",
+                buttons: ["Wie lange dauert es?", "Wann kann es losgehen?", "Was muss ich selbst tun?"]
+            },
+            {
+                topic: "Recht",
+                keywords: ['recht', 'gesetz', 'anwalt', 'paragraph', 'pflicht', 'haftung'],
+                answer: "Rechtliche Fragen beantworte ich nur, soweit sie meine Arbeit betreffen — Datenschutz, Impressum und die Pflichtangaben in Inseraten. Alles andere gehört zu einem Anwalt.",
+                buttons: ["Wie sieht es mit DSGVO aus?", "Was sind die Pflichtangaben?", "Brauche ich ein Cookie-Banner?"]
+            },
+            {
+                topic: "Technik",
+                keywords: ['technik', 'server', 'code', 'programm', 'software', 'tool'],
+                answer: "Technisch kann ich Ihnen sagen, wie die Seite gebaut ist, wie Ihre Maklersoftware angebunden wird und wo sie liegt. Was davon interessiert Sie?",
+                buttons: ["Binden Sie onOffice an?", "Wo liegt die Seite gehostet?", "Wie steht es um Sicherheit?"]
+            },
+            {
+                topic: "Bild",
+                keywords: ['bild', 'foto', 'video', 'drohne', 'grundriss'],
+                answer: "Zum Thema Bild und Objektdarstellung kann ich etwas sagen — fragen Sie nach Bildaufbereitung, Objektseiten oder Rundgängen.",
+                buttons: ["Was kostet Bildaufbereitung?", "Können Grundrisse eingebunden werden?", "Können Videos eingebunden werden?"]
+            },
+            {
+                topic: "Kunde",
+                keywords: ['kunde', 'anfrage', 'verkauf', 'eigentuemer', 'mandat', 'akquise'],
+                answer: "Ich verspreche keine Anfragen und keine Mandate. Was ich sagen kann: wie die Seite gebaut ist, damit die Leute, die schon kommen, nicht abspringen.",
+                buttons: ["Wie läuft das ab?", "Was kostet eine Website?", "Erstgespräch vereinbaren"]
+            }
+        ];
+
+        // =========================================================================
+        // KATALOG — 97 EINTRÄGE WORTWÖRTLICH ÜBERNOMMEN
+        // =========================================================================
+        const rawCatalog = [
+            // --- GESPRÄCH ---
+            {
+                category: "GESPRÄCH",
+                label: "Alltägliche Begrüßung",
+                keywords: "hallo, hi, hey, guten tag, moin, servus, guten morgen, guten abend",
+                answer: "Guten Tag. Fragen Sie mich nach Preisen, Ablauf, Leistungen oder Datenschutz — oder wählen Sie unten.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?", "Wie lange dauert es?"]
+            },
+            {
+                category: "GESPRÄCH",
+                label: "Verabschiedung",
+                keywords: "tschuess, auf wiedersehen, bis dann, ciao, machs gut",
+                answer: "Bis dahin. Wenn etwas offen bleibt: service@ce-studios.de.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?", "Kontakt aufnehmen"]
+            },
+            {
+                category: "GESPRÄCH",
+                label: "Danksagung & Bestätigung",
+                keywords: "danke, dankeschoen, super, alles klar, ok, verstanden",
+                answer: "Gern. Wenn noch etwas offen ist, fragen Sie einfach.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?", "Was muss ich selbst tun?"]
+            },
+            {
+                category: "GESPRÄCH",
+                label: "Smalltalk / Wetter / Befinden",
+                keywords: "wetter, uhrzeit, wie spaet, wie gehts, wie geht es dir, witz",
+                answer: "Da muss ich passen — ich beantworte nur Fragen zu CÉ Studios. Womit kann ich helfen?",
+                weiter: ["Was kostet das?", "Wie läuft das ab?", "Wie lange dauert es?"]
+            },
+            {
+                category: "GESPRÄCH",
+                label: "Mensch oder Bot?",
+                keywords: "bist du ein mensch, bist du echt, ki, bot, roboter, chatgpt",
+                answer: "Ich bin ein einfacher Assistent mit hinterlegten Antworten, keine künstliche Intelligenz. Was ich nicht weiß, sagt Ihnen Cyril Portmann persönlich.",
+                weiter: ["Wer steckt dahinter?", "Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "GESPRÄCH",
+                label: "Was kann der Assistent?",
+                keywords: "was kannst du, hilfe, themen, wobei hilfst du",
+                answer: "Preise, Ablauf, Leistungen, Technik, Datenschutz, und was Sie selbst tun müssen. Fragen Sie einfach frei heraus.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?", "Was muss ich selbst tun?"]
+            },
+
+            // --- PREIS ---
+            {
+                category: "PREIS",
+                label: "Was kostet eine Website?",
+                keywords: "was kostet, preis, kosten, teuer, euro",
+                answer: "Eine Website beginnt bei 1.900 € einmalig. Einzelne Objektseiten ab 490 €. Was es bei Ihnen genau wird, hängt vom Umfang ab — das klären wir im Erstgespräch.",
+                weiter: ["Was ist im Preis enthalten?", "Wann muss ich zahlen?"]
+            },
+            {
+                category: "PREIS",
+                label: "Kosten für eine einzelne Objektseite",
+                keywords: "objektseite kosten, einzelne objektseite, was kostet objektseite",
+                answer: "Eine einzelne Objektseite beginnt bei 490 €. Darin enthalten: Aufbereitung der Fotos, Objekttext und ein Link, den Sie Interessenten direkt schicken können.",
+                weiter: ["Was ist im Preis enthalten?", "Wie lange dauert es?"]
+            },
+            {
+                category: "PREIS",
+                label: "Kosten für Bildbearbeitung & Fotoaufbereitung",
+                keywords: "bildbearbeitung, fotos kosten, bilder aufbereiten preis",
+                answer: "Bildaufbereitung ist auch einzeln buchbar, ohne Website. Preis je nach Menge — schicken Sie mir zwei Beispielbilder, dann sage ich Ihnen konkret, was geht.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "PREIS",
+                label: "Warum CÉ Studios statt Baukasten?",
+                keywords: "warum so teuer, guenstiger, billiger, andere machen das fuer",
+                answer: "Es gibt günstiger, und es gibt Baukästen für ein paar Euro im Monat. Was Sie bei mir bekommen, ist ein Auftritt, den es kein zweites Mal gibt, und jemand, der Ihr Geschäft kennt. Ob Ihnen das den Unterschied wert ist, entscheiden Sie.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+            {
+                category: "PREIS",
+                label: "Gibt es Rabatte oder Preisnachlässe?",
+                keywords: "rabatt, nachlass, verhandeln, geht da was",
+                answer: "Ich rechne knapp und gebe keine Rabatte. Was ich anbiete: Sie sehen die fertige Startseite, bevor Sie zahlen. Damit tragen Sie kein Risiko.",
+                weiter: ["Wie läuft das ab?", "Wann muss ich zahlen?"]
+            },
+            {
+                category: "PREIS",
+                label: "Ist Ratenzahlung oder Teilzahlung möglich?",
+                keywords: "raten, ratenzahlung, aufteilen, teilzahlung",
+                answer: "Eine Aufteilung auf zwei Zahlungen ist möglich. Sprechen Sie mich im Erstgespräch darauf an.",
+                weiter: ["Wann muss ich zahlen?", "Was kostet das?"]
+            },
+            {
+                category: "PREIS",
+                label: "Wann muss ich zahlen / Anzahlung?",
+                keywords: "wann zahlen, anzahlung, vorkasse, vorab bezahlen",
+                answer: "Keine Anzahlung. Die Entscheidung fällt am Entwurf der Startseite. Sagen Sie dort ab, zahlen Sie nichts. Sagen Sie zu, wird nach der Veröffentlichung abgerechnet.",
+                weiter: ["Wie läuft das ab?", "Was ist im Preis enthalten?"]
+            },
+            {
+                category: "PREIS",
+                label: "Fällt Mehrwertsteuer an / Kleinunternehmer?",
+                keywords: "mehrwertsteuer, umsatzsteuer, netto, brutto, mwst",
+                answer: "Ich bin Kleinunternehmer nach § 19 UStG und weise keine Umsatzsteuer aus. Der genannte Preis ist der Endpreis.",
+                weiter: ["Was kostet das?", "Wann muss ich zahlen?"]
+            },
+            {
+                category: "PREIS",
+                label: "Was ist im Leistungsumfang enthalten?",
+                keywords: "was ist enthalten, leistungsumfang, inklusive, im preis drin",
+                answer: "Individuelles Design, Aufbau fürs Handy zuerst, Objektübersicht, Kontaktweg, Impressum und Datenschutz eingebunden, zwei Korrekturrunden und eine Einweisung. Keine Baukastenvorlage.",
+                weiter: ["Was kostet das?", "Wie lange dauert es?"]
+            },
+            {
+                category: "PREIS",
+                label: "Laufende Kosten, Monatsabos oder Mindestlaufzeit?",
+                keywords: "laufende kosten, monatlich, abo, mindestlaufzeit, vertrag",
+                answer: "Für die Website zahlen Sie einmalig, ohne Mindestlaufzeit. Laufend fällt nur Ihre Domain an, wenige Euro im Jahr, und die Rechnung geht direkt an Sie. Laufende Betreuung gibt es als eigenes Angebot, das Sie nicht buchen müssen.",
+                weiter: ["Was kostet das?", "Wann muss ich zahlen?"]
+            },
+
+            // --- ABLAUF ---
+            {
+                category: "ABLAUF",
+                label: "Wie läuft die Zusammenarbeit ab?",
+                keywords: "wie laeuft, ablauf, vorgehen, schritte, prozess",
+                answer: "In drei Schritten. Erst sehe ich mir Ihre Seite und Ihre aktuellen Inserate an und sage Ihnen konkret, was funktioniert und was nicht. Dann bauen wir die Startseite, bevor Sie zahlen. Erst wenn die sitzt, geht es weiter.",
+                weiter: ["Wie lange dauert es?", "Was muss ich selbst tun?"]
+            },
+            {
+                category: "ABLAUF",
+                label: "Wie lange dauert die Fertigstellung?",
+                keywords: "wie lange, dauer, wann fertig, zeitraum, wochen",
+                answer: "Zwei bis vier Wochen, je nach Umfang und gewünschten Funktionen.",
+                weiter: ["Was muss ich selbst tun?", "Wie läuft das ab?"]
+            },
+            {
+                category: "ABLAUF",
+                label: "Wann kann das Projekt starten / Kapazitäten?",
+                keywords: "wann losgehen, ab wann, naechster termin, kapazitaet",
+                answer: "In der Regel innerhalb von ein bis zwei Wochen. Schreiben Sie mir, dann sage ich Ihnen einen konkreten Termin.",
+                weiter: ["Wie läuft das ab?", "Termin anfragen"]
+            },
+            {
+                category: "ABLAUF",
+                label: "Was muss ich selbst tun / Mein Aufwand?",
+                keywords: "was muss ich tun, aufwand, mitarbeit, mein aufwand, zuarbeit, wie viel arbeit, wie viel aufwand, wie viel zeit, arbeit fuer uns, unser aufwand",
+                answer: "Ein Gespräch zu Beginn, danach zwei kurze Durchsichten. Die Texte schreibe ich, die Objektdaten hole ich mir selbst. Fragebögen bekommen Sie von mir keine.",
+                weiter: ["Wie lange dauert es?", "Wer schreibt die Texte?"]
+            },
+            {
+                category: "ABLAUF",
+                label: "Korrekturen und Revisionsrunden",
+                keywords: "korrektur, aenderungen, revisionen, korrekturrunden",
+                answer: "Zwei Korrekturrunden sind eingeplant und werden schriftlich festgehalten — damit für beide Seiten klar ist, wann ein Projekt fertig ist.",
+                weiter: ["Wie läuft das ab?", "Was passiert wenn es nicht gefällt?"]
+            },
+            {
+                category: "ABLAUF",
+                label: "Was passiert, wenn der Entwurf nicht gefällt?",
+                keywords: "gefaellt nicht, nicht zufrieden, risiko, absagen, storno",
+                answer: "Dann zahlen Sie nichts und wir gehen auseinander. Sie sehen die fertige Startseite, bevor Geld fließt.",
+                weiter: ["Wie läuft das ab?", "Was kostet das?"]
+            },
+            {
+                category: "ABLAUF",
+                label: "Wer schreibt die Texte für die Website?",
+                keywords: "wer schreibt texte, texte, inhalte, formulieren",
+                answer: "Die Texte schreibe ich. Sie lesen gegen und sagen, was nicht stimmt. Sie müssen nichts vorformulieren.",
+                weiter: ["Was muss ich selbst tun?", "Wer macht die Fotos?"]
+            },
+            {
+                category: "ABLAUF",
+                label: "Wer macht die Fotos / Fotograf?",
+                keywords: "wer macht fotos, fotograf, fotos machen, aufnahmen",
+                answer: "Vorhandene Fotos bereite ich auf. Wenn neue gebraucht werden, klären wir das im Erstgespräch — das ist ein eigener Posten.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+
+            // --- LEISTUNGEN ---
+            {
+                category: "LEISTUNGEN",
+                label: "Objektübersicht & Immobilien-Liste",
+                keywords: "objektuebersicht, objekte anzeigen, immobilien liste",
+                answer: "Ihre Objekte bekommen eine eigene Übersicht auf der Seite. Wenn Sie eine Maklersoftware nutzen, lassen sie sich über die OpenImmo-Schnittstelle einbinden, damit Sie nichts doppelt pflegen.",
+                weiter: ["Binden Sie onOffice an?", "Was kostet das?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "360°-Rundgänge / Virtuelle Besichtigung",
+                keywords: "rundgang, 360, virtuelle besichtigung, matterport",
+                answer: "Ein bestehender Rundgang lässt sich in die Objektseite einbetten. Ich erstelle selbst keine Rundgänge.",
+                weiter: ["Was ist im Preis enthalten?", "Was kostet das?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Mehrsprachige Website / Englisch",
+                keywords: "mehrsprachig, englisch, uebersetzung, zweisprachig",
+                answer: "Eine zweite Sprache ist möglich und wird als eigener Posten kalkuliert.",
+                weiter: ["Was ist im Preis enthalten?", "Was kostet das?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Blog, News & Ratgeber-Bereich",
+                keywords: "blog, news, artikel, ratgeber",
+                answer: "Möglich. Sinnvoll ist es nur, wenn Sie ihn auch pflegen — sonst steht ein alter Beitrag auf Ihrer Seite und schadet mehr, als er nützt.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Google-Rezensionen & Kundenbewertungen",
+                keywords: "bewertungen, google rezensionen, referenzen einbinden",
+                answer: "Ja, Kundenstimmen können eingebunden werden. Echte, mit Freigabe — erfundene kommen mir nicht auf eine Seite.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Kontaktformulare und Anfragen",
+                keywords: "formular, kontaktformular, anfragen, wo landen anfragen",
+                answer: "Anfragen gehen direkt in Ihr Postfach. Kein Zwischenkonto, in das Sie sich einloggen müssen.",
+                weiter: ["Wie läuft das ab?", "Was kostet das?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Newsletter & Mailverteiler",
+                keywords: "newsletter, mailing, verteiler",
+                answer: "Nicht Teil des Standardumfangs. Wenn Sie es brauchen, besprechen wir es im Erstgespräch.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Logo & Corporate Design Gestaltung",
+                keywords: "logo, branding, gestaltung, corporate design",
+                answer: "Ich gestalte seit fünf Jahren. Ein Logo oder eine Auffrischung Ihres Auftritts ist möglich — das ist ein eigenes Projekt neben der Website.",
+                weiter: ["Was kostet das?", "Visitenkarten & Exposés?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Visitenkarten, Drucksachen & Exposé-Gestaltung",
+                keywords: "visitenkarten, print, drucksachen, flyer, expose gestalten",
+                answer: "Exposés und Drucksachen gestalte ich. Das ist tatsächlich der Bereich, aus dem ich komme.",
+                weiter: ["Wer steckt hinter CÉ Studios?", "Was kostet das?"]
+            },
+
+            // --- TECHNIK ---
+            {
+                category: "TECHNIK",
+                label: "Maklersoftware (onOffice, Propstack, FlowFact)",
+                keywords: "onoffice, propstack, flowfact, fio, maklersoftware, crm",
+                answer: "Ihre Objekte lassen sich über die OpenImmo-Schnittstelle einbinden. Ob das bei Ihrer Software sinnvoll ist und was es kostet, klären wir im Erstgespräch.",
+                weiter: ["Was ist OpenImmo?", "Was kostet das?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "OpenImmo Schnittstelle & Daten-Import",
+                keywords: "openimmo, schnittstelle, import, xml",
+                answer: "OpenImmo ist der deutsche Standard dafür. Ihre Software exportiert die Objekte, die Website übernimmt sie. Sie pflegen weiter dort, wo Sie es gewohnt sind.",
+                weiter: ["Binden Sie onOffice an?", "Was kostet das?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "ImmoScout24, Immowelt & Portale",
+                keywords: "immoscout, is24, portal, immowelt",
+                answer: "Ihre Website ersetzt die Portale nicht, sie macht Sie von ihnen unabhängiger. Wer Sie über Google oder eine Empfehlung findet, landet bei Ihnen statt bei einem Portal mit zwanzig Wettbewerbern daneben.",
+                weiter: ["Wie läuft das ab?", "Was kostet das?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Domain & Wunschadresse",
+                keywords: "domain, adresse, wunschadresse, url",
+                answer: "Die Domain läuft auf Ihren Namen, nicht auf meinen. Bei der Auswahl und Einrichtung helfe ich.",
+                weiter: ["Wo liegt die Website gehostet?", "Was kostet das?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Hosting & Server-Standort",
+                keywords: "hosting, server, wo liegt die seite",
+                answer: "Die Seite liegt bei einem Hoster auf Ihrem eigenen Konto. Welcher das ist, besprechen wir — Sie bleiben Inhaber.",
+                weiter: ["Wem gehört die Seite?", "Was kostet das?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "E-Mail-Adressen auf eigener Domain",
+                keywords: "email adresse, postfach, info at",
+                answer: "E-Mail-Adressen auf Ihrer Domain richte ich mit ein.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Umzug einer bestehenden Website / Migration",
+                keywords: "umziehen, bestehende seite, alte seite, migration",
+                answer: "Inhalte einer bestehenden Seite kann ich übernehmen. Alte Adressen leite ich weiter, damit nichts ins Leere läuft.",
+                weiter: ["Wie läuft das ab?", "Was kostet das?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Website selbst pflegen oder CMS?",
+                keywords: "selbst pflegen, selber aendern, cms, bearbeiten, pflege",
+                answer: "Objekte laufen über die Schnittstelle aus Ihrer Software, da müssen Sie nichts tun. Texte, Team und Bilder ändere ich für Sie — eine Mail genügt, meist am selben Tag erledigt. Wenn Sie es lieber selbst machen wollen, besprechen wir die Möglichkeiten.",
+                weiter: ["Gibt es laufende Kosten?", "Wie läuft das ab?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Optimierung fürs Handy / Responsivität",
+                keywords: "handy, mobil, smartphone, responsive, tablet",
+                answer: "Zuerst fürs Handy gebaut, weil dort entschieden wird. Danach für Tablet und Rechner.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Ladezeit & Schnelligkeit",
+                keywords: "ladezeit, schnell, geschwindigkeit, performance",
+                answer: "Handgeschriebener Code ohne Ballast, Bilder komprimiert, keine externen Dienste, die beim Aufruf laden. Konkrete Sekundenwerte verspreche ich nicht — die hängen auch an Ihrer Verbindung.",
+                weiter: ["Wie sieht es mit Datenschutz aus?", "Was kostet das?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Barrierefreiheit & Lesbarkeit",
+                keywords: "barrierefrei, accessibility, lesbarkeit",
+                answer: "Ich achte auf lesbare Schriftgrößen, Kontraste und Bedienbarkeit mit der Tastatur. Eine förmliche Barrierefreiheits-Zertifizierung ist das nicht.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+
+            // --- RECHT ---
+            {
+                category: "RECHT",
+                label: "Datenschutz, DSGVO, Tracking & Schriften",
+                keywords: "datenschutz, dsgvo, tracking, cookies, schriften",
+                answer: "Ich baue technisch datenschutzfreundlich: Schriften liegen lokal, kein Tracking, keine externen Dienste, die beim Aufruf Daten übertragen. Impressum und Datenschutzerklärung binde ich ein — die Texte lassen Sie bitte rechtlich prüfen, das darf ich als Gestalter nicht leisten.",
+                weiter: ["Brauche ich ein Cookie-Banner?", "Was sind die Pflichtangaben?"]
+            },
+            {
+                category: "RECHT",
+                label: "Brauche ich ein Cookie-Banner?",
+                keywords: "cookie banner, einwilligung, consent",
+                answer: "Wenn keine Cookies zu Analyse- oder Werbezwecken gesetzt werden, braucht es auch kein Banner. Sobald Sie später ein Tool einbauen, ändert sich das.",
+                weiter: ["Wie sieht es mit DSGVO aus?", "Was kostet das?"]
+            },
+            {
+                category: "RECHT",
+                label: "Impressum & Anbieterkennzeichnung",
+                keywords: "impressum, anbieterkennzeichnung",
+                answer: "Impressum und Datenschutzerklärung binde ich ein und verlinke sie von jeder Seite. Die Inhalte liefern Sie beziehungsweise Ihr Anwalt.",
+                weiter: ["Wie sieht es mit DSGVO aus?", "Was sind die Pflichtangaben?"]
+            },
+            {
+                category: "RECHT",
+                label: "Pflichtangaben nach § 87 GEG / GModG",
+                keywords: "pflichtangaben, energieausweis, gmodg, geg, energieeffizienzklasse",
+                answer: "Nach § 87 GModG müssen fünf Angaben in jede Anzeige, wenn ein Energieausweis vorliegt: Art des Ausweises, Endenergiewert, wesentlicher Energieträger, Baujahr und Energieeffizienzklasse. Ich habe dazu eine Checkliste zum Abhaken — kostenlos.",
+                weiter: ["Checkliste herunterladen"]
+            },
+            {
+                category: "RECHT",
+                label: "Abmahnungen & Bußgelder vermeiden",
+                keywords: "abmahnung, bussgeld, ordnungswidrigkeit, abmahnverein",
+                answer: "In der Praxis sind Abmahnungen durch Wettbewerber und Verbände das häufigere Risiko, nicht das Bußgeld. Meine Checkliste zeigt Ihnen in zwei Minuten pro Objekt, ob etwas fehlt. Eine Rechtsberatung ist das nicht.",
+                weiter: ["Checkliste herunterladen", "Was sind die Pflichtangaben?"]
+            },
+            {
+                category: "RECHT",
+                label: "Wem gehören die Website & Dateien?",
+                keywords: "wem gehoert, eigentum, rechte, quellcode",
+                answer: "Die Dateien Ihrer Website gehören Ihnen. Sie können jederzeit umziehen und mit jedem anderen weiterarbeiten.",
+                weiter: ["Gibt es eine Kündigungsfrist?", "Was kostet das?"]
+            },
+            {
+                category: "RECHT",
+                label: "Kündigung & Vertragsbeendigung",
+                keywords: "kuendigen, vertrag beenden, ausstieg",
+                answer: "Für die Website gibt es nichts zu kündigen — sie ist bezahlt und gehört Ihnen. Eine laufende Betreuung wäre monatlich kündbar.",
+                weiter: ["Gibt es laufende Kosten?", "Was kostet das?"]
+            },
+
+            // --- SICHTBARKEIT ---
+            {
+                category: "SICHTBARKEIT",
+                label: "Google-Ranking & SEO",
+                keywords: "google, seo, gefunden werden, suchmaschine, ranking",
+                answer: "Ich baue die Seite technisch sauber: sinnvolle Titel, klare Struktur, schnelle Ladezeit. Platzierungen bei Google kann und will Ihnen niemand seriös versprechen — wer das tut, sollte Sie misstrauisch machen.",
+                weiter: ["Was bringt Google Business?", "Wie läuft das ab?"]
+            },
+            {
+                category: "SICHTBARKEIT",
+                label: "Google Unternehmensprofil (Maps / Brancheneintrag)",
+                keywords: "google business, maps, brancheneintrag",
+                answer: "Ihr Google-Unternehmensprofil ist für ein lokales Maklerbüro oft wichtiger als die Website selbst. Ich zeige Ihnen gern, was dort zu tun ist.",
+                weiter: ["Google Ranking & SEO?", "Was kostet das?"]
+            },
+            {
+                category: "SICHTBARKEIT",
+                label: "Social Media Kanäle",
+                keywords: "social media, instagram, facebook, linkedin",
+                answer: "Kanäle bespiele ich nicht. Ich kann Ihre Seite so aufbauen, dass sie beim Teilen ordentlich aussieht.",
+                weiter: ["Schalten Sie Google Ads?", "Was ist im Preis enthalten?"]
+            },
+            {
+                category: "SICHTBARKEIT",
+                label: "Werbung schalten & Google Ads",
+                keywords: "werbung, ads, anzeigen schalten, google ads",
+                answer: "Keine Werbeschaltung. Ich baue die Seite, auf der Werbung landen würde.",
+                weiter: ["Bringt eine neue Website mehr Anfragen?", "Was kostet das?"]
+            },
+            {
+                category: "SICHTBARKEIT",
+                label: "Bringt eine Website mehr Anfragen & Kunden?",
+                keywords: "mehr anfragen, mehr kunden, bringt das was, erfolg",
+                answer: "Ich verspreche Ihnen keine Anfragen — das hängt an Ihrem Markt, Ihrem Ruf und daran, wie schnell Sie ans Telefon gehen. Was ich zusage: Die Leute, die schon kommen, sollen nicht mehr abspringen, weil die Seite am Handy nicht funktioniert.",
+                weiter: ["Wie läuft das ab?", "Was kostet das?"]
+            },
+
+            // --- ÜBER CÉ STUDIOS ---
+            {
+                category: "ÜBER CÉ STUDIOS",
+                label: "Wer steckt hinter CÉ Studios?",
+                keywords: "wer bist du, cyril, wer steckt dahinter, ueber euch",
+                answer: "Cyril Portmann, Wiesbaden. Immobilienkaufmann in Ausbildung und seit fünf Jahren Gestalter. Ich sitze selbst im Maklerbüro — was in ein Exposé gehört und wie ein Verkauf abläuft, muss mir niemand erklären.",
+                weiter: ["Habt ihr Referenzen?", "Wo sitzt ihr?"]
+            },
+            {
+                category: "ÜBER CÉ STUDIOS",
+                label: "Referenzen & Portfolio",
+                keywords: "referenzen, beispiele, projekte, portfolio, wen habt ihr",
+                answer: "Ich baue CÉ Studios gerade in der Immobiliennische auf, deshalb zeige ich Ihnen lieber etwas Konkretes als eine Liste: Schicken Sie mir den Link zu Ihrer Seite, dann bekommen Sie eine ehrliche Einschätzung — und auf Wunsch einen Entwurf, bevor Sie zahlen.",
+                weiter: ["Wie lange sind Sie dabei?", "Kostenlose Einschätzung anfragen"]
+            },
+            {
+                category: "ÜBER CÉ STUDIOS",
+                label: "Erfahrung & Werdegang",
+                keywords: "wie lange dabei, erfahrung, seit wann",
+                answer: "Fünf Jahre Gestaltung, dazu die Ausbildung im Immobilienbereich. Die Verbindung aus beidem ist der Punkt.",
+                weiter: ["Arbeiten Sie allein oder im Team?", "Was kostet das?"]
+            },
+            {
+                category: "ÜBER CÉ STUDIOS",
+                label: "Allein oder Agentur-Team?",
+                keywords: "allein, team, mitarbeiter, agentur groesse",
+                answer: "Ich arbeite allein. Das heißt: Sie sprechen immer mit demselben Menschen, und der kennt Ihr Projekt.",
+                weiter: ["Wo sitzt ihr?", "Wie läuft die Zusammenarbeit ab?"]
+            },
+            // --- REGION ---
+            {
+                category: "REGION",
+                label: "Standort & Firmensitz",
+                keywords: "wo sitzt ihr, standort, wo seid ihr, adresse, buero, wiesbaden",
+                answer: "CÉ Studios sitzt in Wiesbaden und arbeitet für Maklerbüros in ganz Deutschland.",
+                weiter: ["Arbeiten Sie deutschlandweit?", "Treffen vor Ort möglich?"]
+            },
+            {
+                category: "REGION",
+                label: "Deutschlandweite Zusammenarbeit",
+                keywords: "deutschlandweit, bundesweit, ueberall, auch in, entfernung, kommt ihr nach, weit weg, andere stadt",
+                answer: "Ja, deutschlandweit. Der Ablauf läuft ohnehin über Telefon, Mail und Bildschirmfreigabe — wo Ihr Büro steht, spielt für die Zusammenarbeit keine Rolle.",
+                weiter: ["Wie läuft die Zusammenarbeit ab?", "Treffen vor Ort möglich?"]
+            },
+            {
+                category: "REGION",
+                label: "Zusammenarbeit nach Städten & Regionen",
+                keywords: "berlin, hamburg, muenchen, koeln, frankfurt, stuttgart, duesseldorf, leipzig, dresden, hannover, nuernberg, bremen, essen, dortmund, mainz, darmstadt, mannheim, karlsruhe, freiburg, muenster, augsburg, bonn, kiel, rostock, erfurt, oesterreich, schweiz",
+                answer: "Ja, dort arbeite ich auch. CÉ Studios sitzt in Wiesbaden und betreut Maklerbüros in ganz Deutschland.",
+                weiter: ["Wie läuft die Zusammenarbeit ab?", "Was kostet das?"]
+            },
+            {
+                category: "REGION",
+                label: "Persönliches Treffen vor Ort",
+                keywords: "vor ort, persoenlich treffen, besuch, vorbeikommen",
+                answer: "Ein Treffen vor Ort geht im Rhein-Main-Gebiet unkompliziert. Darüber hinaus auf Absprache — meistens reicht ein Telefonat mit Bildschirmfreigabe völlig aus.",
+                weiter: ["Wo sitzt ihr?", "Wie läuft das Erstgespräch ab?"]
+            },
+            // --- WARUM CÉ STUDIOS ---
+            {
+                category: "WARUM CÉ STUDIOS",
+                label: "Warum CÉ Studios?",
+                keywords: "warum ce studios, warum cé studios, warum ihr, warum sie, warum wir, warum dich, warum du, ueberzeugen, warum sollte ich, wieso sie",
+                answer: "Weil ich das Geschäft kenne, in dem Sie arbeiten. Eine Agentur baut Ihnen eine schöne Seite und lässt sich dann erklären, was ein Alleinauftrag ist. Ich sitze selbst im Maklerbüro. Und Sie sehen die fertige Startseite, bevor Sie zahlen — das kann ein Betrieb mit Gehältern gar nicht anbieten.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "WARUM CÉ STUDIOS",
+                label: "Warum nicht jemand anderen / Konkurrenz?",
+                keywords: "warum nicht jemand anderen, warum nicht agentur, konkurrenz, andere anbieter, vergleich anbieter",
+                answer: "Ehrliche Antwort: Wenn Sie jemanden haben, der Ihr Geschäft versteht und dessen Arbeit Ihnen gefällt, nehmen Sie den. Falls nicht — schicken Sie mir den Link zu Ihrer Seite. Sie bekommen eine Einschätzung und danach einen Entwurf, bevor Geld fließt. Dann müssen Sie nicht glauben, sondern können sehen.",
+                weiter: ["Was zeichnet Sie aus?", "Kostenlose Einschätzung anfragen"]
+            },
+            {
+                category: "WARUM CÉ STUDIOS",
+                label: "Was macht Sie besser als eine Agentur?",
+                keywords: "besser als agentur, was macht euch besser, staerken",
+                answer: "Nicht besser, anders. Eine Agentur hat mehr Leute und mehr Referenzen als ich. Ich habe das Fachwissen Ihrer Branche, keinen Overhead — und Sie tragen kein Risiko, weil Sie erst nach dem Entwurf entscheiden.",
+                weiter: ["Wie läuft das ab ohne Anzahlung?", "Was kostet das?"]
+            },
+            {
+                category: "WARUM CÉ STUDIOS",
+                label: "Alleinstellungsmerkmal von CÉ Studios",
+                keywords: "alleinstellung, was macht euch besonders, unterschied, was koennt ihr was andere nicht",
+                answer: "Zwei Dinge, die zusammen selten sind: Ich gestalte seit fünf Jahren, und ich arbeite in der Immobilienwirtschaft. Die meisten Agenturen können das eine, die meisten Fotografen das andere. Deshalb müssen Sie sonst zwei Leute beauftragen und beiden erklären, was Sie eigentlich brauchen.",
+                weiter: ["Wie läuft die Zusammenarbeit ab?", "Was kostet das?"]
+            },
+            {
+                category: "WARUM CÉ STUDIOS",
+                label: "Entstehung und Motivation von CÉ Studios",
+                keywords: "warum gibt es euch, warum macht ihr das, geschichte, wie kam es dazu, motivation",
+                answer: "Weil mir bei der Arbeit ständig Maklerseiten begegnen, die gut gemachte Objekte schlecht aussehen lassen. Ich kann gestalten und ich kenne die Branche — es lag nahe, beides zu verbinden.",
+                weiter: ["Wer steckt hinter CÉ Studios?", "Was kostet das?"]
+            },
+            {
+                category: "WARUM CÉ STUDIOS",
+                label: "Warum nur Immobilien?",
+                keywords: "warum nur immobilien, nische, spezialisierung, nur makler",
+                answer: "Weil man eine Branche entweder kennt oder nicht. Wer heute eine Zahnarztpraxis und morgen ein Maklerbüro baut, kennt keine von beiden richtig.",
+                weiter: ["Was zeichnet Sie aus?", "Wie läuft das ab?"]
+            },
+            {
+                category: "WARUM CÉ STUDIOS",
+                label: "Zu jung / Ausbildung / Fehlende Erfahrung?",
+                keywords: "zu jung, ausbildung, azubi, erfahrung fehlt, anfaenger",
+                answer: "Stimmt, ich stehe am Anfang. Das heißt aber auch: Sie bekommen meine volle Aufmerksamkeit statt eines Praktikanten, einen Preis, den eine Agentur mit Angestellten nicht machen kann — und Sie sehen die Arbeit, bevor Sie zahlen.",
+                weiter: ["Was kostet das?", "Wie läuft das ab ohne Anzahlung?"]
+            },
+            {
+                category: "WARUM CÉ STUDIOS",
+                label: "Was wenn Sie aufhören / Ausfall?",
+                keywords: "was wenn sie aufhoeren, hoeren sie auf, was ist wenn sie weg sind, abhaengigkeit, ausfall",
+                answer: "Die Dateien gehören Ihnen und die Seite läuft auf Ihrem Konto. Wenn ich morgen aufhöre, kann jeder andere damit weiterarbeiten. Genau deshalb setze ich es so auf.",
+                weiter: ["Wem gehört die Website?", "Wie läuft das ab?"]
+            },
+            {
+                category: "ÜBER CÉ STUDIOS",
+                label: "Erreichbarkeit & Telefon",
+                keywords: "erreichbar, telefon, wann erreichbar, rueckruf",
+                answer: "Schreiben Sie mir an service@ce-studios.de, gern mit Ihrer Nummer und wann es Ihnen passt. Ich melde mich innerhalb von zwei Werktagen.",
+                weiter: ["Erstgespräch vereinbaren", "Was kostet das?"]
+            },
+
+            // --- EINWÄNDE ---
+            {
+                category: "EINWÄNDE",
+                label: "Wir haben schon eine Website",
+                keywords: "haben schon eine website, brauchen keine, schon eine seite",
+                answer: "Dann ist die Frage nicht, ob Sie eine haben, sondern was sie verliert. Schicken Sie mir den Link — ich sage Ihnen in drei Punkten, wo Interessenten abspringen. Kostenlos, ohne dass Sie danach etwas bestellen müssen.",
+                weiter: ["Kostenlose Einschätzung anfragen", "Was kostet das?"]
+            },
+            {
+                category: "EINWÄNDE",
+                label: "Keine Zeit / Zu viel Stress",
+                keywords: "keine zeit, zu viel aufwand, stress, kein kopf dafuer",
+                answer: "Deshalb ist Ihr Anteil klein gehalten: ein Gespräch, danach zwei kurze Durchsichten. Alles andere mache ich.",
+                weiter: ["Was muss ich selbst tun?", "Wie lange dauert es?"]
+            },
+            {
+                category: "Preis & Zahlung",
+                label: "Ist das Erstgespräch kostenlos?",
+                keywords: "kostenlos, gratis, umsonst, unverbindlich, ohne kosten",
+                answer: "Das Erstgespräch und die Einschätzung Ihrer Seite kosten nichts, auch dann nicht, wenn Sie danach absagen. Ebenso die Checkliste zu den Pflichtangaben.",
+                weiter: ["Wie läuft das ab?", "Was kostet die Website?"]
+            },
+            {
+                category: "EINWÄNDE",
+                label: "Zu teuer / Kein Budget",
+                keywords: "zu teuer, kein budget, zu viel geld, lohnt nicht",
+                answer: "Verständlich. Fragen Sie sich einmal, was Sie im Monat an Portalgebühren zahlen — und stellen Sie einen einmaligen Betrag daneben. Wenn es dann immer noch nicht passt, sagen Sie ab, das ist völlig in Ordnung.",
+                weiter: ["Ratenzahlung möglich?", "Wie läuft das ab ohne Anzahlung?"]
+            },
+            {
+                category: "EINWÄNDE",
+                label: "Machen wir selbst / Verwandter / Neffe",
+                keywords: "machen wir selbst, neffe, bekannter, intern",
+                answer: "Kann gut funktionieren. Was dabei meistens fehlt, ist jemand, der weiß, was ein Eigentümer sehen will, bevor er einen Alleinauftrag vergibt.",
+                weiter: ["Was unterscheidet CÉ Studios?", "Kostenlose Einschätzung anfragen"]
+            },
+            {
+                category: "EINWÄNDE",
+                label: "Wir sind nur ein kleines Büro",
+                keywords: "zu klein, nur zwei leute, kleines buero, lohnt sich das",
+                answer: "Gerade kleine Büros profitieren, weil sie nicht über Masse gewinnen, sondern über Vertrauen. Und Vertrauen entsteht in den ersten Sekunden auf dem Handy.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "EINWÄNDE",
+                label: "Später / Nächstes Jahr",
+                keywords: "spaeter, melde mich, nicht jetzt, naechstes jahr",
+                answer: "Gern. Nehmen Sie in der Zwischenzeit die Checkliste zu den Pflichtangaben mit — die kostet nichts und bringt Ihnen sofort etwas.",
+                weiter: ["Checkliste herunterladen", "Erstgespräch vereinbaren"]
+            },
+            {
+                category: "EINWÄNDE",
+                label: "Angebot einer anderen Agentur liegt vor",
+                keywords: "andere agentur, angebot vorliegen, vergleichen",
+                answer: "Holen Sie ruhig Angebote ein. Fragen Sie dabei drei Dinge: Wer schreibt die Texte, wem gehört die Seite am Ende, und was passiert, wenn Ihnen der Entwurf nicht gefällt.",
+                weiter: ["Wie läuft das bei Ihnen ab?", "Was kostet das?"]
+            },
+
+            // --- NÄCHSTER SCHRITT ---
+            {
+                category: "NÄCHSTER SCHRITT",
+                label: "Kontakt aufnehmen",
+                keywords: "kontakt, anfrage, melden, schreiben, erreichen",
+                answer: "Am einfachsten per Mail an service@ce-studios.de. Schicken Sie den Link zu Ihrer Seite mit, dann ist meine Antwort gleich konkret.",
+                weiter: ["Erstgespräch vereinbaren", "Was kostet das?"]
+            },
+            {
+                category: "NÄCHSTER SCHRITT",
+                label: "Kostenloses Erstgespräch vereinbaren",
+                keywords: "termin, gespraech, telefonat, beratung, kennenlernen",
+                answer: "Schreiben Sie mir zwei Zeitfenster, die Ihnen passen, dann bestätige ich eines. Das Erstgespräch kostet nichts.",
+                weiter: ["Wie läuft das Erstgespräch ab?", "Was kostet das?"]
+            },
+            {
+                category: "NÄCHSTER SCHRITT",
+                label: "Checkliste herunterladen",
+                keywords: "checkliste, download, pdf, unterlagen",
+                answer: "Die Checkliste zu den fünf Pflichtangaben nach § 87 GModG bekommen Sie kostenlos — zwei Seiten, zum Abhaken an einem Objekt.",
+                weiter: ["Checkliste herunterladen", "Was sind die Pflichtangaben?"]
+            },
+            {
+                category: "NÄCHSTER SCHRITT",
+                label: "Kostenlose Einschätzung der aktuellen Website",
+                keywords: "einschaetzung, analyse, pruefen sie meine seite, feedback",
+                answer: "Schicken Sie mir den Link. Sie bekommen innerhalb von zwei Werktagen eine schriftliche Einschätzung: drei Punkte, keine Verkaufspräsentation. Wenn Ihre Seite gut ist, sage ich Ihnen das auch.",
+                weiter: ["Kostenlose Einschätzung anfragen", "Wie läuft das ab?"]
+            },
+
+            // =========================================================================
+            // 4 — WEITERE KATALOG-EINTRÄGE (24 NEUE EINTRÄGE)
+            // =========================================================================
+            {
+                category: "TECHNIK",
+                label: "Website-Baukästen (Wix, Jimdo, WordPress, Squarespace)",
+                keywords: "wix, jimdo, baukasten, wordpress, squarespace, homepage baukasten",
+                answer: "Ein Baukasten ist günstig und schnell. Der Preis dafür ist, dass man Ihrer Seite ansieht, aus welchem Baukasten sie kommt — und dass Sie an den Anbieter gebunden sind.",
+                weiter: ["Was kostet eine Website?", "Wie sicher ist handgeschriebener Code?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Wartung, Updates & technische Pflege",
+                keywords: "wartung, updates, pflege der technik, sicherheitsupdates",
+                answer: "Weil ich ohne Baukasten und ohne Plugins baue, gibt es nichts, was regelmäßig aktualisiert werden müsste. Das ist einer der Vorteile dieser Bauweise.",
+                weiter: ["Gibt es laufende Kosten?", "Wie sicher ist die Seite?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Sicherheit gegen Hacker & Viren",
+                keywords: "sicherheit, gehackt, hacker, virus, schadsoftware",
+                answer: "Die Seite besteht aus festen Dateien ohne Datenbank und ohne Login — es gibt schlicht wenig, wo jemand ansetzen könnte.",
+                weiter: ["Gibt es Backups?", "Muss die Seite gewartet werden?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Backups & Datensicherung",
+                keywords: "backup, sicherung, datenverlust",
+                answer: "Alle Dateien liegen versioniert, ältere Stände lassen sich jederzeit wiederherstellen.",
+                weiter: ["Wem gehört die Seite?", "Wo liegt die Seite gehostet?"]
+            },
+            {
+                category: "TECHNIK",
+                label: "Besucherstatistiken & Analytics",
+                keywords: "statistik, besucherzahlen, wie viele besucher, analytics",
+                answer: "Standardmäßig ist kein Tracking eingebaut. Wenn Sie Zahlen möchten, gibt es datenschutzfreundliche Lösungen — das besprechen wir dann, weil es in die Datenschutzerklärung muss.",
+                weiter: ["Wie steht es um Datenschutz?", "Brauche ich ein Cookie-Banner?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Videos, Imagefilme & Drohnenaufnahmen",
+                keywords: "video, imagefilm, drohne, luftaufnahme",
+                answer: "Videos binde ich ein, wenn Sie welche haben. Gedreht wird nicht von mir.",
+                weiter: ["Können 360°-Rundgänge eingebunden werden?", "Was ist im Preis enthalten?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Grundrisse & Raumaufteilung",
+                keywords: "grundriss, plan, raumaufteilung",
+                answer: "Grundrisse können auf der Objektseite eingebunden und optisch an Ihren Auftritt angepasst werden.",
+                weiter: ["Was kosten Objektseiten?", "Wer bereitet die Fotos auf?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Home Staging & virtuelles Möblieren",
+                keywords: "home staging, moebliert, virtuell einrichten",
+                answer: "Virtuelles Möblieren biete ich nicht an. Bildaufbereitung von vorhandenen Fotos schon.",
+                weiter: ["Was kostet Bildaufbereitung?", "Was ist im Preis enthalten?"]
+            },
+            {
+                category: "RECHT",
+                label: "Energieausweis erstellen lassen",
+                keywords: "energieausweis besorgen, ausweis erstellen, energieberater",
+                answer: "Energieausweise stellt ein Aussteller aus, nicht ich. Ich kann Ihnen nur sagen, welche Angaben daraus ins Inserat müssen.",
+                weiter: ["Checkliste herunterladen", "Was sind die Pflichtangaben?"]
+            },
+            {
+                category: "RECHT",
+                label: "Notar, Kaufvertrag & Beurkundung",
+                keywords: "notar, kaufvertrag, beurkundung",
+                answer: "Das gehört zum Verkaufsprozess, nicht zur Website. Ich weiß, wie es abläuft — beraten dürfen dazu andere.",
+                weiter: ["Wer steckt hinter CÉ Studios?", "Wie läuft die Zusammenarbeit ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Finanzierungsrechner einbinden",
+                keywords: "finanzierungsrechner, rechner einbinden, budgetrechner",
+                answer: "Ein Rechner eines Drittanbieters lässt sich einbinden. Das ist ein eigener Posten und muss in die Datenschutzerklärung.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Wertermittlungstool für Immobilien",
+                keywords: "wertermittlung, bewertungstool, was ist meine immobilie wert",
+                answer: "Ein Bewertungstool ist ein eigener Dienst, den man einbindet. Machbar, aber mit laufenden Kosten und Datenschutzaufwand — besprechen wir im Erstgespräch.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Chatbot für Makler-Website",
+                keywords: "chatbot, assistent, ki auf meiner seite",
+                answer: "So einer wie ich lässt sich auch auf Ihrer Seite einbauen. Was Sie hier sehen, ist die einfache Variante mit festen Antworten.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Online-Terminbuchung & Kalender",
+                keywords: "terminbuchung, kalender, online termin",
+                answer: "Ein Buchungskalender ist möglich, meist über einen Anbieter. Auch das ist ein eigener Posten mit Datenschutzbezug.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "WhatsApp-Button einbinden",
+                keywords: "whatsapp, messenger, direkt schreiben",
+                answer: "Ein WhatsApp-Knopf ist technisch einfach. Ob Sie das datenschutzrechtlich wollen, sollten Sie vorher klären.",
+                weiter: ["Wie steht es um Datenschutz?", "Wie landen Anfragen bei mir?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Karriereseite & Stellenangebote",
+                keywords: "bewerbung, job, stelle, mitarbeiter gesucht, karriereseite",
+                answer: "Eine Karriereseite gehört oft dazu — Maklerbüros suchen ständig Leute. Sagen Sie Bescheid, wenn Sie eine brauchen.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Kooperationspartner & Partnerfirmen",
+                keywords: "kooperation, partner, zusammenarbeit, empfehlung",
+                answer: "Wenn Sie mit anderen Gewerken oder Büros zusammenarbeiten und das zeigen möchten, bauen wir das ein.",
+                weiter: ["Was ist im Preis enthalten?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Hausverwaltung & WEG-Verwaltung",
+                keywords: "hausverwaltung, verwaltung, wev, weg",
+                answer: "Wenn Sie neben der Vermittlung verwalten, bekommt das einen eigenen Bereich mit eigenem Kontaktweg.",
+                weiter: ["Was kostet das?", "Wie läuft das ab?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Websites für Bauträger & Projektentwickler",
+                keywords: "bautraeger, projektentwickler, neubau, projekt",
+                answer: "Für Bauträger und Projektentwickler baue ich Projektseiten mit eigenem Auftritt je Vorhaben — das ist etwas anderes als eine Objektliste.",
+                weiter: ["Was kostet das?", "Erstgespräch vereinbaren"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Gewerbeimmobilien darstellen",
+                keywords: "gewerbe, buero, halle, gewerbeimmobilie",
+                answer: "Gewerbeobjekte gehen genauso. Achtung: dort gelten andere Pflichtangaben als bei Wohngebäuden — drei statt fünf.",
+                weiter: ["Was sind die Pflichtangaben?", "Was kosten Objektseiten?"]
+            },
+            {
+                category: "LEISTUNGEN",
+                label: "Vermietungsobjekte separat darstellen",
+                keywords: "vermietung, mieter, mietobjekt",
+                answer: "Vermietungsobjekte lassen sich getrennt von Verkaufsobjekten darstellen, damit sich Interessenten nicht durchklicken müssen.",
+                weiter: ["Wie läuft das ab?", "Binden Sie Maklersoftware an?"]
+            },
+            {
+                category: "RECHT",
+                label: "Datenschutzbeauftragter / DSB",
+                keywords: "datenschutzbeauftragter, dsb, verarbeitungsverzeichnis",
+                answer: "Dazu kann ich nichts sagen — das ist eine Frage an Ihre Datenschutzbeauftragte oder Ihren Anwalt.",
+                weiter: ["Wie sieht es mit DSGVO aus?", "Brauche ich ein Cookie-Banner?"]
+            },
+            {
+                category: "ÜBER CÉ STUDIOS",
+                label: "Wie viele Kunden oder Projekte?",
+                keywords: "wie viele kunden habt ihr, wie viele projekte, auftraege",
+                answer: "Ich baue CÉ Studios gerade in dieser Nische auf und nenne keine Zahlen, die ich nicht belegen kann. Urteilen Sie lieber an einem Entwurf — den bekommen Sie, bevor Sie zahlen.",
+                weiter: ["Wie läuft das ab ohne Anzahlung?", "Was kostet das?"]
+            },
+            {
+                category: "ABLAUF",
+                label: "Erfolgsgarantie / Geld-zurück-Garantie",
+                keywords: "garantie, geld zurueck, zufriedenheitsgarantie",
+                answer: "Eine Erfolgsgarantie gibt es nicht, die wäre unseriös. Was es gibt: Sie sehen die Startseite, bevor Sie zahlen, und können kostenlos absagen.",
+                weiter: ["Wie läuft das ab ohne Anzahlung?", "Was kostet das?"]
+            }
+        ];
+
+        // =========================================================================
+        // ERKENNUNGSLOGIK & ZUSTAND
+        // =========================================================================
+        function normalizeText(str) {
+            return str
+                .toLowerCase()
+                .replace(/ä/g, 'ae')
+                .replace(/ö/g, 'oe')
+                .replace(/ü/g, 'ue')
+                .replace(/ß/g, 'ss')
+                .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'«»„“’–—]/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function commonPrefixLen(a, b) {
+            let len = 0;
+            const min = Math.min(a.length, b.length);
+            while (len < min && a[len] === b[len]) len++;
+            return len;
+        }
+
+        function levenshtein(a, b) {
+            const m = a.length, n = b.length;
+            const d = [];
+            for (let i = 0; i <= m; i++) d[i] = [i];
+            for (let j = 0; j <= n; j++) d[0][j] = j;
+            for (let i = 1; i <= m; i++) {
+                for (let j = 1; j <= n; j++) {
+                    const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+                    d[i][j] = Math.min(
+                        d[i - 1][j] + 1,
+                        d[i][j - 1] + 1,
+                        d[i - 1][j - 1] + cost
+                    );
+                }
+            }
+            return d[m][n];
+        }
+
+        const catalog = rawCatalog.map((entry, index) => {
+            const kwList = entry.keywords
+                .split(',')
+                .map(k => normalizeText(k))
+                .filter(k => k.length > 0);
+            return {
+                index,
+                category: entry.category,
+                label: entry.label,
+                rawKeywords: entry.keywords,
+                keywords: kwList,
+                answer: entry.answer,
+                weiter: entry.weiter
+            };
+        });
+
+        let lastPoolIndex = -1;
+        let consecutiveMisses = 0;
+        let pendingClarification = null;
+
+        const standardFollowups = [
+            "Was kostet das?",
+            "Wie lange dauert es?",
+            "Wie läuft das ab?",
+            "Was muss ich selbst tun?",
+            "Warum CÉ Studios?"
+        ];
+
+        function getRandomPoolAnswer() {
+            let idx;
+            do {
+                idx = Math.floor(Math.random() * fallbackPool.length);
+            } while (idx === lastPoolIndex);
+            lastPoolIndex = idx;
+            return fallbackPool[idx];
+        }
+
+        function processMessage(rawInput) {
+            const inputNorm = normalizeText(rawInput);
+            if (!inputNorm) return null;
+
+            // 1. Bearbeitung einer aktiven "Meinten Sie ...?" Klärung
+            if (pendingClarification) {
+                if (inputNorm === 'ja' || inputNorm === 'ja genau') {
+                    const entry = pendingClarification;
+                    pendingClarification = null;
+                    consecutiveMisses = 0;
+                    return {
+                        answer: entry.answer,
+                        buttons: entry.weiter
+                    };
+                }
+                if (inputNorm === 'nein' || inputNorm === 'nein etwas anderes') {
+                    pendingClarification = null;
+                    consecutiveMisses++;
+                    let text = getRandomPoolAnswer();
+                    let buttons = [...standardFollowups];
+                    if (consecutiveMisses >= 3) {
+                        text += "\n\nWir drehen uns im Kreis — das geht schneller direkt. Schreiben Sie kurz, worum es geht, ich antworte innerhalb von zwei Werktagen.";
+                        buttons = ["Anfrage schreiben", ...standardFollowups];
+                    }
+                    return {
+                        answer: text,
+                        buttons: buttons
+                    };
+                }
+                pendingClarification = null;
+            }
+
+            const inputWords = inputNorm.split(' ').filter(w => w.length > 0);
+
+            // 2. Treffer in den 109 Katalog-Einträgen prüfen
+            let strongMatches = [];
+            let weakMatches = [];
+
+            for (const entry of catalog) {
+                let strongHits = 0;
+                let exactHits = 0;
+                let phraseHits = 0;
+                let weakHits = 0;
+                let maxKwLen = 0;
+
+                for (const kw of entry.keywords) {
+                    // Mehrwort-Stichwort (Phrase): z.B. "was kostet", "zu teuer", "wer bist du"
+                    if (kw.includes(' ')) {
+                        if (inputNorm.includes(kw)) {
+                            strongHits++;
+                            phraseHits++;
+                            if (kw.length > maxKwLen) maxKwLen = kw.length;
+                        } else {
+                            const kwWords = kw.split(' ');
+                            const allFound = kwWords.every(kww => inputWords.includes(kww));
+                            if (allFound) {
+                                strongHits++;
+                                phraseHits++;
+                                if (kw.length > maxKwLen) maxKwLen = kw.length;
+                            }
+                        }
+                    } else {
+                        // Einzelwort-Stichwort
+                        if (inputWords.includes(kw)) {
+                            strongHits++;
+                            exactHits++;
+                            if (kw.length > maxKwLen) maxKwLen = kw.length;
+                        } else if (inputNorm.includes(kw) && kw.length >= 5) {
+                            strongHits++;
+                            if (kw.length > maxKwLen) maxKwLen = kw.length;
+                        } else {
+                            // Stamm- oder Tippfehler-Treffer prüfen
+                            for (const iw of inputWords) {
+                                if (iw.length >= 4 && kw.length >= 4) {
+                                    const cpl = commonPrefixLen(iw, kw);
+                                    if (cpl >= 4) {
+                                        // "kostet" trifft "kosten" -> voller Treffer
+                                        if ((iw.startsWith('kost') && kw.startsWith('kost')) ||
+                                            (iw.startsWith('preis') && kw.startsWith('preis')) ||
+                                            (iw.startsWith('termin') && kw.startsWith('termin')) ||
+                                            (iw.startsWith('kontakt') && kw.startsWith('kontakt'))) {
+                                            strongHits++;
+                                            if (kw.length > maxKwLen) maxKwLen = kw.length;
+                                        } else {
+                                            // Knapper / schwacher Treffer
+                                            weakHits++;
+                                            if (kw.length > maxKwLen) maxKwLen = kw.length;
+                                        }
+                                        break;
+                                    }
+                                }
+                                if (iw.length >= 6 && kw.length >= 6 && Math.abs(iw.length - kw.length) <= 1) {
+                                    if (levenshtein(iw, kw) === 1) {
+                                        weakHits++;
+                                        if (kw.length > maxKwLen) maxKwLen = kw.length;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (strongHits > 0) {
+                    strongMatches.push({ entry, hits: strongHits, phrase: phraseHits, exact: exactHits, maxKwLen });
+                } else if (weakHits > 0) {
+                    weakMatches.push({ entry, hits: weakHits, maxKwLen });
+                }
+            }
+
+            // 3. Starker Treffer gewinnt (mehr Treffer > Phrase > exaktes Wort > längeres Stichwort)
+            if (strongMatches.length > 0) {
+                strongMatches.sort((a, b) => b.hits - a.hits || b.phrase - a.phrase || b.exact - a.exact || b.maxKwLen - a.maxKwLen);
+                const best = strongMatches[0].entry;
+                consecutiveMisses = 0;
+                return {
+                    answer: best.answer,
+                    buttons: best.weiter
+                };
+            }
+
+            // 4. Themen-Ausweichantworten (Teil 3)
+            for (const tf of topicFallbacks) {
+                const hitsTf = tf.keywords.some(k => inputWords.includes(k) || (k.length >= 5 && inputNorm.includes(k)));
+                if (hitsTf) {
+                    return {
+                        answer: tf.answer,
+                        buttons: tf.buttons
+                    };
+                }
+            }
+
+            // 5. Knapper Treffer ("Meinten Sie …?") (Teil 2)
+            weakMatches.sort((a, b) => b.hits - a.hits || a.maxKwLen - b.maxKwLen);
+            if (weakMatches.length >= 1) {
+                const candidate = weakMatches[0].entry;
+                pendingClarification = candidate;
+                return {
+                    answer: `Meinten Sie: ${candidate.label}?`,
+                    buttons: ["Ja, genau", "Nein, etwas anderes"]
+                };
+            }
+
+            // 6. Ausweichantwort aus dem Pool (Teil 1)
+            consecutiveMisses++;
+            let text = getRandomPoolAnswer();
+            let buttons = [...standardFollowups];
+
+            if (consecutiveMisses >= 3) {
+                text += "\n\nWir drehen uns im Kreis — das geht schneller direkt. Schreiben Sie kurz, worum es geht, ich antworte innerhalb von zwei Werktagen.";
+                buttons = ["Anfrage schreiben", ...standardFollowups];
+            }
+
+            return {
+                answer: text,
+                buttons: buttons
+            };
+        }
+
+        // =========================================================================
+        // CHAT INTERAKTION
+        // =========================================================================
+
+        
+
+        function handleKey(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function handleChipClick(chipText) {
+            if (chipText === 'Checkliste herunterladen') {
+                window.open('checkliste-pflichtangaben.pdf', '_blank');
+                return;
+            }
+            if (chipText === 'Anfrage schreiben') {
+                window.location.href = 'contact.html';
+                return;
+            }
+            const input = document.getElementById('chatInput');
+            if (input) {
+                input.value = chipText;
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            if (!input) return;
+            const text = input.value.trim();
+            if (!text) return;
+
+            appendMessage('user', text);
+            input.value = '';
+            playChime('user');
+
+            const typing = document.getElementById('typingIndicator');
+            if (typing) typing.classList.add('active');
+            scrollToBottom();
+
+            setTimeout(() => {
+                if (typing) typing.classList.remove('active');
+                const res = processMessage(text);
+                if (res) {
+                    appendMessage('bot', res.answer, res.buttons);
+                    playChime('bot');
+                }
+            }, 550);
+        }
+
+        function appendMessage(sender, text, buttons) {
+            const body = document.getElementById('chatBody');
+            const typing = document.getElementById('typingIndicator');
+            if (!body || !typing) return;
+            
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'ce-message ' + sender;
+
+            const bubble = document.createElement('div');
+            bubble.className = 'ce-bubble';
+            bubble.textContent = text;
+            msgDiv.appendChild(bubble);
+
+            const time = document.createElement('span');
+            time.className = 'ce-msg-time';
+            const now = new Date();
+            time.textContent = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+            msgDiv.appendChild(time);
+
+            if (buttons && buttons.length > 0) {
+                const fDiv = document.createElement('div');
+                fDiv.className = 'ce-followups';
+                buttons.forEach(btnText => {
+                    const btn = document.createElement('button');
+                    btn.setAttribute('type', 'button');
+                    btn.className = 'ce-chip';
+                    if (btnText === 'Anfrage schreiben' || btnText === 'Checkliste herunterladen') {
+                        btn.classList.add('special-action');
+                    }
+                    btn.textContent = btnText;
+                    btn.onclick = () => handleChipClick(btnText);
+                    fDiv.appendChild(btn);
+                });
+                msgDiv.appendChild(fDiv);
+            }
+
+            body.insertBefore(msgDiv, typing);
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            const body = document.getElementById('chatBody');
+            if (body) body.scrollTop = body.scrollHeight;
+        }
+    </script>
+
+</body>
+</html>

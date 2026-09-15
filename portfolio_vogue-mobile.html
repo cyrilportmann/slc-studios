@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CÉ Studios | Cinematic Mobile</title>
+    
+    <!-- Referrer check to skip duplicate intro if redirecting from landing page -->
+    <script>
+        (function() {
+            const ref = document.referrer;
+            if (ref) {
+                const isSelf = ref.includes('portfolio_vogue') || ref.includes('portfolio_vogue-mobile');
+                const cameFromLanding = !isSelf && (
+                    ref.includes('index.html') || 
+                    ref.includes('landing') || 
+                    ref.includes('ce-studios.netlify.app') ||
+                    ref === window.location.origin ||
+                    ref === window.location.origin + '/'
+                );
+                if (cameFromLanding) {
+                    const style = document.createElement('style');
+                    style.innerHTML = `
+                        #ce-splash-overlay { display: none !important; }
+                        #ce-main-content { opacity: 1 !important; }
+                        .hero-title, .hero-tagline, .hero-subtitle, .hero-btn { opacity: 1 !important; transform: none !important; }
+                    `;
+                    document.head.appendChild(style);
+                    window.ceSkipIntro = true;
+                }
+            }
+        })();
+    </script>
+
+    <!-- Instant Black Background: Prevents white flashes before fonts/scripts load -->
+    <style>
+        html, body { background-color: #000000 !important; }
+    </style>
+    
+    <!-- Preload Splash Logo: Prevents delay and pop-in flash during intro scaling -->
+    <link rel="preload" as="image" href="logo_ce_needle.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Playfair+Display:ital,wght@1,400;1,600&family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+
+    <style>
+        /* Fast & Seamless Page Entry Transition */
+        html, body { 
+            background-color: #000; 
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body { 
+            color: #e6dac3;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            background: radial-gradient(circle at center, rgba(184, 160, 128, 0.08) 0%, #000000 80%), #000;
+        }
+
+        :root {
+            --bg: #000000;
+            --text: #e6dac3;
+            --accent: #b8a080;
+            --font-display: 'Syncopate', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: inherit;
+        }
+
+        /* NAVIGATION */
+        .nav {
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            padding: 1.5rem 1.5rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            z-index: 100; 
+            font-family: var(--font-display);
+            font-size: 0.7rem; 
+            letter-spacing: 0.2em; 
+            text-transform: uppercase;
+            background: transparent;
+            transition: padding 0.4s ease, background-color 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+            border-bottom: 1px solid transparent;
+        }
+        body.scrolled .nav {
+            padding: 1rem 1.5rem;
+            background: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(230, 218, 195, 0.08);
+        }
+        .nav-logo img { height: 34px; width: auto; mix-blend-mode: screen; filter: contrast(1.2); transition: transform 0.4s ease, height 0.4s ease; }
+        body.scrolled .nav-logo img { height: 28px; }
+        .nav-right { display: flex; align-items: center; }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-content {
+            text-align: center;
+            width: 100%;
+        }
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: clamp(4.5rem, 16vw, 7.5rem); 
+            font-weight: 300; 
+            line-height: 1.0;
+            background: linear-gradient(135deg, #ffffff 10%, #eae5d9 50%, #b8a080 90%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.1em; 
+            text-transform: uppercase; 
+            margin: 0;
+            padding-top: 0.1em;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
+        .hero-tagline {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 0.5em;
+            color: var(--accent);
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8); 
+            font-style: italic;
+            letter-spacing: 0.05em;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            margin: 0;
+        }
+        .hero-btn {
+            display: inline-block;
+            margin-top: 3.5rem;
+            padding: 1rem 2.5rem;
+            border: 1px solid rgba(184, 160, 128, 0.5);
+            border-radius: 100px;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-decoration: none;
+            background: rgba(184, 160, 128, 0.05);
+            box-shadow: 0 0 15px rgba(184, 160, 128, 0.1);
+        }
+
+        /* MARQUEE RUNNER */
+        .marquee-wrapper {
+            background: #0a0a0a; 
+            border-top: 1px solid rgba(230, 218, 195, 0.1); 
+            border-bottom: 1px solid rgba(230, 218, 195, 0.1);
+            padding: 1.5rem 0; 
+            position: relative; 
+            z-index: 3; 
+            overflow: hidden;
+        }
+        .marquee {
+            display: flex; 
+            white-space: nowrap; 
+            width: max-content;
+            animation: marquee 20s linear infinite;
+        }
+        .marquee span {
+            font-family: var(--font-display); 
+            font-size: 1.1rem; 
+            letter-spacing: 0.25em; 
+            color: rgba(230, 218, 195, 0.5); 
+            padding: 0 2rem; 
+            text-transform: uppercase;
+        }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* PORTFOLIO LOOKBOOK SECTION (STATIC FOR MOBILE) */
+        .projects-section {
+            position: relative; 
+            z-index: 2; 
+            background: #000; 
+            padding: 6rem 1.5rem;
+        }
+        .projects-header {
+            margin-bottom: 3.5rem;
+            font-family: var(--font-sans); 
+            font-size: 0.8rem; 
+            letter-spacing: 0.25em; 
+            color: var(--accent); 
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid rgba(230, 218, 195, 0.1);
+            padding-bottom: 3rem;
+        }
+        .project-card:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .project-title {
+            font-family: var(--font-serif); 
+            font-size: 2.5rem; 
+            font-style: italic;
+            color: #ffffff; 
+            margin: 0 0 1rem 0;
+            line-height: 1.1;
+        }
+        .project-meta {
+            font-family: var(--font-display); 
+            font-size: 0.75rem; 
+            letter-spacing: 0.15em; 
+            color: var(--accent); 
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+        .project-img-container {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid rgba(184, 160, 128, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+        .project-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%) brightness(0.85);
+        }
+
+        /* COLLAGE VIBE SECTION */
+        .vibe-collage {
+            position: relative; 
+            z-index: 2; 
+            background: #000; 
+            padding: 8rem 1.5rem;
+            text-align: center;
+            overflow: hidden;
+        }
+        .collage-center h2 {
+            font-family: var(--font-display); 
+            font-size: 2.2rem;
+            color: #fff; 
+            letter-spacing: 0.1em;
+            text-transform: uppercase; 
+            margin: 0 0 0.8rem 0;
+        }
+        .collage-center p {
+            font-family: var(--font-serif); 
+            font-size: 1.3rem; 
+            font-style: italic; 
+            color: var(--accent);
+            margin: 0 0 3rem 0;
+        }
+        .collage-mobile-img {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            border-radius: 4px;
+            filter: grayscale(100%) brightness(0.8);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* PROCESS SECTION */
+        .process-section {
+            position: relative; 
+            z-index: 2; 
+            background: #000; 
+            padding: 6rem 1.5rem 2rem 1.5rem;
+        }
+        .process-header {
+            font-family: var(--font-display); 
+            font-size: 0.8rem; 
+            letter-spacing: 0.25em;
+            color: var(--accent); 
+            text-transform: uppercase; 
+            margin-bottom: 3.5rem;
+            text-align: center;
+        }
+        .process-list {
+            border-top: 1px solid rgba(220, 205, 185, 0.15);
+        }
+        .process-row {
+            padding: 2.5rem 0;
+            border-bottom: 1px solid rgba(220, 205, 185, 0.15);
+        }
+        .process-num { 
+            font-family: var(--font-serif); 
+            font-size: 1.1rem; 
+            font-style: italic; 
+            color: var(--accent); 
+            margin-bottom: 0.5rem;
+        }
+        .process-title { 
+            font-family: var(--font-serif); 
+            font-size: 1.6rem; 
+            color: #e6dac3; 
+            margin-bottom: 0.8rem;
+        }
+        .process-desc { 
+            font-family: var(--font-sans); 
+            font-size: 0.85rem; 
+            color: rgba(230, 218, 195, 0.65); 
+            line-height: 1.7; 
+        }
+        
+        /* PRICING SECTION */
+        .pricing-section {
+            position: relative; 
+            z-index: 2; 
+            background: #000; 
+            padding: 6rem 1.5rem;
+        }
+        .pricing-header {
+            font-family: var(--font-display); 
+            font-size: 0.8rem; 
+            letter-spacing: 0.25em;
+            color: var(--accent); 
+            text-transform: uppercase; 
+            margin-bottom: 3.5rem;
+            text-align: center;
+        }
+        .pricing-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .pricing-card {
+            padding: 3rem 2rem; 
+            background: rgba(184, 160, 128, 0.02);
+            border: 1px solid rgba(184, 160, 128, 0.15);
+            border-radius: 12px;
+            display: flex; 
+            flex-direction: column;
+        }
+        .pricing-name {
+            font-family: var(--font-display); 
+            font-size: 0.75rem; 
+            letter-spacing: 0.2em;
+            color: var(--accent); 
+            text-transform: uppercase; 
+            margin-bottom: 1.5rem;
+        }
+        .pricing-price {
+            font-family: var(--font-serif); 
+            font-size: 3rem; 
+            color: #fff; 
+            line-height: 1; 
+            margin-bottom: 2rem;
+        }
+        .pricing-price span {
+            font-family: var(--font-serif); 
+            font-size: 0.9rem; 
+            font-style: italic; 
+            color: var(--accent); 
+            margin-left: 0.5rem;
+        }
+        .pricing-price.text-price { font-style: italic; font-size: 2.2rem; }
+        
+        .pricing-features {
+            list-style: none; 
+            margin-bottom: 2.5rem;
+        }
+        .pricing-features li {
+            font-family: var(--font-sans); 
+            font-size: 0.85rem; 
+            color: rgba(230, 218, 195, 0.75);
+            margin-bottom: 1.2rem; 
+            display: flex; 
+            align-items: flex-start;
+        }
+        .pricing-features li::before {
+            content: '—'; 
+            color: rgba(184, 160, 128, 0.5); 
+            margin-right: 0.8rem;
+        }
+        .pricing-note {
+            font-family: var(--font-serif); 
+            font-size: 0.85rem; 
+            font-style: italic; 
+            color: var(--accent);
+        }
+
+        /* FOOTER */
+        .footer {
+            position: relative; 
+            z-index: 2; 
+            background: radial-gradient(circle at center, rgba(184, 160, 128, 0.05) 0%, #000000 80%);
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 6rem 1.5rem 3rem 1.5rem;
+        }
+        .footer-content {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        .footer-pretitle {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+        .footer-title {
+            font-family: 'Cormorant Garamond', serif; 
+            font-weight: 300;
+            line-height: 1.3; 
+            margin-bottom: 3.5rem; 
+            color: #ffffff;
+        }
+        .footer-title .serif-accent {
+            font-size: 2.2rem;
+            font-style: italic;
+            color: var(--accent);
+        }
+        .footer-title .serif-main {
+            font-size: 2.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #ffffff;
+            display: inline-block;
+            margin: 0.4rem 0;
+        }
+        .footer-btn {
+            display: inline-block;
+            padding: 1rem 2.8rem;
+            border: 1px solid rgba(184, 160, 128, 0.5);
+            border-radius: 100px;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-decoration: none;
+            background: rgba(184, 160, 128, 0.05);
+        }
+        
+        .footer-bottom {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            border-top: 1px solid rgba(230, 218, 195, 0.1);
+            padding-top: 2rem;
+            font-family: var(--font-sans);
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            color: rgba(230, 218, 195, 0.4);
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .footer-bottom-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .footer-bottom a {
+            color: rgba(230, 218, 195, 0.4);
+            text-decoration: none;
+        }
+
+        /* MENU OVERLAY & TOGGLE */
+        .menu-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .menu-toggle-text {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #fff;
+        }
+        .menu-toggle-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 18px;
+            height: 8px;
+            position: relative;
+        }
+        .menu-toggle-icon .line {
+            display: block;
+            width: 100%;
+            height: 1px;
+            background-color: #fff;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .menu-toggle.active .menu-toggle-icon .line:noh-child(2) { display: none; }
+        .menu-toggle.active .menu-toggle-icon .line:nth-child(1) { transform: translateY(3.5px) rotate(45deg); }
+        .menu-toggle.active .menu-toggle-icon .line:nth-child(2) { transform: scaleX(0); }
+        .menu-toggle.active .menu-toggle-icon .line:nth-child(3) { transform: translateY(-3.5px) rotate(-45deg); }
+
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .menu-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .menu-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            text-align: center;
+        }
+        .menu-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-style: italic;
+            color: #fff;
+        }
+        .menu-brand span {
+            display: block;
+            font-family: var(--font-sans);
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-top: 0.5rem;
+        }
+        .menu-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            padding: 0;
+        }
+        .menu-link {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            font-family: var(--font-display);
+        }
+        .menu-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--accent);
+        }
+        .menu-details {
+            font-family: var(--font-sans);
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            color: rgba(230, 218, 195, 0.4);
+            text-transform: uppercase;
+            line-height: 2;
+        }
+        .menu-details a {
+            color: rgba(230, 218, 195, 0.4);
+            text-decoration: none;
+        }
+
+        /* -------------------------------------------------------------
+           CHATBOT UI WIDGET (VANILLA CSS)
+           ------------------------------------------------------------- */
+        
+        /* Chat Trigger Button */
+        .ce-chat-trigger {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background-color: #000000;
+            border: 1px solid var(--ce-border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .ce-chat-trigger-icon {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--ce-accent);
+            letter-spacing: 0.05em;
+        }
+
+        .ce-chat-trigger::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: var(--ce-accent);
+            box-shadow: 0 0 8px var(--ce-accent);
+            animation: cePulse 2.5s infinite;
+        }
+
+        /* Chat Window Container */
+        .ce-chat-window {
+            position: fixed;
+            bottom: 85px;
+            right: 20px;
+            width: calc(100vw - 40px);
+            max-width: 390px;
+            height: 480px;
+            max-height: calc(100vh - 120px);
+            background: rgba(10, 10, 10, 0.96);
+            border: 1px solid var(--ce-border);
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 9998;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+            opacity: 0;
+            transform: translateY(15px) scale(0.96);
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .ce-chat-window.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .ce-chat-header {
+            padding: 1.2rem;
+            border-bottom: 1px solid rgba(184, 160, 128, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(184, 160, 128, 0.02);
+        }
+
+        .ce-chat-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ce-chat-title {
+            font-family: var(--font-serif);
+            font-size: 1.05rem;
+            font-style: italic;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .ce-chat-subtitle {
+            font-family: var(--font-display);
+            font-size: 0.5rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--ce-accent);
+            margin-top: 2px;
+        }
+
+        .ce-chat-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ce-chat-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            color: var(--ce-text-muted);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ce-chat-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .ce-chat-messages {
+            flex-grow: 1;
+            padding: 1.2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            scroll-behavior: smooth;
+        }
+
+        .ce-msg {
+            display: flex;
+            flex-direction: column;
+            max-width: 85%;
+            animation: ceFadeIn 0.35s ease forwards;
+        }
+
+        .ce-msg.bot { align-self: flex-start; }
+        .ce-msg.user { align-self: flex-end; }
+
+        .ce-msg-bubble {
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.88rem;
+            line-height: 1.45;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .ce-msg.bot .ce-msg-bubble {
+            background: rgba(184, 160, 128, 0.12);
+            color: #ffffff;
+            border: 1px solid rgba(184, 160, 128, 0.2);
+            border-bottom-left-radius: 4px;
+        }
+
+        .ce-msg.user .ce-msg-bubble {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom-right-radius: 2px;
+        }
+
+        .ce-msg-action-btn {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 8px;
+            padding: 6px 12px;
+            background: #ffffff;
+            color: #000000;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .ce-chat-quick-replies {
+            padding: 0 1.2rem 0.8rem 1.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .ce-quick-btn {
+            background: rgba(184, 160, 128, 0.04);
+            color: var(--ce-accent);
+            border: 1px solid var(--ce-border);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .ce-chat-input-area {
+            padding: 0.8rem 1.2rem 1.2rem 1.2rem;
+            border-top: 1px solid rgba(184, 160, 128, 0.15);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .ce-chat-input-wrapper { flex-grow: 1; }
+
+        .ce-chat-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--ce-border);
+            color: #ffffff;
+            border-radius: 20px;
+            padding: 10px 14px;
+            font-size: 0.88rem;
+            outline: none;
+        }
+
+        .ce-send-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--ce-accent);
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000000;
+        }
+
+        .ce-send-btn svg { width: 14px; height: 14px; fill: currentColor; }
+
+        .ce-typing-indicator { display: flex; align-items: center; gap: 3px; padding: 2px 4px; }
+        .ce-typing-dot { width: 5px; height: 5px; border-radius: 50%; background-color: var(--ce-accent); opacity: 0.4; animation: ceTyping 1.4s infinite ease-in-out; }
+        .ce-typing-dot:nth-child(1) { animation-delay: 200ms; }
+        .ce-typing-dot:nth-child(2) { animation-delay: 400ms; }
+        .ce-typing-dot:nth-child(3) { animation-delay: 600ms; }
+
+        /* Splash Overlay Screen for Butter-Smooth Transition */
+        #ce-splash-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 1s ease-in-out;
+            pointer-events: auto;
+        }
+        .ce-splash-logo {
+            position: relative;
+            width: 280px;
+            display: block;
+            animation: ceSplashScaleIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transition: transform 1s ease-in-out, opacity 1s ease-in-out, filter 1s ease-in-out;
+        }
+        .ce-splash-logo img {
+            width: 100%;
+            height: auto;
+            mix-blend-mode: screen;
+            filter: contrast(1.25);
+        }
+        .ce-logo-fade-out {
+            opacity: 0 !important;
+            transform: scale(1.35) !important;
+            filter: blur(15px) !important;
+        }
+        .ce-splash-fade-out {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+        @keyframes ceSplashScaleIn {
+            0% { transform: scale(0.85); opacity: 0; filter: blur(10px); }
+            100% { transform: scale(1); opacity: 1; filter: blur(0px); }
+        }
+
+        /* Preloaded Main Page Content Container */
+        #ce-main-content {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        #ce-main-content.ce-content-fade-in {
+            opacity: 1;
+        }
+
+        /* BRAND STORY SECTION (COMPACT & EDITORIAL) */
+        .story-section {
+            position: relative;
+            z-index: 2;
+            background: transparent;
+            padding: 6.5rem 5vw;
+            border-bottom: 1px solid rgba(230, 218, 195, 0.1);
+            overflow: hidden;
+        }
+        /* Reduce top padding of pricing section when following the story section */
+        .story-section + .pricing-section {
+            padding-top: 6.5rem;
+        }
+        .story-watermark {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--font-serif);
+            font-size: clamp(12rem, 24vw, 24rem);
+            font-style: italic;
+            font-weight: 300;
+            color: rgba(230, 218, 195, 0.015); /* Extremely subtle 1.5% opacity cream-gold */
+            pointer-events: none;
+            z-index: 1;
+            user-select: none;
+        }
+        .story-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .story-header-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            border-bottom: 1px solid rgba(184, 160, 128, 0.25);
+            padding-bottom: 0.8rem;
+            width: max-content;
+            margin: 0 auto 2.5rem auto;
+        }
+        .story-header {
+            font-family: var(--font-serif);
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            font-weight: 300;
+            color: var(--accent);
+            margin-bottom: 0;
+            letter-spacing: 0.05em;
+        }
+        .story-star-accent {
+            color: var(--accent);
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: -2px;
+        }
+        .story-text-block {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            width: 100%;
+        }
+        .story-lead {
+            font-family: var(--font-serif);
+            font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+            font-weight: 300;
+            line-height: 1.65;
+            color: #ffffff;
+            letter-spacing: -0.01em;
+        }
+        .story-lead span {
+            font-style: italic;
+            color: var(--accent);
+        }
+        .story-subtext {
+            font-family: var(--font-sans);
+            font-size: clamp(1rem, 1.6vw, 1.12rem);
+            line-height: 1.85;
+            color: rgba(230, 218, 195, 0.65);
+            font-weight: 300;
+        }
+        
+        /* Reveal animation styles */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .story-section {
+                padding: 4.5rem 6vw;
+            }
+            .story-watermark {
+                font-size: 15rem;
+                opacity: 0.015;
+            }
+            .story-header-wrapper {
+                flex-direction: row;
+                align-items: center;
+                gap: 1rem;
+                width: max-content;
+                margin-bottom: 2rem;
+            }
+            .story-star-accent {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="ce-splash-overlay">
+        <div class="ce-splash-logo">
+            <img src="logo_ce_needle.png" alt="CÉ Studios">
+        </div>
+    </div>
+
+    <!-- Main content container that starts at opacity 0 -->
+    <div id="ce-main-content">
+
+    <!-- NAVIGATION -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <img src="logo_ce_monogram.png" alt="CÉ Monogram">
+        </div>
+        <div class="nav-right">
+            <div class="menu-toggle" id="menu-toggle">
+                <span class="menu-toggle-text">Menü</span>
+                <div class="menu-toggle-icon">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- FULLSCREEN MENU OVERLAY -->
+    <div class="menu-overlay" id="menu-overlay">
+        <div class="menu-container">
+            <h2 class="menu-brand">CÉ Studios<span>Digitale Handwerkskunst</span></h2>
+            <ul class="menu-list">
+                <li><a href="#projects" class="menu-link"><span class="menu-num">i.</span> Expertise</a></li>
+                <li><a href="#vorgehen" class="menu-link"><span class="menu-num">ii.</span> Vorgehen</a></li>
+                <li><a href="#konditionen" class="menu-link"><span class="menu-num">iii.</span> Konditionen</a></li>
+                <li><a href="contact.html" class="menu-link"><span class="menu-num">iv.</span> Kontakt</a></li>
+            </ul>
+            <div class="menu-details">
+                service@ce-studios.de<br>
+                <a href="impressum.html">Impressum</a> &nbsp;·&nbsp; <a href="datenschutz.html">Datenschutz</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">CÉ</h1>
+            <div class="hero-tagline">Studios</div>
+            <div class="hero-subtitle">High-End Web-Artistry</div>
+            <a href="#projects" class="hero-btn">Expertise &nbsp;➔</a>
+        </div>
+    </header>
+
+    <!-- MARQUEE RUNNER -->
+    <div class="marquee-wrapper">
+        <div class="marquee">
+            <span>HIGH-END WEBDESIGN</span>
+            <span>EDITORIAL DESIGN</span>
+            <span>FLUID MOTION</span>
+            <span>CUSTOM CODE</span>
+            <span>HIGH-END WEBDESIGN</span>
+            <span>EDITORIAL DESIGN</span>
+            <span>FLUID MOTION</span>
+            <span>CUSTOM CODE</span>
+        </div>
+    </div>
+
+    <!-- PORTFOLIO LOOKBOOK SECTION -->
+    <section class="projects-section" id="projects">
+        <div class="projects-header">I. Expertise</div>
+        
+        <div class="projects-list">
+            <!-- Project 1 -->
+            <div class="project-card">
+                <h2 class="project-title">Editorial Design</h2>
+                <div class="project-meta">Edle Typografie-Layouts / 01</div>
+                <div class="project-img-container">
+                    <img src="vibe_silk_texture.png" alt="Editorial Design Texture">
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-card">
+                <h2 class="project-title">Fluid Motion</h2>
+                <div class="project-meta">Interaktionen & Custom Code / 02</div>
+                <div class="project-img-container">
+                    <img src="vibe_chrome_texture.png" alt="Fluid Motion Texture">
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="project-card">
+                <h2 class="project-title">3D & WebGL</h2>
+                <div class="project-meta">Immersive Welten / 03</div>
+                <div class="project-img-container">
+                    <img src="vibe_tech_texture.png" alt="3D & WebGL Texture">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COLLAGE VIBE SECTION -->
+    <section class="vibe-collage">
+        <div class="collage-center">
+            <h2>Die Ästhetik</h2>
+            <p>Puristisch. Kinoreif. Kompromisslos.</p>
+        </div>
+        <img src="vibe_ysl.png" alt="YSL Vibe" class="collage-mobile-img">
+    </section>
+
+    <!-- PROCESS SECTION -->
+    <section class="process-section" id="vorgehen">
+        <div class="process-header">II. Vorgehen</div>
+        
+        <div class="process-list">
+            <div class="process-row">
+                <div class="process-num">i.</div>
+                <div class="process-title">Gespräch</div>
+                <div class="process-desc">Wir hören zu. Was macht dein Geschäft besonders, wer sind deine Kunden, wohin willst du? Einfach per Nachricht oder Mail — unkompliziert.</div>
+            </div>
+            <div class="process-row">
+                <div class="process-num">ii.</div>
+                <div class="process-title">Entwurf</div>
+                <div class="process-desc">Du bekommst eine vollständige, klickbare Demo deiner neuen Website zu sehen, bevor du dich entscheidest. Erst überzeugen, dann beauftragen.</div>
+            </div>
+            <div class="process-row">
+                <div class="process-num">iii.</div>
+                <div class="process-title">Umsetzung</div>
+                <div class="process-desc">Innerhalb von sieben Tagen steht deine fertige Website — mit echten, edlen Inhalten, für Mobilgeräte handoptimiert.</div>
+            </div>
+            <div class="process-row">
+                <div class="process-num">iv.</div>
+                <div class="process-title">Übergabe</div>
+                <div class="process-desc">Alles gehört dir: der Code, das Hosting. Du bekommst eine kurze Einweisung. Keine monatlichen Abonnements, volle Unabhängigkeit.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BRAND STORY SECTION -->
+    <section class="story-section reveal-on-scroll" id="brand-story">
+        <div class="story-watermark">CÉ</div>
+        <div class="story-container">
+            <div class="story-header-wrapper">
+                <span class="story-star-accent">✦</span>
+                <h2 class="story-header">Der Name</h2>
+                <span class="story-star-accent">✦</span>
+            </div>
+            <div class="story-text-block">
+                <p class="story-lead">
+                    CÉ steht für <span>»Cyril et Étoiles«</span> — Cyril und die Sterne. Der Sternenhimmel auf diesen Seiten ist kein Zufall: Für mich ist jedes Projekt ein eigener Stern, den ich zum Leuchten bringe.
+                </p>
+                <p class="story-subtext">
+                    Hinter CÉ Studios steht kein großes Team, sondern ein Mensch mit kompromisslosem Blick fürs Detail. Keine Templates, keine Massenware — handgemachtes Design, in das ich mich einarbeite, als wäre dein Projekt mein eigenes.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section class="pricing-section" id="konditionen">
+        <div class="pricing-header">III. Konditionen</div>
+        
+        <div class="pricing-grid">
+            <!-- Tier 1 -->
+            <div class="pricing-card">
+                <div class="pricing-name">Essential</div>
+                <div class="pricing-price">1250<span>€ einmalig</span></div>
+                <ul class="pricing-features">
+                    <li>One-Page-Website</li>
+                    <li>Mobil optimiert</li>
+                    <li>Bis zu fünf Sektionen</li>
+                    <li>Hosting-Einrichtung inklusive</li>
+                    <li>Eine Korrekturrunde</li>
+                </ul>
+                <div class="pricing-note">Der ehrliche Einstieg.</div>
+            </div>
+            
+            <!-- Tier 2 -->
+            <div class="pricing-card">
+                <div class="pricing-name">Signature</div>
+                <div class="pricing-price">1500<span>€ einmalig</span></div>
+                <ul class="pricing-features">
+                    <li>Bis zu fünf Unterseiten</li>
+                    <li>Maßgeschneiderte Animationen</li>
+                    <li>Editorial Design</li>
+                    <li>Drei Korrekturrunden</li>
+                    <li>30 Tage Begleitung</li>
+                </ul>
+                <div class="pricing-note">Die meistgewählte Stufe.</div>
+            </div>
+            
+            <!-- Tier 3 -->
+            <div class="pricing-card">
+                <div class="pricing-name">Maßgeschneidertes Design</div>
+                <div class="pricing-price text-price">Auf Anfrage</div>
+                <ul class="pricing-features">
+                    <li>Vollständige Markenidentität</li>
+                    <li>Unbegrenzter Umfang</li>
+                    <li>Individuelle Interaktionen</li>
+                    <li>90 Tage Begleitung</li>
+                    <li>Persönliche Beratung</li>
+                </ul>
+                <div class="pricing-note">Für Marken mit Ambition.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-pretitle">Bereit für etwas Neues?</div>
+            <h2 class="footer-title">
+                <span class="serif-accent">Lass uns gemeinsam</span><br>
+                <span class="serif-main">digitale Eleganz</span><br>
+                <span class="serif-accent">erschaffen.</span>
+            </h2>
+            <a href="contact.html" class="footer-btn">Schreib uns &nbsp;➔</a>
+        </div>
+        <div class="footer-bottom">
+            <div>CÉ Studios © 2026</div>
+            <div class="footer-bottom-links">
+                <a href="#projects">Expertise</a> &nbsp;·&nbsp;
+                <a href="#vorgehen">Vorgehen</a> &nbsp;·&nbsp;
+                <a href="contact.html">Kontakt</a> &nbsp;·&nbsp;
+                <a href="impressum.html">Impressum</a> &nbsp;·&nbsp;
+                <a href="datenschutz.html">Datenschutz</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- -----------------------------------------------------------------
+         CHATBOT HTML WIDGET
+         ----------------------------------------------------------------- -->
+    
+    <!-- Floating Trigger -->
+    <div class="ce-chat-trigger" id="ceChatTrigger" onclick="toggleCeChat()">
+        <span class="ce-chat-trigger-icon">CÉ</span>
+    </div>
+
+    <!-- Chat Window -->
+    <div class="ce-chat-window" id="ceChatWindow">
+        <!-- Header -->
+        <div class="ce-chat-header">
+            <div class="ce-chat-brand">
+                <h3 class="ce-chat-title">CÉ Concierge</h3>
+                <span class="ce-chat-subtitle">Digitale Handwerkskunst</span>
+            </div>
+            
+            <div class="ce-chat-controls">
+                <button class="ce-chat-btn" id="ceSoundBtn" onclick="toggleCeSound()" title="Sound einschalten">
+                    <svg id="ceSoundMutedIcon" viewBox="0 0 24 24">
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.03c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                    </svg>
+                    <svg id="ceSoundOnIcon" viewBox="0 0 24 24" style="display: none;">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                </button>
+                
+                <button class="ce-chat-btn" onclick="toggleCeChat()" title="Chat schließen">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Messages Area -->
+        <div class="ce-chat-messages" id="ceChatMessages"></div>
+
+        <!-- Quick Replies -->
+        <div class="ce-chat-quick-replies" id="ceQuickReplies"></div>
+
+        <!-- Input Area -->
+        <div class="ce-chat-input-area">
+            <div class="ce-chat-input-wrapper">
+                <input type="text" class="ce-chat-input" id="ceChatInput" placeholder="Schreibe eine Nachricht..." onkeydown="handleCeInputKey(event)">
+            </div>
+            <button class="ce-send-btn" onclick="sendCeUserMessage()" title="Nachricht senden">
+                <svg viewBox="0 0 24 24">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+    </div> <!-- end ce-main-content -->
+
+    <!-- Hidden Easter Egg: Tiny subtle Christian cross (Latin cross shape, light cream color for screen contrast) -->
+    <div id="ce-secret-cross" class="interactive" style="position: fixed; bottom: 20px; left: 20px; width: 9px; height: 13px; opacity: 0.18; z-index: 99999; cursor: pointer; transition: opacity 0.3s; pointer-events: auto;" onmouseenter="this.style.opacity='0.8'; document.body.classList.add('hover-secret-cross');" onmouseleave="this.style.opacity='0.18'; document.body.classList.remove('hover-secret-cross');" title="CÉ" onclick="console.log('CÉ Studios Easter Egg')">
+        <div style="position: absolute; top: 4px; left: 0; width: 9px; height: 1px; background-color: #e6dac3;"></div>
+        <div style="position: absolute; top: 0; left: 4px; width: 1px; height: 13px; background-color: #e6dac3;"></div>
+    </div>
+
+    <!-- GSAP (Used only for clean entrance animations) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <script>
+        // SEAMLESS SPLASH TRANSITION FOR MOBILE
+        if (window.ceSkipIntro) {
+            const mainContent = document.getElementById('ce-main-content');
+            if (mainContent) mainContent.classList.add('ce-content-fade-in');
+        } else {
+            // Unified crossfade transition after logo entry scale-in completes (2.0s)
+            setTimeout(() => {
+                const logo = document.querySelector('.ce-splash-logo');
+                if (logo) logo.classList.add('ce-logo-fade-out');
+
+                const splash = document.getElementById('ce-splash-overlay');
+                if (splash) splash.classList.add('ce-splash-fade-out');
+
+                const mainContent = document.getElementById('ce-main-content');
+                if (mainContent) mainContent.classList.add('ce-content-fade-in');
+
+                // Start GSAP hero entrance animations at the same time
+                gsap.from('.hero-title', { y: 30, opacity: 0, duration: 1.2, ease: "power3.out" });
+                gsap.from('.hero-tagline', { letterSpacing: "0.2em", opacity: 0, duration: 1.4, ease: "power2.out", delay: 0.15 });
+                gsap.from('.hero-subtitle', { y: 20, opacity: 0, duration: 1.2, ease: "power2.out", delay: 0.3 });
+                gsap.from('.hero-btn', { y: 15, opacity: 0, duration: 1.0, ease: "power2.out", delay: 0.45 });
+            }, 2000);
+        }
+
+        // Toggle scrolled class on body
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                document.body.classList.add('scrolled');
+            } else {
+                document.body.classList.remove('scrolled');
+            }
+        });
+
+        // MOBILE HAMBURGER MENU INTERACTION
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        function toggleMenu() {
+            const isOpen = menuToggle.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMenu();
+            });
+        });
+
+        // Reveal Brand Story on scroll
+        const storySection = document.getElementById('brand-story');
+        if (storySection) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        storySection.classList.add('revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            observer.observe(storySection);
+        }
+
+        // -------------------------------------------------------------
+        // CHATBOT LOGIC (VANILLA JS)
+        // -------------------------------------------------------------
+        let ceChatOpen = false;
+        let ceSoundMuted = true;
+        let ceChatInitialized = false;
+
+        let ceChatTrigger = null;
+        let ceChatWindow = null;
+        let ceChatMessages = null;
+        let ceQuickReplies = null;
+        let ceChatInput = null;
+        let ceSoundMutedIcon = null;
+        let ceSoundOnIcon = null;
+        let ceSoundBtn = null;
+
+        function ceInitDomReferences() {
+            if (!ceChatTrigger) ceChatTrigger = document.getElementById('ceChatTrigger');
+            if (!ceChatWindow) ceChatWindow = document.getElementById('ceChatWindow');
+            if (!ceChatMessages) ceChatMessages = document.getElementById('ceChatMessages');
+            if (!ceQuickReplies) ceQuickReplies = document.getElementById('ceQuickReplies');
+            if (!ceChatInput) ceChatInput = document.getElementById('ceChatInput');
+            if (!ceSoundMutedIcon) ceSoundMutedIcon = document.getElementById('ceSoundMutedIcon');
+            if (!ceSoundOnIcon) ceSoundOnIcon = document.getElementById('ceSoundOnIcon');
+            if (!ceSoundBtn) ceSoundBtn = document.getElementById('ceSoundBtn');
+        }
+
+        // Initialize DOM references immediately if DOM is loaded, otherwise on DOMContentLoaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', ceInitDomReferences);
+        } else {
+            ceInitDomReferences();
+        }
+
+        // Helper function to reliably scroll chat panel to the bottom (double scroll ensures layout adjusts first)
+        function scrollToBottom() {
+            ceInitDomReferences();
+            setTimeout(() => {
+                if (ceChatMessages) ceChatMessages.scrollTop = ceChatMessages.scrollHeight;
+            }, 50);
+            setTimeout(() => {
+                if (ceChatMessages) ceChatMessages.scrollTop = ceChatMessages.scrollHeight;
+            }, 150);
+        }
+
+        function toggleCeChat() {
+            ceInitDomReferences();
+            ceChatOpen = !ceChatOpen;
+            if (ceChatOpen) {
+                if (ceChatWindow) ceChatWindow.classList.add('active');
+                if (!ceChatInitialized) {
+                    initializeCeChat();
+                }
+                scrollToBottom();
+            } else {
+                if (ceChatWindow) ceChatWindow.classList.remove('active');
+            }
+        }
+
+        function toggleCeSound() {
+            ceInitDomReferences();
+            ceSoundMuted = !ceSoundMuted;
+            if (ceSoundMuted) {
+                if (ceSoundMutedIcon) ceSoundMutedIcon.style.display = 'block';
+                if (ceSoundOnIcon) ceSoundOnIcon.style.display = 'none';
+                if (ceSoundBtn) ceSoundBtn.setAttribute('title', 'Sound einschalten');
+            } else {
+                if (ceSoundMutedIcon) ceSoundMutedIcon.style.display = 'none';
+                if (ceSoundOnIcon) ceSoundOnIcon.style.display = 'block';
+                if (ceSoundBtn) ceSoundBtn.setAttribute('title', 'Sound stummschalten');
+                playCeChime('outgoing');
+            }
+        }
+
+        function playCeChime(type) {
+            if (ceSoundMuted) return;
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                const audioCtx = new AudioContext();
+                if (!audioCtx) return;
+
+                if (type === 'incoming') {
+                    const osc1 = audioCtx.createOscillator();
+                    const gain1 = audioCtx.createGain();
+                    osc1.connect(gain1);
+                    gain1.connect(audioCtx.destination);
+                    osc1.type = 'sine';
+                    osc1.frequency.setValueAtTime(659.25, audioCtx.currentTime); // E5
+                    gain1.gain.setValueAtTime(0.04, audioCtx.currentTime);
+                    gain1.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+                    osc1.start();
+                    osc1.stop(audioCtx.currentTime + 0.4);
+
+                    setTimeout(() => {
+                        const osc2 = audioCtx.createOscillator();
+                        const gain2 = audioCtx.createGain();
+                        osc2.connect(gain2);
+                        gain2.connect(audioCtx.destination);
+                        osc2.type = 'sine';
+                        osc2.frequency.setValueAtTime(783.99, audioCtx.currentTime); // G5
+                        gain2.gain.setValueAtTime(0.04, audioCtx.currentTime);
+                        gain2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+                        osc2.start();
+                        osc2.stop(audioCtx.currentTime + 0.5);
+                    }, 90);
+                } else if (type === 'outgoing') {
+                    const osc = audioCtx.createOscillator();
+                    const gainNode = audioCtx.createGain();
+                    osc.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+                    gainNode.gain.setValueAtTime(0.03, audioCtx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.25);
+                }
+            } catch (error) {
+                console.log('Web Audio error.');
+            }
+        }
+
+        function appendCeMessage(sender, text, hasAction = false, actionText = "", actionUrl = "") {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `ce-msg ${sender}`;
+            
+            let bubbleHtml = `<div class="ce-msg-bubble">${text}`;
+            if (hasAction && actionText && actionUrl) {
+                bubbleHtml += `<br><a href="${actionUrl}" class="ce-msg-action-btn">${actionText}</a>`;
+            }
+            bubbleHtml += `</div>`;
+            
+            msgDiv.innerHTML = bubbleHtml;
+            ceChatMessages.appendChild(msgDiv);
+            scrollToBottom();
+        }
+
+        let typingIndicatorDiv = null;
+        function showCeTypingIndicator() {
+            if (typingIndicatorDiv) return;
+
+            typingIndicatorDiv = document.createElement('div');
+            typingIndicatorDiv.className = 'ce-msg bot';
+            typingIndicatorDiv.innerHTML = `
+                <div class="ce-msg-bubble" style="padding: 10px 14px;">
+                    <div class="ce-typing-indicator">
+                        <div class="ce-typing-dot"></div>
+                        <div class="ce-typing-dot"></div>
+                        <div class="ce-typing-dot"></div>
+                    </div>
+                </div>
+            `;
+            ceChatMessages.appendChild(typingIndicatorDiv);
+            scrollToBottom();
+        }
+
+        function removeCeTypingIndicator() {
+            if (typingIndicatorDiv) {
+                typingIndicatorDiv.remove();
+                typingIndicatorDiv = null;
+            }
+        }
+
+        // 3 primary relevant replies
+        const primaryQuickReplies = [
+            "Preise & Pakete",
+            "Ablauf & Dauer",
+            "Projekt anfragen"
+        ];
+
+        function setCeQuickReplies(replies) {
+            ceQuickReplies.innerHTML = '';
+            replies.forEach(reply => {
+                const btn = document.createElement('button');
+                btn.className = 'ce-quick-btn';
+                btn.textContent = reply;
+                btn.onclick = () => handleCeQuickReplyClick(reply);
+                ceQuickReplies.appendChild(btn);
+            });
+            scrollToBottom();
+        }
+
+        function initializeCeChat() {
+            ceChatInitialized = true;
+            showCeTypingIndicator();
+
+            const hours = new Date().getHours();
+            let greeting = "Schön, dass du da bist. Ich bin dein CÉ Concierge — frag mich gern alles.";
+            
+            if (hours >= 5 && hours < 11) {
+                greeting = "Guten Morgen. Ich bin dein CÉ Concierge — wie kann ich dir helfen?";
+            } else if (hours >= 11 && hours < 18) {
+                greeting = "Schön, dass du da bist. Ich bin dein CÉ Concierge — frag mich gern alles.";
+            } else if (hours >= 18 && hours < 23) {
+                greeting = "Guten Abend. Ich bin dein CÉ Concierge — wie kann ich behilflich sein?";
+            } else {
+                greeting = "Auch spät noch wach? Ich bin dein CÉ Concierge — frag mich gern.";
+            }
+
+            setTimeout(() => {
+                removeCeTypingIndicator();
+                appendCeMessage('bot', greeting);
+                playCeChime('incoming');
+                setCeQuickReplies(primaryQuickReplies);
+            }, 1000);
+        }
+
+        function handleCeQuickReplyClick(replyText) {
+            appendCeMessage('user', replyText);
+            playCeChime('outgoing');
+            setCeQuickReplies([]);
+            respondToCeQuery(replyText);
+        }
+
+        function sendCeUserMessage() {
+            const queryText = ceChatInput.value.trim();
+            if (!queryText) return;
+
+            ceChatInput.value = '';
+            appendCeMessage('user', queryText);
+            playCeChime('outgoing');
+            setCeQuickReplies([]);
+            respondToCeQuery(queryText);
+        }
+
+        function handleCeInputKey(event) {
+            if (event.key === 'Enter') {
+                sendCeUserMessage();
+            }
+        }
+
+        const ceKnowledgeBase = [
+            {
+                id: "why",
+                keywords: ["warum", "besonders", "abheben", "unterschied", "anders", "besser", "vorteil", "alleinstellungsmerkmal"],
+                text: "Die meisten Websites sehen aus wie Baukästen. Meine nicht. Bei CÉ Studios bekommst du editoriales Design auf dem Niveau von Modemagazinen — maßgeschneidert, nicht aus der Schablone. Du siehst eine vollständige Demo, bevor du dich entscheidest. Und am Ende gehört alles dir: der Code, das Hosting, keine monatlichen Fesseln."
+            },
+            {
+                id: "pricing",
+                keywords: ["preis", "kosten", "paket", "teuer", "günstig", "was kostet", "preise", "kondition", "konditionen", "essential", "signature"],
+                text: "Drei Stufen: Essential für 1.250 € (One-Page, bis 5 Sektionen), Signature für 1.500 € (bis 5 Unterseiten, maßgeschneiderte Animationen, Editorial Design) und Maßgeschneidertes Design auf Anfrage (komplette Markenidentität). Alles einmalig — keine Abos. Möchtest du Details zu einer Stufe?"
+            },
+            {
+                id: "process",
+                keywords: ["ablauf", "dauer", "lange", "prozess", "wie läuft", "vorgehen", "wann fertig", "schritte", "tage", "zeit"],
+                text: "Vier Schritte: Gespräch, Entwurf, Umsetzung, Übergabe. Du siehst erst eine vollständige Demo, bevor du beauftragst. Nach der Beauftragung steht deine Website innerhalb von sieben Tagen — mit echten Inhalten."
+            },
+            {
+                id: "aesthetic",
+                keywords: ["design", "technik", "animation", "3d", "ästhetik", "aussehen", "stil", "look", "code", "webgl"],
+                text: "Puristisch. Kinoreif. Kompromisslos. Ich arbeite mit Editorial-Layouts, flüssigen Interaktionen, Custom Code und bei Bedarf immersiven 3D-Welten. Jede Seite wird von Hand gestaltet — kein Template, kein Baukasten."
+            },
+            {
+                id: "target",
+                keywords: ["für wen", "geeignet", "branche", "wer", "kunden", "zielgruppe", "zielgruppen"],
+                text: "Für Marken und Geschäfte, die sich vom Mittelmaß abheben wollen — Restaurants, Studios, lokale Unternehmen mit Anspruch. Wenn dir Ästhetik wichtig ist, sind wir ein gutes Match."
+            },
+            {
+                id: "hosting",
+                keywords: ["hosting", "laufende", "monatlich", "wartung", "folgekosten", "abo", "kosten", "gebühren"],
+                text: "Keine laufenden Kosten, keine Abhängigkeit. Nach der Übergabe gehört dir alles — der Code und das Hosting. Du bekommst eine kurze Einweisung und bist frei."
+            },
+            {
+                id: "revisions",
+                keywords: ["korrektur", "änderung", "überarbeiten", "anpassen", "revision", "korrekturen", "änderungen"],
+                text: "Im Essential-Paket ist eine Korrekturrunde enthalten, im Signature drei. Bei maßgeschneiderten Projekten begleite ich dich bis zu 90 Tage. Du bekommst also ein Ergebnis, mit dem du wirklich zufrieden bist."
+            },
+            {
+                id: "contact",
+                keywords: ["kontakt", "anfrage", "anfragen", "termin", "buchen", "erreichen", "melden", "mail", "schreiben", "telefon"],
+                text: "Gern. Schreib mir direkt an service@ce-studios.de oder über das Kontaktformular — ich melde mich zeitnah.",
+                hasAction: true,
+                actionText: "Jetzt anfragen ➔",
+                actionUrl: "contact.html"
+            },
+            {
+                id: "location",
+                keywords: ["wo", "standort", "sitz", "stadt", "wiesbaden", "ort"],
+                text: "CÉ Studios sitzt in Wiesbaden — arbeite aber ortsunabhängig mit Kunden zusammen."
+            },
+            {
+                id: "experience",
+                keywords: ["erfahrung", "referenz", "portfolio", "beispiele", "schon gemacht", "referenzen", "projekte"],
+                text: "Schau dir die Ästhetik direkt hier auf der Seite an — sie spricht für sich. Für konkrete Projektbeispiele melde dich gern direkt, dann zeige ich dir passende Arbeiten."
+            }
+        ];
+
+        function respondToCeQuery(userQuery) {
+            showCeTypingIndicator();
+            const q = userQuery.toLowerCase().trim();
+
+            setTimeout(() => {
+                removeCeTypingIndicator();
+                
+                let botText = "";
+                let hasAction = false;
+                let actionText = "";
+                let actionUrl = "";
+                let matchedCategory = null;
+                let nextReplies = primaryQuickReplies;
+
+                for (const entry of ceKnowledgeBase) {
+                    const match = entry.keywords.some(keyword => q.includes(keyword));
+                    if (match) {
+                        matchedCategory = entry;
+                        break;
+                    }
+                }
+
+                if (matchedCategory) {
+                    botText = matchedCategory.text;
+                    if (matchedCategory.hasAction) {
+                        hasAction = true;
+                        actionText = matchedCategory.actionText;
+                        actionUrl = matchedCategory.actionUrl;
+                    }
+                    
+                    if (matchedCategory.id === "pricing") {
+                        nextReplies = ["Ablauf & Dauer", "Projekt anfragen"];
+                    } else if (matchedCategory.id === "process") {
+                        nextReplies = ["Preise & Pakete", "Projekt anfragen"];
+                    } else if (matchedCategory.id === "contact") {
+                        nextReplies = ["Preise & Pakete", "Ablauf & Dauer"];
+                    } else {
+                        nextReplies = ["Preise & Pakete", "Ablauf & Dauer", "Projekt anfragen"];
+                    }
+                } else {
+                    botText = "Das beantworte ich am liebsten persönlich. Schreib mir direkt über das Kontaktformular oder an service@ce-studios.de — dann finden wir gemeinsam die beste Lösung.";
+                    hasAction = true;
+                    actionText = "Zum Kontaktformular ➔";
+                    actionUrl = "contact.html";
+                    nextReplies = ["Preise & Pakete", "Ablauf & Dauer"];
+                }
+
+                appendCeMessage('bot', botText, hasAction, actionText, actionUrl);
+                playCeChime('incoming');
+                setCeQuickReplies(nextReplies);
+            }, 1200);
+        }
+    </script>
+</body>
+</html>

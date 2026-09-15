@@ -1,0 +1,2419 @@
+<!DOCTYPE html>
+<html lang="de" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CÉ Studios — Websites für ihr Immobilienunternehmen</title>
+    
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta name="theme-color" content="#FFFFFF">
+
+    <!-- Open Graph / Link Preview -->
+    <meta property="og:title" content="CÉ Studios — Websites für ihr Immobilienunternehmen">
+    <meta property="og:description" content="Ihre Objekte verdienen mehr als eine Liste.">
+    <meta property="og:image" content="og-bild.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script>
+        // Progressive Enhancement: add js-enabled class immediately
+        document.documentElement.className = 'js-enabled';
+    </script>
+    
+    <style>
+        /* =========================================================================
+           LOKALE SCHRIFTARTEN (DSGVO-KONFORM)
+           ========================================================================= */
+        @font-face {
+            font-family: 'Archivo';
+            font-style: normal;
+            font-weight: 400;
+            src: url('fonts/archivo-400.ttf') format('truetype');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Archivo';
+            font-style: normal;
+            font-weight: 500;
+            src: url('fonts/archivo-500.ttf') format('truetype');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Bodoni Moda';
+            font-style: normal;
+            font-weight: 400;
+            src: url('fonts/bodoni-moda-400.ttf') format('truetype');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Bodoni Moda';
+            font-style: normal;
+            font-weight: 600;
+            src: url('fonts/bodoni-moda-600.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        /* =========================================================================
+           THEME & RESET (STRICKTE FARBPALETTE)
+           ========================================================================= */
+        :root {
+            --bg: #FFFFFF;
+            --bg-secondary: #FAF9F7;
+            --text: #0A0A0A;
+            --text-secondary: #767370;
+            --line: #E8E6E2;
+            --font-display: 'Bodoni Moda', serif;
+            --font-sans: 'Archivo', sans-serif;
+            --max-width: 1440px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Smooth scroll margin-top offset for fixed navigation bar */
+        [id] {
+            scroll-margin-top: 100px;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Keyboard Focus Style */
+        *:focus-visible {
+            outline: 2px solid var(--text);
+            outline-offset: 4px;
+        }
+
+        /* =========================================================================
+           TYPOGRAFIE & BASIS-ELEMENTE
+           ========================================================================= */
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            font-weight: 400;
+            color: var(--text);
+            max-width: 65ch;
+        }
+
+        a {
+            color: var(--text);
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+
+        /* Underline effect from left to right */
+        a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: currentColor;
+            transform-origin: bottom left;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        a:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Labels / Kickers */
+        .label {
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--text-secondary);
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-separator {
+            border: none;
+            border-top: 1px solid var(--line);
+            margin: 0 auto;
+            max-width: var(--max-width);
+            width: 100%;
+        }
+
+        /* =========================================================================
+           LAYOUT UTILITIES
+           ========================================================================= */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 60px;
+            width: 100%;
+        }
+
+        .section-spacing {
+            padding: 140px 0;
+        }
+
+        /* 12-Column Grid Setup */
+        .grid-12 {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 32px;
+        }
+
+        /* =========================================================================
+           KOPFZEILE (HEADER)
+           ========================================================================= */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 30px 0;
+            color: #FFFFFF;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, padding 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .header.scrolled {
+            background-color: var(--bg);
+            border-bottom-color: var(--line);
+            color: var(--text);
+            padding: 20px 0;
+        }
+
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo-img {
+            height: 30px;
+            width: auto;
+            display: block;
+            filter: brightness(0) invert(1);
+            transition: filter 0.3s ease, opacity 0.3s ease;
+        }
+
+        .brand-logo:hover .brand-logo-img {
+            opacity: 0.7;
+        }
+
+        .header.scrolled .brand-logo-img {
+            filter: none;
+        }
+
+        @media (max-width: 900px) {
+            .brand-logo-img {
+                height: 24px;
+            }
+        }
+
+        .header-menu {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .header-link {
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: inherit;
+            padding: 5px 0;
+        }
+
+        .header-btn {
+            background-color: #FFFFFF;
+            color: var(--text);
+            border: 1px solid transparent;
+            padding: 12px 24px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        .header-btn::after {
+            display: none;
+        }
+
+        .header.scrolled .header-btn {
+            background-color: var(--text);
+            color: #FFFFFF;
+            border-color: var(--text);
+        }
+
+        .header.scrolled .header-btn:hover {
+            background-color: transparent;
+            color: var(--text);
+        }
+
+        /* =========================================================================
+           1 · HERO Sektion & Line-Animations (Progressive Enhancement)
+           ========================================================================= */
+        .hero {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            height: 100svh;
+            background-color: var(--text);
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 100px;
+        }
+
+        .hero-bg-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.85;
+        }
+
+        .hero-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.6) 0%, rgba(10, 10, 10, 0) 35%);
+            pointer-events: none;
+        }
+
+        .hero-container {
+            position: relative;
+            z-index: 10;
+            color: #FFFFFF;
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 60px;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 32px;
+        }
+
+        .hero-text-container {
+            grid-column: 1 / 10;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .hero-text-container .label {
+            color: #FFFFFF;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 7vw, 6.5rem);
+            margin-bottom: 2rem;
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: #FFFFFF;
+            margin-bottom: 2.5rem;
+            max-width: 58ch;
+        }
+
+        .hero-link {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            padding-bottom: 4px;
+        }
+
+        .hero-link::after {
+            display: none;
+        }
+
+        .hero-link:hover {
+            border-bottom-color: #FFFFFF;
+        }
+
+        /* Scroll-Hinweis */
+        .scroll-hint {
+            position: absolute;
+            bottom: 55px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            pointer-events: none;
+            z-index: 10;
+            color: #FFFFFF;
+        }
+
+        .scroll-hint-label {
+            font-size: 10px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .scroll-hint-line {
+            display: none;
+        }
+
+        /* =========================================================================
+           SCROLL-LINIE (ORIENTIERT AN GUEST-HOUSE-ONE-PAGER.WEBFLOW.IO)
+           ========================================================================= */
+        .line-drawing-wrapper {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 50;
+            mix-blend-mode: difference;
+        }
+
+        .line-drawing {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        #scrollSvg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Line-Reveal Animationen */
+        .line-wrapper {
+            display: block;
+            overflow: hidden;
+        }
+        
+        .line-content {
+            display: block;
+        }
+        
+        .js-enabled .line-content {
+            transform: translateY(100%);
+            transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .js-enabled .hero-title.start-anim .line-wrapper:nth-child(1) .line-content {
+            transform: translateY(0);
+            transition-delay: 0s;
+        }
+        
+        .js-enabled .hero-title.start-anim .line-wrapper:nth-child(2) .line-content {
+            transform: translateY(0);
+            transition-delay: 0.15s;
+        }
+        
+        .js-enabled .hero-subtitle,
+        .js-enabled .hero-link {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .js-enabled .hero-title.start-anim ~ .hero-subtitle {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.4s;
+        }
+        
+        .js-enabled .hero-title.start-anim ~ .hero-link {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.55s;
+        }
+
+        /* =========================================================================
+           2 · WARUM Sektion
+           ========================================================================= */
+        .why-title {
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            line-height: 1.15;
+            grid-column: 1 / 7;
+        }
+
+        .why-content {
+            grid-column: 7 / 13;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            justify-content: center;
+        }
+
+        .why-text-1 {
+            font-size: 1.1rem;
+        }
+
+        .why-text-2 {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* =========================================================================
+           RANDLOSE BILDER (FULL-WIDTH SEPARATORS)
+           ========================================================================= */
+        .full-width-separator-img {
+            width: 100vw;
+            height: 60vh;
+            min-height: 400px;
+            overflow: hidden;
+            background-color: var(--bg-secondary);
+        }
+
+        .full-width-separator-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* =========================================================================
+           3 · LEISTUNGEN Sektion
+           ========================================================================= */
+        .services-section {
+            position: relative;
+        }
+
+        .services-left-col {
+            grid-column: 1 / 5;
+        }
+
+        .services-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.1;
+        }
+
+        .services-scroll-right {
+            grid-column: 5 / 13;
+            display: flex;
+            flex-direction: column;
+            gap: 120px;
+        }
+
+        .service-block-new {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .service-img-wrapper {
+            aspect-ratio: 3 / 2;
+            overflow: hidden;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--line);
+        }
+
+        .service-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .service-text-wrapper {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 24px;
+        }
+
+        .service-num {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            color: var(--text-secondary);
+            line-height: 1;
+        }
+
+        .service-content-box h3 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .service-desc {
+            font-size: 1.05rem;
+            color: var(--text);
+        }
+
+        /* Leistungsumfang (Separate Section) */
+        .scope-section {
+            padding-bottom: 80px; /* reduced space */
+        }
+
+        .scope-header {
+            grid-column: 1 / 13;
+            margin-bottom: 40px;
+        }
+
+        .scope-title {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+        }
+
+        .scope-content {
+            grid-column: 1 / 13;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .scope-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .scope-list li {
+            font-size: 15px;
+            color: var(--text);
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .scope-list li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--text-secondary);
+        }
+
+        /* =========================================================================
+           LAUFBAND (MARQUEE)
+           ========================================================================= */
+        .marquee-wrapper {
+            width: 100vw;
+            overflow: hidden;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            padding: 30px 0;
+            background-color: var(--bg);
+        }
+
+        .marquee {
+            display: flex;
+            white-space: nowrap;
+            animation: marquee-scroll 25s linear infinite;
+        }
+
+        .marquee span {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            text-transform: uppercase;
+            padding-right: 4rem;
+        }
+
+        @keyframes marquee-scroll {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+
+        /* =========================================================================
+           4 · REFERENZEN Sektion
+           ========================================================================= */
+        .works-header {
+            grid-column: 1 / 13;
+        }
+
+        .works-grid {
+            grid-column: 1 / 13;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .work-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Versetztes asymmetrisches Raster */
+        .work-item-1 {
+            grid-column: 1 / 7;
+            margin-top: 80px; /* higher offset */
+        }
+
+        .work-item-2 {
+            grid-column: 7 / 13;
+        }
+
+        .work-img-wrapper {
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--line);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .work-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .work-img-wrapper:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.03);
+        }
+
+        .work-placeholder-badge {
+            position: absolute;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            background-color: var(--text);
+            color: #FFFFFF;
+            padding: 8px 16px;
+            z-index: 10;
+            top: 20px;
+            left: 20px;
+        }
+
+        .work-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .work-category {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* =========================================================================
+           ZITAT Sektion
+           ========================================================================= */
+        .quote-section {
+            background-color: var(--bg-secondary);
+            padding: 120px 0;
+            text-align: left;
+        }
+
+        .quote-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        .quote-text {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.15;
+            font-style: italic;
+            color: var(--text);
+        }
+
+        /* =========================================================================
+           5 · ÜBER MICH Sektion
+           ========================================================================= */
+        .about-portrait {
+            grid-column: 1 / 6;
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--line);
+        }
+
+        .portrait-placeholder-box {
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed var(--line);
+        }
+
+        .portrait-placeholder-box span {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .about-text {
+            grid-column: 7 / 13;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .about-title {
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            margin-bottom: 2.5rem;
+        }
+
+        .about-text p {
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* =========================================================================
+           6 · ABLAUF Sektion
+           ========================================================================= */
+        .process-header {
+            grid-column: 1 / 13;
+            margin-bottom: 60px;
+        }
+
+        .process-grid {
+            grid-column: 1 / 13;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .process-step {
+            display: flex;
+            flex-direction: column;
+            padding-right: 30px;
+            position: relative;
+        }
+
+        /* Vertical separation lines between columns */
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: var(--line);
+        }
+
+        .process-step-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .process-step-desc {
+            font-size: 15px;
+            color: var(--text);
+        }
+
+        /* =========================================================================
+           HÄUFIGE FRAGEN (FAQ) Sektion
+           ========================================================================= */
+        .faq-header {
+            grid-column: 1 / 13;
+            margin-bottom: 40px;
+        }
+
+        .faq-accordion {
+            grid-column: 1 / 13;
+            display: flex;
+            flex-direction: column;
+        }
+
+        details {
+            border-bottom: 1px solid var(--line);
+            padding: 24px 0;
+        }
+
+        details:first-of-type {
+            border-top: 1px solid var(--line);
+        }
+
+        summary {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 500;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            outline: none;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* Custom Cross Indicator */
+        summary::after {
+            content: "+";
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            transition: transform 0.3s ease;
+        }
+
+        details[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            margin-top: 16px;
+            font-size: 15px;
+            color: var(--text-secondary);
+            max-width: 80ch;
+        }
+
+        /* =========================================================================
+           7 · PREISE Sektion
+           ========================================================================= */
+        .pricing-header {
+            grid-column: 1 / 13;
+            margin-bottom: 60px;
+        }
+
+        .pricing-list {
+            grid-column: 1 / 13;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .pricing-item-new {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            align-items: center;
+            border-bottom: 1px solid var(--line);
+            padding: 30px 0;
+        }
+
+        .pricing-item-new:first-of-type {
+            border-top: 1px solid var(--line);
+        }
+
+        .pricing-service-new {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+        }
+
+        .pricing-service-new span {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: block;
+            margin-top: 6px;
+            font-weight: 400;
+        }
+
+        .pricing-price-new {
+            font-family: var(--font-sans);
+            font-weight: 500;
+            font-size: 1.25rem;
+            text-align: right;
+            padding-right: 40px;
+        }
+
+        .pricing-action {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .pricing-btn {
+            background-color: var(--text);
+            color: #FFFFFF;
+            border: 1px solid var(--text);
+            padding: 12px 30px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .pricing-btn::after {
+            display: none;
+        }
+
+        .pricing-btn:hover {
+            background-color: transparent;
+            color: var(--text);
+        }
+
+        .pricing-footer-note {
+            grid-column: 1 / 13;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* =========================================================================
+           8 · KONTAKT Sektion
+           ========================================================================= */
+        .contact-section {
+            padding-bottom: 140px;
+        }
+
+        .contact-container {
+            grid-column: 1 / 11;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .contact-title {
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            margin-bottom: 2rem;
+            line-height: 1.1;
+        }
+
+        .contact-desc {
+            font-size: 1.15rem;
+            margin-bottom: 3.5rem;
+            color: var(--text);
+            max-width: 60ch;
+        }
+
+        .contact-mail-link {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 400;
+            border-bottom: 1px solid var(--text);
+            padding-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .contact-mail-link::after {
+            display: none; /* Hide default underline hover effect */
+        }
+
+        /* =========================================================================
+           9 · FUSSZEILE (FOOTER)
+           ========================================================================= */
+        .footer {
+            padding: 80px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 450px;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .footer-tagline {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .footer-link {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .footer-link:hover {
+            color: var(--text);
+        }
+
+        /* =========================================================================
+           MOBILE FIXED BAR
+           ========================================================================= */
+        .mobile-fixed-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid var(--line);
+            padding: 16px 20px;
+            z-index: 1000;
+            display: none; /* Hidden by default, managed by JS on scroll */
+            justify-content: center;
+        }
+
+        .mobile-fixed-btn {
+            background-color: var(--text);
+            color: #FFFFFF;
+            width: 100%;
+            text-align: center;
+            padding: 14px 0;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: 1px solid var(--text);
+        }
+
+        .mobile-fixed-btn::after {
+            display: none;
+        }
+
+        /* =========================================================================
+           ANIMATION INITIAL STATES (GSAP/JS REVEAL FALLBACK)
+           ========================================================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+        }
+
+        /* =========================================================================
+           MOBILE VIEWS
+           ========================================================================= */
+        /* =========================================================================
+           MOBILE VIEWS (FÜR SMARTPHONES OPTIMIERT - DESKTOP UNBERÜHRT)
+           ========================================================================= */
+        @media (max-width: 900px) {
+            .section-spacing {
+                padding: 60px 0;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            /* Stack Grids */
+            .grid-12 {
+                display: flex;
+                flex-direction: column;
+                gap: 36px;
+            }
+
+            /* Linie auf Smartphone ausblenden, um vollfächigen Text nicht zu durchschneiden */
+            .line-drawing-wrapper {
+                display: none !important;
+            }
+
+            /* Header: Gläserne Leiste auf Mobile mit sauberen Kontrasten */
+            .header {
+                padding: 16px 0;
+                background-color: transparent;
+                color: #FFFFFF;
+                border-bottom: 1px solid transparent;
+                position: fixed;
+            }
+
+            .header.scrolled {
+                background-color: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border-bottom: 1px solid var(--line);
+                color: var(--text);
+                padding: 12px 0;
+            }
+
+            .header:not(.scrolled) .brand-logo-img {
+                filter: brightness(0) invert(1);
+            }
+
+            .header.scrolled .brand-logo-img {
+                filter: none;
+            }
+
+            .header-links {
+                display: none;
+            }
+
+            .header-btn {
+                padding: 8px 14px;
+                font-size: 11px;
+                letter-spacing: 0.08em;
+            }
+
+            .header:not(.scrolled) .header-btn {
+                border-color: rgba(255, 255, 255, 0.6);
+                color: #FFFFFF;
+            }
+
+            /* Hero: Perfekt abgestimmt auf Smartphone-Displays */
+            .hero {
+                min-height: 100svh;
+                height: auto;
+                padding-top: 100px;
+                padding-bottom: 75px;
+                display: flex;
+                align-items: flex-end;
+            }
+
+            .hero-container {
+                padding: 0 20px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .hero-text-container {
+                width: 100%;
+            }
+
+            .hero-title {
+                font-size: clamp(1.85rem, 7.2vw, 2.6rem);
+                line-height: 1.12;
+                letter-spacing: -0.02em;
+                margin-bottom: 1.25rem;
+                word-break: normal;
+                overflow-wrap: break-word;
+            }
+
+            .hero-title .line-wrapper {
+                overflow: visible;
+                display: block;
+            }
+
+            .hero-subtitle {
+                font-size: 0.98rem;
+                line-height: 1.6;
+                margin-bottom: 1.75rem;
+                max-width: 100%;
+            }
+
+            .hero-link {
+                width: 100%;
+                text-align: center;
+                padding: 16px 20px;
+                font-size: 12px;
+                display: inline-block;
+            }
+
+            .scroll-hint {
+                bottom: 18px;
+            }
+
+            .scroll-hint-label {
+                font-size: 9px;
+            }
+
+            /* Warum Sektion */
+            .why-title {
+                font-size: clamp(1.5rem, 5.5vw, 2.1rem);
+                line-height: 1.2;
+                margin-bottom: 16px;
+            }
+
+            .why-content {
+                gap: 16px;
+            }
+
+            .why-text-1, .why-text-2 {
+                font-size: 0.98rem;
+                line-height: 1.6;
+            }
+
+            /* Trennbilder */
+            .full-width-separator-img {
+                height: 42vh;
+                min-height: 240px;
+            }
+
+            /* Leistungen Sektion */
+            .services-left-col {
+                width: 100%;
+            }
+
+            .services-title {
+                font-size: clamp(1.8rem, 6.5vw, 2.5rem);
+            }
+
+            .services-scroll-right {
+                width: 100%;
+                gap: 48px;
+            }
+
+            .service-block-new {
+                gap: 20px;
+            }
+
+            .service-img-wrapper {
+                aspect-ratio: 16 / 10;
+            }
+
+            .service-text-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .service-num {
+                font-size: 1.5rem;
+            }
+
+            .service-content-box h3 {
+                font-size: 1.45rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .service-desc {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+
+            /* Leistungsumfang: Sauberes 1-spaltiges Stapeln */
+            .scope-section {
+                padding-bottom: 50px;
+            }
+
+            .scope-header {
+                margin-bottom: 24px;
+            }
+
+            .scope-title {
+                font-size: clamp(1.45rem, 5vw, 2rem);
+            }
+
+            .scope-content {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .scope-list {
+                gap: 14px;
+            }
+
+            .scope-list li {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            /* Laufband (Marquee) */
+            .marquee-wrapper {
+                padding: 20px 0;
+            }
+
+            .marquee span {
+                font-size: 1.25rem;
+                padding-right: 2.5rem;
+            }
+
+            /* Referenzen */
+            .works-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 36px;
+                margin-top: 24px;
+            }
+
+            .work-item-1 {
+                margin-top: 0;
+            }
+
+            .work-img-wrapper {
+                aspect-ratio: 16 / 11;
+                margin-bottom: 16px;
+            }
+
+            .work-img-wrapper img {
+                filter: grayscale(15%);
+            }
+
+            .work-title {
+                font-size: 1.35rem;
+            }
+
+            .work-category {
+                font-size: 13px;
+            }
+
+            /* Zitat */
+            .quote-section {
+                padding: 60px 0;
+            }
+
+            .quote-container {
+                padding: 0 20px;
+            }
+
+            .quote-text {
+                font-size: clamp(1.35rem, 5.5vw, 1.85rem);
+                line-height: 1.3;
+            }
+
+            /* Über mich */
+            .about-portrait {
+                width: 100%;
+                aspect-ratio: 4 / 5;
+            }
+
+            .about-title {
+                font-size: clamp(1.7rem, 6vw, 2.3rem);
+                margin-bottom: 1.25rem;
+            }
+
+            .about-text p {
+                font-size: 0.98rem;
+                line-height: 1.6;
+                margin-bottom: 1.25rem;
+            }
+
+            /* Ablauf */
+            .process-header {
+                margin-bottom: 32px;
+            }
+
+            .process-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 28px;
+            }
+
+            .process-step {
+                padding-right: 0;
+                padding-bottom: 20px;
+                border-bottom: 1px solid var(--line);
+            }
+
+            .process-step:not(:last-child)::after {
+                display: none;
+            }
+
+            .process-step:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+
+            .process-step-title {
+                font-size: 1.4rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .process-step-desc {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+
+            /* FAQ */
+            .faq-header {
+                margin-bottom: 24px;
+            }
+
+            .faq-header h2 {
+                font-size: clamp(1.7rem, 6vw, 2.3rem);
+            }
+
+            summary {
+                font-size: 1.08rem;
+                padding: 16px 0;
+                min-height: 48px;
+            }
+
+            .faq-answer {
+                font-size: 14px;
+                line-height: 1.6;
+                padding-bottom: 10px;
+            }
+
+            /* Kontakt */
+            .contact-section {
+                padding-bottom: 80px;
+            }
+
+            .contact-container {
+                width: 100%;
+            }
+
+            .contact-title {
+                font-size: clamp(1.8rem, 6.5vw, 2.6rem);
+                line-height: 1.15;
+                margin-bottom: 1.25rem;
+            }
+
+            .contact-desc {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 2.5rem;
+            }
+
+            .contact-mail-link {
+                font-size: clamp(1.2rem, 5.8vw, 1.85rem);
+                word-break: break-word;
+                max-width: 100%;
+                display: inline-block;
+            }
+
+            /* Footer */
+            .footer {
+                padding: 48px 0 85px;
+            }
+
+            .footer-grid {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 28px;
+            }
+
+            .footer-right {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            /* Mobile Bottom Bar (Fixed) */
+            .mobile-bottom-bar {
+                width: 100%;
+                left: 0;
+                right: 0;
+                padding: 14px 20px max(14px, env(safe-area-inset-bottom));
+            }
+        }
+
+        /* Respect accessibility preferences */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- KOPFZEILE -->
+    <header class="header" id="main-header">
+        <div class="container header-nav">
+            <a href="index.html" class="brand-logo" aria-label="CÉ Studios Startseite">
+                <img src="logo_transparent.png" alt="CÉ Studios" class="brand-logo-img">
+            </a>
+            <div class="header-menu">
+                <nav class="header-links">
+                    <a href="#leistungen" class="header-link">Leistungen</a>
+                    <a href="#referenzen" class="header-link">Referenzen</a>
+                    <a href="#ablauf" class="header-link">Ablauf</a>
+                </nav>
+                <a href="contact.html" class="header-btn">Projekt anfragen</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- LINIE WIE BEI GUEST-HOUSE-ONE-PAGER.WEBFLOW.IO -->
+    <div class="line-drawing-wrapper" aria-hidden="true">
+        <div class="line-drawing">
+            <svg id="scrollSvg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
+                <!-- Hauptlinie (präzise, hardwarebeschleunigt via mix-blend-mode) -->
+                <path id="svgPathMain" d="" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </div>
+    </div>
+
+    <main>
+        <!-- 1 · HERO SEKTION -->
+        <section class="hero">
+            <img src="platzhalter_01.jpg" alt="Modernistische Architektur einer Luxusvilla in Cannes als Beispiel für anspruchsvolles Immobilien-Webdesign" class="hero-bg-img" loading="eager">
+            <div class="hero-gradient"></div>
+            <div class="hero-container">
+                <div class="hero-text-container">
+                    <span class="label">CÉ STUDIOS · WIESBADEN</span>
+                    <h1 class="hero-title line-anim-title">
+                        <span class="line-wrapper"><span class="line-content">Websites für ihr</span></span>
+                        <span class="line-wrapper"><span class="line-content">Immobilienunternehmen</span></span>
+                    </h1>
+                    <p class="hero-subtitle">Ihre Objekte verdienen mehr als eine Liste. Ich gestalte Websites für Maklerbüros, Bauträger und Projektentwickler — vom ersten Eindruck bis zur Objektdarstellung.</p>
+                    <a href="contact.html" class="hero-link" aria-label="Kostenlose Einschätzung Ihrer Seite anfordern">Kostenlose Einschätzung Ihrer Seite</a>
+                </div>
+            </div>
+            <div class="scroll-hint">
+                <span class="scroll-hint-label">SCROLLEN</span>
+            </div>
+        </section>
+
+        <!-- 2 · WARUM SEKTION -->
+        <section class="why section-spacing container">
+            <div class="grid-12">
+                <h2 class="why-title reveal">Die meisten Maklerseiten sind älter als der Markt, in dem sie verkaufen</h2>
+                <div class="why-content reveal">
+                    <p class="why-text-1">Ein Eigentümer entscheidet heute in weniger als zehn Sekunden, wem er sein Objekt zutraut — und er entscheidet es am Handy. Funktioniert die Seite dort nicht, ruft er beim nächsten Büro an. Das ist kein Geschmacksthema, das sind verlorene Aufträge.</p>
+                    <p class="why-text-2">Genau da setze ich an.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- RANDLOSES BILD (TRENNUNG) -->
+        <div class="full-width-separator-img reveal">
+            <img src="platzhalter_02.jpg" alt="Moderne minimalistische Hausfassade aus Sichtbeton" loading="lazy">
+        </div>
+
+        <!-- 3 · LEISTUNGEN SEKTION -->
+        <section class="services-section section-spacing container" id="leistungen">
+            <div class="grid-12">
+                <div class="services-left-col">
+                    <span class="label">Leistungen</span>
+                    <h2 class="services-title">Wie ich Sie präsentiere</h2>
+                </div>
+                
+                <div class="services-scroll-right">
+                    <!-- Leistung 01 -->
+                    <div class="service-block-new reveal">
+                        <div class="service-img-wrapper">
+                            <img src="platzhalter_04.jpg" alt="Exklusives Webdesign auf einem Mobilgerät" loading="lazy">
+                        </div>
+                        <div class="service-text-wrapper">
+                            <div class="service-num">01</div>
+                            <div class="service-content-box">
+                                <h3>Website</h3>
+                                <p class="service-desc">Eine Seite, die zeigt, wofür Ihr Büro steht. Zuerst fürs Handy gebaut, weil dort entschieden wird. Mit klarer Objektübersicht, sichtbarem Ansprechpartner und einem Weg zur Kontaktaufnahme, der keine drei Klicks braucht.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Leistung 02 -->
+                    <div class="service-block-new reveal">
+                        <div class="service-img-wrapper">
+                            <img src="platzhalter_05.jpg" alt="Virtueller Immobilien-Rundgang auf einem Tablet" loading="lazy">
+                        </div>
+                        <div class="service-text-wrapper">
+                            <div class="service-num">02</div>
+                            <div class="service-content-box">
+                                <h3>Objektpräsentation</h3>
+                                <p class="service-desc">Eigene Seiten für Ihre wichtigsten Objekte, mit eingebettetem Rundgang. Der Link, den Sie Interessenten schicken — statt einer PDF-Datei im Anhang.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Leistung 03 -->
+                    <div class="service-block-new reveal">
+                        <div class="service-img-wrapper">
+                            <img src="platzhalter_06.jpg" alt="Professionelle Architektur-Objektfotos" loading="lazy">
+                        </div>
+                        <div class="service-text-wrapper">
+                            <div class="service-num">03</div>
+                            <div class="service-content-box">
+                                <h3>Bild und Text</h3>
+                                <p class="service-desc">Objektfotos professionell aufbereitet, Inseratstexte, die zu Ende gelesen werden. Auch einzeln buchbar, ganz ohne Website.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leistungsumfang (Zweispaltige separate Sektion) -->
+        <section class="scope-section container reveal">
+            <hr class="section-separator" style="margin-bottom: 60px;">
+            <div class="grid-12">
+                <div class="scope-header">
+                    <span class="label">Umfang</span>
+                    <h3 class="scope-title">Was in jedem Projekt enthalten ist</h3>
+                </div>
+                <div class="scope-content">
+                    <ul class="scope-list">
+                        <li>Individuelles Design, kein Baukasten</li>
+                        <li>Objektübersicht, die Sie selbst pflegen</li>
+                        <li>Für Smartphone, Tablet und Desktop gebaut</li>
+                        <li>Kontaktanfragen direkt in Ihr Postfach</li>
+                    </ul>
+                    <ul class="scope-list">
+                        <li>Impressum und Datenschutz sauber eingebunden</li>
+                        <li>Schnelle Ladezeiten ohne externe Dienste</li>
+                        <li>Zwei Korrekturrunden inklusive</li>
+                        <li>Einweisung, damit Sie danach selbst weiterarbeiten können</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- LAUFBAND (MARQUEE) -->
+        <div class="marquee-wrapper reveal">
+            <div class="marquee">
+                <span>Immobilien luxuriös inszenieren — Exklusivität ausstrahlen — Kompromisslose Ästhetik — </span>
+                <span>Immobilien luxuriös inszenieren — Exklusivität ausstrahlen — Kompromisslose Ästhetik — </span>
+            </div>
+        </div>
+
+        <!-- 4 · REFERENZEN SEKTION -->
+        <section class="works section-spacing container" id="referenzen">
+            <div class="grid-12">
+                <div class="works-header reveal">
+                    <span class="label">Referenzen</span>
+                </div>
+                
+                <div class="works-grid">
+                    <!-- Referenz 1 -->
+                    <article class="work-item work-item-1 reveal">
+                        <div class="work-img-wrapper">
+                            <span class="work-placeholder-badge">Bild folgt</span>
+                            <img src="platzhalter_07.jpg" alt="Referenzprojekt Arcadis Vermarktungsexposé Platzhalter" loading="lazy">
+                        </div>
+                        <h3 class="work-title">Arcadis</h3>
+                        <p class="work-category">Vermarktungsexposé</p>
+                    </article>
+
+                    <!-- Referenz 2 -->
+                    <article class="work-item work-item-2 reveal">
+                        <div class="work-img-wrapper">
+                            <span class="work-placeholder-badge">Bild folgt</span>
+                            <img src="platzhalter_08.jpg" alt="Referenzprojekt DATA CAMPUS Leonhard Euler Projektexposé Platzhalter" loading="lazy">
+                        </div>
+                        <h3 class="work-title">DATA CAMPUS Leonhard Euler</h3>
+                        <p class="work-category">Projektexposé</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ZITAT SEKTION -->
+        <section class="quote-section reveal">
+            <div class="quote-container">
+                <blockquote class="quote-text">
+                    „Ein Objekt wird zweimal verkauft: das erste Mal im Kopf des Käufers, das zweite Mal beim Notar.“
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- 5 · ÜBER MICH SEKTION -->
+        <section class="about section-spacing container">
+            <div class="grid-12">
+                <div class="about-portrait reveal">
+                    <div class="portrait-placeholder-box">
+                        <span>Porträt folgt</span>
+                    </div>
+                </div>
+                <div class="about-text reveal">
+                    <span class="label">Hintergrund</span>
+                    <h2 class="about-title">Ich bin Cyril Portmann</h2>
+                    <p>Immobilienkaufmann in Ausbildung, seit fünf Jahren Gestalter.</p>
+                    <p>Das ist die ungewöhnliche Kombination: Ich weiß, was in ein Exposé gehört, was hinter einem Energieausweis steckt und wie ein Verkaufsprozess wirklich abläuft — und ich kann es gleichzeitig so aussehen lassen, wie Ihr Objekt es verdient.</p>
+                    <p>Die meisten Agenturen können das eine. Die meisten Fotografen das andere. Deshalb müssen Sie sonst zwei Leute beauftragen und beiden erklären, was Sie eigentlich brauchen.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-separator">
+
+        <!-- 6 · ABLAUF SEKTION -->
+        <section class="process section-spacing container" id="ablauf">
+            <div class="grid-12">
+                <div class="process-header reveal">
+                    <span class="label">Vorgehensweise</span>
+                </div>
+                
+                <div class="process-grid">
+                    <!-- Schritt 01 -->
+                    <div class="process-step reveal">
+                        <span class="process-num">01</span>
+                        <h3 class="process-step-title">Einschätzung</h3>
+                        <p class="process-step-desc">Ich sehe mir Ihre aktuelle Seite an und sage Ihnen konkret, was funktioniert und was nicht. Kostenlos und unverbindlich — auch dann, wenn Sie danach nicht mit mir zusammenarbeiten.</p>
+                    </div>
+
+                    <!-- Schritt 02 -->
+                    <div class="process-step reveal">
+                        <span class="process-num">02</span>
+                        <h3 class="process-step-title">Entwurf</h3>
+                        <p class="process-step-desc">Sie bekommen einen Entwurf der Startseite, bevor irgendetwas gebaut wird. Erst wenn der sitzt, geht es weiter.</p>
+                    </div>
+
+                    <!-- Schritt 03 -->
+                    <div class="process-step reveal">
+                        <span class="process-num">03</span>
+                        <h3 class="process-step-title">Umsetzung</h3>
+                        <p class="process-step-desc">Zwei bis vier Wochen, je nach Umfang. Danach pflegen Sie Ihre Inhalte selbst — ich zeige Ihnen wie.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RANDLOSES BILD (VOR KONTAKT) -->
+        <div class="full-width-separator-img reveal">
+            <img src="platzhalter_03.jpg" alt="Innenraum einer modernistischen Luxusvilla mit Stadtblick" loading="lazy">
+        </div>
+
+        <!-- 7 · HÄUFIGE FRAGEN (FAQ) SEKTION -->
+        <section class="faq section-spacing container">
+            <div class="grid-12">
+                <div class="faq-header reveal">
+                    <span class="label">FAQ</span>
+                    <h2>Häufige Fragen</h2>
+                </div>
+                
+                <div class="faq-accordion reveal">
+                    <!-- Frage 1 -->
+                    <details>
+                        <summary>Wie lange dauert die Umsetzung einer Website?</summary>
+                        <div class="faq-answer">
+                            Die Umsetzung dauert in der Regel zwei bis vier Wochen, je nach Umfang und gewünschten Funktionen (wie z. B. Schnittstellenanbindungen).
+                        </div>
+                    </details>
+
+                    <!-- Frage 2 -->
+                    <details>
+                        <summary>Binden Sie bestehende Maklersoftware wie onOffice oder Propstack an?</summary>
+                        <div class="faq-answer">
+                            Ja. Ihre Objekte werden vollautomatisch über eine standardisierte OpenImmo-Schnittstelle oder direkte REST-APIs synchronisiert, sodass Sie Objektdaten nur an einer einzigen Stelle pflegen müssen.
+                        </div>
+                    </details>
+
+                    <!-- Frage 3 -->
+                    <details>
+                        <summary>Ist die Website rechtssicher (DSGVO)?</summary>
+                        <div class="faq-answer">
+                            Absolut. Ich verzichte auf externe Schriftarten (Google Fonts werden lokal gehostet), betreibe datenschutzkonformes Hosting und binde ein rechtssicheres Impressum und eine Datenschutzerklärung ein.
+                        </div>
+                    </details>
+
+                    <!-- Frage 4 -->
+                    <details>
+                        <summary>Gibt es laufende monatliche Kosten oder eine Mindestlaufzeit?</summary>
+                        <div class="faq-answer">
+                            Nein. Bei CÉ Studios zahlen Sie einen einmaligen Festpreis. Der Code und das Hosting gehören vollständig Ihnen. Es gibt keine monatlichen Fesseln oder versteckten Gebühren.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-separator">
+
+        <!-- 9 · KONTAKT SEKTION -->
+        <section class="contact-section section-spacing container">
+            <div class="grid-12">
+                <div class="contact-container reveal">
+                    <span class="label">Anfrage</span>
+                    <h2 class="contact-title">Schicken Sie mir den Link zu Ihrer Seite</h2>
+                    <p class="contact-desc">Sie bekommen innerhalb von zwei Werktagen eine ehrliche Einschätzung. Schriftlich, drei Punkte, keine Verkaufspräsentation. Wenn Ihre Seite gut ist, sage ich Ihnen das auch.</p>
+                    <a href="mailto:service@ce-studios.de" class="contact-mail-link" aria-label="E-Mail senden an service@ce-studios.de">service@ce-studios.de</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FUSSZEILE -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <img src="logo_transparent.png" alt="CÉ Studios" style="height: 24px; width: auto; display: block; filter: invert(47%) sepia(5%) saturate(163%) hue-rotate(328deg) brightness(97%) contrast(85%);">
+                </div>
+                <div class="footer-tagline">Aus Wiesbaden, für Immobilienunternehmen in ganz Deutschland</div>
+            </div>
+            <div class="footer-right">
+                <a href="impressum.html" class="footer-link">Impressum</a>
+                <a href="datenschutz.html" class="footer-link">Datenschutz</a>
+                <a href="mailto:service@ce-studios.de" class="footer-link">service@ce-studios.de</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MOBILE FIXED BOTTOM BAR -->
+    <div class="mobile-fixed-bar" id="mobile-bottom-bar">
+        <a href="contact.html" class="mobile-fixed-btn">Projekt anfragen</a>
+    </div>
+
+    <!-- =========================================================================
+       DYNAMIC DSGVO PRELOADER SCREEN & SCRIPTS
+       ========================================================================= */ -->
+    <script>
+        (function() {
+            // Force scroll to top instantly and disable browser scroll restoration
+            if (history.scrollRestoration) {
+                history.scrollRestoration = 'manual';
+            }
+            window.scrollTo(0, 0);
+
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            // Intercept logo click immediately to allow reload & replay
+            document.addEventListener('DOMContentLoaded', () => {
+                const logo = document.querySelector('.brand-logo');
+                if (logo) {
+                    logo.addEventListener('click', (e) => {
+                        // Intercept only standard left clicks without modifiers
+                        if (e.button === 0 && !e.ctrlKey && !e.shiftKey && !e.metaKey && !e.altKey) {
+                            e.preventDefault();
+                            sessionStorage.removeItem('ce_intro_gesehen');
+                            window.location.href = logo.getAttribute('href') || 'index.html';
+                        }
+                    });
+                }
+            });
+
+            // Instantly block scroll before DOMContentLoaded
+            document.documentElement.style.overflow = 'hidden';
+                
+                // Append Preloader styling
+                const style = document.createElement('style');
+                style.id = 'preloader-styles';
+                style.innerHTML = `
+                    .preloader-overlay {
+                        position: fixed;
+                        top: 0; left: 0; width: 100vw; height: 100vh;
+                        background-color: #FFFFFF; color: #0A0A0A;
+                        z-index: 99999; display: flex; flex-direction: column;
+                        justify-content: center; align-items: center;
+                        clip-path: inset(0 0 0 0);
+                        transition: clip-path 900ms cubic-bezier(.76,0,.24,1);
+                    }
+                    .preloader-overlay.hide-curtain {
+                        clip-path: inset(0 0 100% 0);
+                    }
+                    .preloader-overlay.instant-hide {
+                        display: none !important;
+                    }
+                    .preloader-overlay.fallback-active {
+                        animation: preloader-fallback-fade 4s forwards;
+                    }
+                    @keyframes preloader-fallback-fade {
+                        0% { clip-path: inset(0 0 0 0); }
+                        90% { clip-path: inset(0 0 0 0); }
+                        100% { clip-path: inset(0 0 100% 0); visibility: hidden; pointer-events: none; }
+                    }
+                    .preloader-logo-container {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin-bottom: 20px;
+                    }
+                    .loader-masked-logo {
+                        -webkit-mask-image: 
+                            linear-gradient(to right, transparent 36px, #000 36px),
+                            conic-gradient(from 120deg at 40px 40px, #000 0%, #000 var(--progress, 0%), transparent var(--progress, 0%), transparent 100%);
+                        -webkit-mask-composite: source-over;
+                        mask-image: 
+                            linear-gradient(to right, transparent 36px, #000 36px),
+                            conic-gradient(from 120deg at 40px 40px, #000 0%, #000 var(--progress, 0%), transparent var(--progress, 0%), transparent 100%);
+                        mask-composite: add;
+                    }
+                    .preloader-counter {
+                        position: absolute; bottom: 40px; right: 40px;
+                        font-family: 'Archivo', sans-serif; font-size: 11px;
+                        font-weight: 500; text-transform: uppercase;
+                        letter-spacing: 0.18em; color: #767370;
+                        font-variant-numeric: tabular-nums;
+                    }
+                    .preloader-loading-text {
+                        position: absolute; bottom: 40px; left: 40px;
+                        font-family: 'Archivo', sans-serif; font-size: 11px;
+                        font-weight: 500; text-transform: uppercase;
+                        letter-spacing: 0.18em; color: #767370;
+                    }
+                `;
+                document.head.appendChild(style);
+
+                // Dynamically inject Preloader DOM
+                document.addEventListener('DOMContentLoaded', () => {
+                    // Set body scroll block as well
+                    document.body.style.overflow = 'hidden';
+
+                    const overlay = document.createElement('div');
+                    overlay.className = 'preloader-overlay fallback-active';
+                    overlay.innerHTML = `
+                        <div class="preloader-logo-container" style="position: relative; width: 189px; height: 80px; display: block; margin: 0 auto 2rem;">
+                            <!-- Faint PNG background placeholder -->
+                            <img src="logo_transparent.png" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.12; display: block; pointer-events: none; user-select: none;">
+                            
+                            <!-- Animating PNG logo on top with conic gradient mask -->
+                            <img src="logo_transparent.png" id="loader-png-logo" class="loader-masked-logo" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; pointer-events: none; user-select: none; --progress: 0%;">
+                        </div>
+                        <div class="preloader-loading-text">LADEN</div>
+                        <div class="preloader-counter" id="preloader-count">000</div>
+                    `;
+                    document.body.appendChild(overlay);
+
+                    // Preload above the fold + next two local images
+                    const preloadList = [
+                        'platzhalter_01.jpg',
+                        'platzhalter_02.jpg',
+                        'platzhalter_04.jpg'
+                    ];
+
+                    let loaded = 0;
+                    const total = preloadList.length;
+                    const startTime = Date.now();
+                    const minDuration = 1100; // 1.1s minimum to ensure smooth transition view
+                    const maxDuration = 4000;
+                    let unveiled = false;
+                    let currentPct = 0;
+                    let targetPct = 0;
+
+                    const updateProgress = () => {
+                        targetPct = Math.round((loaded / total) * 100);
+                    };
+
+                    // Buttery smooth progress ticker
+                    const ticker = setInterval(() => {
+                        if (currentPct < targetPct) {
+                            currentPct += 1;
+                        } else if (loaded === total && currentPct < 100) {
+                            currentPct += 1;
+                        }
+                        
+                        const count = document.getElementById('preloader-count');
+                        const logo = document.getElementById('loader-png-logo');
+                        
+                        if (count) count.textContent = String(currentPct).padStart(3, '0');
+                        if (logo) {
+                            logo.style.setProperty('--progress', currentPct + '%');
+                        }
+
+                        if (currentPct >= 100) {
+                            clearInterval(ticker);
+                            const elapsed = Date.now() - startTime;
+                            const remaining = Math.max(0, minDuration - elapsed);
+                            setTimeout(triggerUnveil, remaining);
+                        }
+                    }, 11); // Control loading speed precisely for visual impact
+
+                    const triggerUnveil = () => {
+                        if (unveiled) return;
+                        unveiled = true;
+
+                        sessionStorage.setItem('ce_intro_gesehen', 'true');
+
+                        const count = document.getElementById('preloader-count');
+                        const logo = document.getElementById('loader-png-logo');
+                        
+                        if (count) count.textContent = '100';
+                        if (logo) logo.style.setProperty('--progress', '100%');
+
+                        // 600ms pause, then slide out
+                        setTimeout(() => {
+                            if (prefersReduced) {
+                                overlay.classList.add('instant-hide');
+                                document.documentElement.style.overflow = '';
+                                document.body.style.overflow = '';
+                                window.scrollTo(0, 0);
+                                // Start Hero Title animation immediately
+                                const title = document.querySelector('.hero-title');
+                                if (title) title.classList.add('start-anim');
+                            } else {
+                                overlay.classList.remove('fallback-active');
+                                overlay.classList.add('hide-curtain');
+                                document.documentElement.style.overflow = '';
+                                document.body.style.overflow = '';
+                                window.scrollTo(0, 0);
+
+                                // Wait for 900ms transition out
+                                setTimeout(() => {
+                                    const title = document.querySelector('.hero-title');
+                                    if (title) title.classList.add('start-anim');
+                                    overlay.remove(); // Cleanup preloader elements from DOM
+                                }, 900);
+                            }
+                        }, 600);
+                    };
+
+                    preloadList.forEach(src => {
+                        const img = new Image();
+                        img.onload = () => {
+                            loaded++;
+                            updateProgress();
+                        };
+                        img.onerror = () => {
+                            loaded++;
+                            updateProgress();
+                        };
+                        img.src = src;
+                    });
+
+                    // Hard timeout safety net
+                    setTimeout(() => {
+                        loaded = total;
+                        updateProgress();
+                    }, maxDuration);
+                });
+        })();
+    </script>
+
+    <script src="js/gsap.min.js"></script>
+    <script src="js/ScrollTrigger.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. FIXED HEADER BACKGROUND & BORDER TRANSITION
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // 2. GSAP SCROLLTRIGGERS FOR ENTRANCE REVEALS (NO PARALLAX OR PINNING)
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Text and Block elements reveal
+            document.querySelectorAll('.reveal').forEach((el) => {
+                gsap.to(el, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 88%",
+                        toggleActions: "play none none none"
+                    }
+                });
+            });
+
+            // 3. MOBILE BOTTOM ANFRAGE BAR (TRIGGERS AT 60% SCROLL DEPTH)
+            const mobileBar = document.getElementById('mobile-bottom-bar');
+            if (mobileBar) {
+                window.addEventListener('scroll', () => {
+                    const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    if (documentHeight > 0) {
+                        const scrollPercent = (window.scrollY / documentHeight) * 100;
+                        if (scrollPercent >= 60 && window.innerWidth <= 900) {
+                            mobileBar.style.display = 'flex';
+                        } else {
+                            mobileBar.style.display = 'none';
+                        }
+                    }
+                });
+            }
+
+            // 4. SCROLL-LINIE (ORIENTIERT AN GUEST-HOUSE-ONE-PAGER.WEBFLOW.IO)
+            (function() {
+                const svg = document.getElementById('scrollSvg');
+                const pathMain = document.getElementById('svgPathMain');
+                const pathGlow = document.getElementById('svgPathGlow');
+                const hero = document.querySelector('.hero');
+                const scrollHint = document.querySelector('.scroll-hint');
+
+                if (!svg || !pathMain) return;
+
+                let pathLength = 0;
+
+                function getTop(el) {
+                    return el ? el.getBoundingClientRect().top + window.scrollY : 0;
+                }
+
+                function buildPath() {
+                    const docWidth = document.documentElement.clientWidth || window.innerWidth;
+                    const docHeight = document.documentElement.scrollHeight;
+                    const centerX = docWidth / 2;
+
+                    svg.setAttribute('viewBox', `0 0 ${docWidth} ${docHeight}`);
+
+                    // 1. Start unter dem SCROLLEN-Hinweis (bei Scroll 0 zu 100 % unsichtbar!)
+                    let startY = hero ? getTop(hero) + hero.offsetHeight - 50 : window.innerHeight - 50;
+                    if (scrollHint) {
+                        const r = scrollHint.getBoundingClientRect();
+                        startY = r.bottom + window.scrollY + 8;
+                    }
+
+                    const waypoints = [];
+                    // Startpunkt: Linie startet bei Länge 0 und entrollt sich erst beim Scrollen
+                    waypoints.push({ x: centerX, y: startY });
+
+                    // 2. Warum (.why) -> Korridor zwischen Titel und Text
+                    const why = document.querySelector('.why');
+                    if (why) {
+                        const top = getTop(why);
+                        const h = why.offsetHeight;
+                        const title = document.querySelector('.why-title');
+                        const content = document.querySelector('.why-content');
+                        let whyX = centerX;
+                        if (title && content) {
+                            const tr = title.getBoundingClientRect().right;
+                            const cl = content.getBoundingClientRect().left;
+                            if (cl > tr) whyX = (tr + cl) / 2;
+                        }
+                        waypoints.push({ x: whyX, y: top + 40 });
+                        waypoints.push({ x: whyX, y: top + h - 30 });
+                    }
+
+                    // 3. Trennbild 1 -> Sanfter Schwung über das Architekturfoto
+                    const sepImgs = document.querySelectorAll('.full-width-separator-img');
+                    if (sepImgs.length > 0) {
+                        const img1 = sepImgs[0];
+                        const top = getTop(img1);
+                        const h = img1.offsetHeight;
+                        waypoints.push({ x: centerX - 25, y: top + h * 0.5 });
+                        waypoints.push({ x: centerX, y: top + h });
+                    }
+
+                    // 4. Leistungen (.services-section) -> Korridor zwischen linkem Titel und rechten Karten
+                    const serv = document.querySelector('.services-section');
+                    if (serv) {
+                        const top = getTop(serv);
+                        const h = serv.offsetHeight;
+                        const leftCol = document.querySelector('.services-left-col');
+                        const rightCol = document.querySelector('.services-scroll-right');
+                        let servX = centerX - 25;
+                        if (leftCol && rightCol) {
+                            const lr = leftCol.getBoundingClientRect().right;
+                            const rl = rightCol.getBoundingClientRect().left;
+                            if (rl > lr) servX = (lr + rl) / 2;
+                        }
+                        waypoints.push({ x: servX, y: top + 40 });
+                        waypoints.push({ x: servX, y: top + h - 40 });
+                    }
+
+                    // 5. Umfang (.scope-section) -> Exakt im Zwischenraum beider Listen
+                    const scope = document.querySelector('.scope-section');
+                    if (scope) {
+                        const top = getTop(scope);
+                        const h = scope.offsetHeight;
+                        const lists = scope.querySelectorAll('.scope-list');
+                        let scX = centerX;
+                        if (lists.length >= 2) {
+                            const lr = lists[0].getBoundingClientRect().right;
+                            const ll = lists[1].getBoundingClientRect().left;
+                            if (ll > lr) scX = (lr + ll) / 2;
+                        }
+                        waypoints.push({ x: scX, y: top + 40 });
+                        waypoints.push({ x: scX, y: top + h - 30 });
+                    }
+
+                    // 6. Marquee
+                    const marquee = document.querySelector('.marquee-wrapper');
+                    if (marquee) {
+                        const top = getTop(marquee);
+                        waypoints.push({ x: centerX, y: top + marquee.offsetHeight * 0.5 });
+                    }
+
+                    // 7. Referenzen (.works) -> Exakt in der Fuge zwischen linker und rechter Projektkarte
+                    const works = document.querySelector('.works');
+                    if (works) {
+                        const top = getTop(works);
+                        const h = works.offsetHeight;
+                        const cards = works.querySelectorAll('.work-card');
+                        let wX = centerX;
+                        if (cards.length >= 2) {
+                            const cr0 = cards[0].getBoundingClientRect().right;
+                            const cl1 = cards[1].getBoundingClientRect().left;
+                            if (cl1 > cr0) wX = (cr0 + cl1) / 2;
+                        }
+                        waypoints.push({ x: wX, y: top + 40 });
+                        waypoints.push({ x: wX, y: top + h - 40 });
+                    }
+
+                    // 8. Zitat (.quote-section) -> Großzügig rechts am Zitat vorbei
+                    const quote = document.querySelector('.quote-section');
+                    const quoteText = document.querySelector('.quote-text');
+                    if (quote) {
+                        const top = getTop(quote);
+                        const h = quote.offsetHeight;
+                        let bypassX = centerX + 200;
+                        if (quoteText) {
+                            const qr = quoteText.getBoundingClientRect();
+                            bypassX = Math.min(docWidth - 60, qr.right + 50);
+                        }
+                        waypoints.push({ x: bypassX, y: top + 30 });
+                        waypoints.push({ x: bypassX, y: top + h - 30 });
+                    }
+
+                    // 9. Über mich (.about) -> Exakt zwischen Porträt und Text
+                    const about = document.querySelector('.about');
+                    if (about) {
+                        const top = getTop(about);
+                        const h = about.offsetHeight;
+                        const portrait = about.querySelector('.about-portrait');
+                        const text = about.querySelector('.about-text');
+                        let abX = centerX;
+                        if (portrait && text) {
+                            const pr = portrait.getBoundingClientRect().right;
+                            const tl = text.getBoundingClientRect().left;
+                            if (tl > pr) abX = (pr + tl) / 2;
+                        }
+                        waypoints.push({ x: abX, y: top + 40 });
+                        waypoints.push({ x: abX, y: top + h - 30 });
+                    }
+
+                    // 10. Ablauf (.process) -> Sicher im Korridor zwischen Schritt 02 und Schritt 03
+                    const proc = document.querySelector('.process');
+                    if (proc) {
+                        const top = getTop(proc);
+                        const h = proc.offsetHeight;
+                        const steps = proc.querySelectorAll('.process-step');
+                        let prX = centerX + 180;
+                        if (steps.length >= 3) {
+                            const s2r = steps[1].getBoundingClientRect().right;
+                            const s3l = steps[2].getBoundingClientRect().left;
+                            if (s3l > s2r) prX = (s2r + s3l) / 2;
+                        }
+                        waypoints.push({ x: prX, y: top + 40 });
+                        waypoints.push({ x: prX, y: top + h - 30 });
+                    }
+
+                    // 11. Trennbild 2
+                    if (sepImgs.length > 1) {
+                        const img2 = sepImgs[1];
+                        const top = getTop(img2);
+                        const h = img2.offsetHeight;
+                        waypoints.push({ x: centerX - 20, y: top + h * 0.5 });
+                        waypoints.push({ x: centerX, y: top + h });
+                    }
+
+                    // 12. FAQ (.faq) -> Rechts der Fragen im Freiraum vor den Plus-Zeichen
+                    const faq = document.querySelector('.faq');
+                    if (faq) {
+                        const top = getTop(faq);
+                        const h = faq.offsetHeight;
+                        const faqContainer = faq.querySelector('.faq-accordion');
+                        let fX = centerX + 150;
+                        if (faqContainer) {
+                            const r = faqContainer.getBoundingClientRect();
+                            fX = Math.min(docWidth - 100, r.left + r.width * 0.65);
+                        }
+                        waypoints.push({ x: fX, y: top + 30 });
+                        waypoints.push({ x: fX, y: top + h - 30 });
+                    }
+
+                    // 13. Kontakt (.contact-section) -> Rechts am Anfrage-Block vorbei
+                    const contact = document.querySelector('.contact-section');
+                    if (contact) {
+                        const top = getTop(contact);
+                        const h = contact.offsetHeight;
+                        const contactContainer = contact.querySelector('.contact-container');
+                        const contactTitle = contact.querySelector('.contact-title');
+                        let cx = docWidth - 70;
+                        if (contactTitle) {
+                            const tr = contactTitle.getBoundingClientRect().right;
+                            cx = Math.min(docWidth - 60, Math.max(tr + 40, centerX + 200));
+                        } else if (contactContainer) {
+                            const cr = contactContainer.getBoundingClientRect().right;
+                            cx = Math.min(docWidth - 60, cr + 40);
+                        }
+                        waypoints.push({ x: cx, y: top + 40 });
+                        waypoints.push({ x: cx, y: top + h - 30 });
+                    }
+
+                    // 14. Footer (.footer) -> Ruhiger Abschluss zentriert im Weißraum
+                    const footer = document.querySelector('.footer');
+                    if (footer) {
+                        const top = getTop(footer);
+                        waypoints.push({ x: centerX, y: top + footer.offsetHeight * 0.6 });
+                    }
+
+                    // Mathematisch garantierte, überschwingungsfreie Smoothstep-Bezier-Interpolation
+                    let d = `M ${waypoints[0].x.toFixed(1)} ${waypoints[0].y.toFixed(1)}`;
+                    for (let i = 0; i < waypoints.length - 1; i++) {
+                        const p1 = waypoints[i];
+                        const p2 = waypoints[i + 1];
+                        const dy = p2.y - p1.y;
+                        const cp1x = p1.x;
+                        const cp1y = p1.y + dy * 0.5;
+                        const cp2x = p2.x;
+                        const cp2y = p2.y - dy * 0.5;
+                        d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+                    }
+
+                    pathMain.setAttribute('d', d);
+
+                    // Setup stroke-dasharray according to guest-house-one-pager technique
+                    pathLength = pathMain.getTotalLength();
+                    pathMain.style.strokeDasharray = pathLength + ' ' + pathLength;
+                    // Bei Start (Scroll 0): 100 % unsichtbar!
+                    pathMain.style.strokeDashoffset = pathLength;
+                }
+
+                function updateScroll() {
+                    if (!pathLength) return;
+                    const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+                    const maxScroll = (document.documentElement.scrollHeight - window.innerHeight);
+                    const scrollPercent = maxScroll > 0 ? Math.min(Math.max(scrollY / maxScroll, 0), 1) : 0;
+
+                    // Exakt wie bei guest-house-one-pager.webflow.io:
+                    // Bei Scroll 0 ist drawLength = 0 -> kein Strich vor dem Scrollen sichtbar!
+                    // Beim Scrollen zieht sich die Linie kontinuierlich und flüssig nach unten mit.
+                    const drawLength = pathLength * scrollPercent;
+                    const offset = pathLength - drawLength;
+
+                    pathMain.style.strokeDashoffset = offset;
+
+                    if (scrollPercent >= 0.99) {
+                        pathMain.style.strokeDasharray = "none";
+                    } else {
+                        pathMain.style.strokeDasharray = pathLength + ' ' + pathLength;
+                    }
+                }
+
+                window.addEventListener('scroll', updateScroll, { passive: true });
+                window.addEventListener('resize', () => {
+                    buildPath();
+                    updateScroll();
+                });
+
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(() => {
+                        buildPath();
+                        updateScroll();
+                    });
+                }
+
+                setTimeout(() => {
+                    buildPath();
+                    updateScroll();
+                }, 300);
+                window.addEventListener('load', () => {
+                    buildPath();
+                    updateScroll();
+                });
+            })();
+        });
+    </script>
+</body>
+</html>
