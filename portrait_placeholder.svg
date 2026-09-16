@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
-  <rect width="800" height="1000" fill="#EFECE6"/>
-  <rect x="24" y="24" width="752" height="952" fill="none" stroke="#DDD9D0" stroke-width="1.5"/>
-  <g fill="#BFBAB0">
+  <rect width="800" height="1000" fill="#F8F8F8"/>
+  <rect x="24" y="24" width="752" height="952" fill="none" stroke="#E5E5E5" stroke-width="1.5"/>
+  <g fill="#D4D4D4">
     <circle cx="400" cy="380" r="100"/>
     <path d="M220 720 C220 540, 290 500, 400 500 C510 500, 580 540, 580 720 Z"/>
   </g>
-  <text x="400" y="785" font-family="'Italiana', 'Cinzel', serif" font-size="24" letter-spacing="4" fill="#6E6A63" text-anchor="middle" font-weight="600">CYRIL PORTMANN</text>
-  <text x="400" y="822" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" letter-spacing="3" fill="#99958E" text-anchor="middle" text-transform="uppercase">&#80;&#111;&#114;&#116;&#114;&#228;&#116;&#32;&#102;&#111;&#108;&#103;&#116;</text>
+  <text x="400" y="785" font-family="'Italiana', 'Cinzel', serif" font-size="24" letter-spacing="4" fill="#555555" text-anchor="middle" font-weight="600">CYRIL PORTMANN</text>
+  <text x="400" y="822" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" letter-spacing="3" fill="#888888" text-anchor="middle" text-transform="uppercase">&#80;&#111;&#114;&#116;&#114;&#228;&#116;&#32;&#102;&#111;&#108;&#103;&#116;</text>
 </svg>
