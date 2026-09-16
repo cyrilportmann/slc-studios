@@ -60,7 +60,7 @@
             --line: #E8E6E2;
             --font-display: 'Bodoni Moda', serif;
             --font-sans: 'Archivo', sans-serif;
-            --max-width: 1440px;
+            --max-width: 1320px;
         }
 
         * {
@@ -546,6 +546,28 @@
         .reveal.revealed {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* =========================================================================
+           LAPTOP ANSICHT (901px - 1440px)
+           ========================================================================= */
+        @media (min-width: 901px) and (max-width: 1440px) {
+            :root {
+                --max-width: 1140px;
+            }
+            .header-nav {
+                padding: 0 48px;
+            }
+            .container {
+                padding-left: 48px;
+                padding-right: 48px;
+            }
+            .contact-info-panel {
+                padding: clamp(90px, 11vh, 120px) 48px clamp(40px, 5vh, 60px) 48px;
+            }
+            .contact-form-panel {
+                padding: clamp(60px, 8vh, 100px) clamp(36px, 4vw, 56px);
+            }
         }
 
         /* =========================================================================

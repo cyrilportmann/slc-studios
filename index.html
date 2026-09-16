@@ -59,14 +59,14 @@
            THEME & RESET (STRICKTE, MONOCHROME FARBPALETTE)
            ========================================================================= */
         :root {
-            --bg: #FAFAF8;
-            --bg-secondary: #F3F1EC;
-            --text: #1C1A18;
-            --text-secondary: #6B6763;
-            --line: #E5E2DC;
+            --bg: #FFFFFF;
+            --bg-secondary: #FAF9F7;
+            --text: #0A0A0A;
+            --text-secondary: #767370;
+            --line: #E8E6E2;
             --font-display: 'Bodoni Moda', Georgia, serif;
             --font-sans: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
-            --max-width: 1440px;
+            --max-width: 1320px;
         }
 
         * {
@@ -163,10 +163,11 @@
             width: 100%;
         }
 
-        .container {
+        .container,
+        .hero-container {
             max-width: var(--max-width);
             margin: 0 auto;
-            padding: 0 clamp(24px, 4.5vw, 64px);
+            padding: 0 60px;
             width: 100%;
         }
 
@@ -315,10 +316,6 @@
         .hero-container {
             position: relative;
             z-index: 3;
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 60px;
-            width: 100%;
         }
 
         .hero-text-container {
@@ -1442,7 +1439,7 @@
            13 · KONTAKT SEKTION & FUSSZEILE
            ========================================================================= */
         .contact-section {
-            background-color: var(--bg-secondary);
+            background-color: var(--bg);
             border-top: 1px solid var(--line);
             border-bottom: 1px solid var(--line);
         }
@@ -1561,38 +1558,21 @@
         }
 
         /* =========================================================================
-           LAPTOP & KOMPAKT-BILDSCHIRME (901px - 1240px)
+           LAPTOP & KOMPAKT-BILDSCHIRME (901px - 1440px)
            ========================================================================= */
-        @media (max-width: 1240px) {
+        @media (min-width: 901px) and (max-width: 1440px) {
+            :root {
+                --max-width: 1140px;
+            }
+            .container,
+            .hero-container {
+                padding: 0 48px;
+            }
             .grid-12 {
-                gap: 24px;
+                gap: 28px;
             }
             .comparison-grid {
                 column-gap: 40px;
-            }
-            .faq-header {
-                grid-column: span 12;
-                margin-bottom: 24px;
-            }
-            .faq-accordion {
-                grid-column: span 12;
-            }
-            .freebie-wrapper {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .freebie-form-container {
-                max-width: 600px;
-            }
-            .about-portrait {
-                grid-column: span 5;
-            }
-            .about-text {
-                grid-column: 6 / span 7;
-            }
-            .contact-container {
-                grid-column: span 12;
-                max-width: 720px;
             }
         }
 
@@ -1608,7 +1588,8 @@
                 padding: 64px 0;
             }
 
-            .container {
+            .container,
+            .hero-container {
                 padding: 0 20px;
             }
 
