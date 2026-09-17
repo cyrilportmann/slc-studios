@@ -167,7 +167,8 @@
         .hero-container {
             max-width: var(--max-width);
             margin: 0 auto;
-            padding: 0 60px;
+            padding-left: 60px;
+            padding-right: 60px;
             width: 100%;
         }
 
@@ -1561,21 +1562,39 @@
 
         /* =========================================================================
            LAPTOP & KOMPAKT-BILDSCHIRME (901px - 1600px)
-           Abstände bleiben unverändert wie gewünscht
+           Harmonische Abstände & optimierte Trennbild-Proportionen
            ========================================================================= */
         @media (min-width: 901px) and (max-width: 1600px) {
-            .section-spacing {
-                padding: 140px 0;
-            }
-            .footer {
-                padding: 80px 0;
-            }
             :root {
                 --max-width: 1120px;
             }
             .container,
             .hero-container {
-                padding: 0 48px;
+                padding-left: 48px;
+                padding-right: 48px;
+            }
+            .section-spacing {
+                padding: 56px 0;
+            }
+            .full-width-separator-img {
+                height: 44vh;
+                min-height: 280px;
+            }
+            .article-section {
+                padding-bottom: 40px;
+            }
+            .freebie-section {
+                padding: 40px 0 32px;
+            }
+            .freebie-wrapper {
+                align-items: start;
+            }
+            .about-section {
+                padding-top: 32px;
+                padding-bottom: 44px;
+            }
+            .footer {
+                padding: 44px 0;
             }
             .grid-12 {
                 gap: 28px;
@@ -1620,7 +1639,20 @@
 
         @media (max-width: 900px) {
             .section-spacing {
-                padding: 92px 0;
+                padding: 56px 0;
+            }
+
+            .article-section {
+                padding-bottom: 36px;
+            }
+
+            .freebie-section {
+                padding: 36px 0 32px;
+            }
+
+            .about-section {
+                padding-top: 32px;
+                padding-bottom: 40px;
             }
 
             /* Sektionen auf Mobilgeräten klar voneinander trennen */
@@ -1645,7 +1677,8 @@
 
             .container,
             .hero-container {
-                padding: 0 20px;
+                padding-left: 20px;
+                padding-right: 20px;
             }
 
             [id] {
