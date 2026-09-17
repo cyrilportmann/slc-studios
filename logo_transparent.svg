@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 149 63" width="149" height="63">
+  <!-- CÉ Studios Vector Monogram & Wordmark -->
+  <path d="M25,10.5 L37.5,2.5 L40.5,4.5 L28,12 Z" fill="#0A0A0A"/>
+  <path d="M47.5,52.2 A25.5,25.5 0 1,1 47.5,20.8 L41.2,25.7 A17.5,17.5 0 1,0 41.2,47.3 Z" fill="#0A0A0A"/>
+  <rect x="24" y="24" width="30.5" height="6.5" fill="#0A0A0A"/>
+  <rect x="24" y="34" width="16" height="5.5" fill="#0A0A0A"/>
+  <rect x="24" y="43.5" width="30.5" height="6.5" fill="#0A0A0A"/>
+  <text x="77" y="40.5" font-family="'Archivo', -apple-system, BlinkMacSystemFont, sans-serif" font-weight="600" font-size="8.2px" letter-spacing="5.4px" fill="#0A0A0A">STUDIOS</text>
+</svg>

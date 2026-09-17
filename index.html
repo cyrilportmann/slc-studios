@@ -390,6 +390,8 @@
         .preloader-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100vh;
+            height: 100dvh;
+            height: 100svh;
             background-color: var(--bg); color: var(--text);
             z-index: 99999; display: flex; flex-direction: column;
             justify-content: center; align-items: center;
@@ -1585,7 +1587,27 @@
 
         @media (max-width: 900px) {
             .section-spacing {
-                padding: 64px 0;
+                padding: 92px 0;
+            }
+
+            /* Sektionen auf Mobilgeräten klar voneinander trennen */
+            .process-section,
+            .risk-section,
+            .comparison-section,
+            .article-section,
+            .about-section,
+            .faq-section {
+                border-top: 1px solid var(--line);
+            }
+
+            /* Preloader auf Mobilgeräten exakt vertikal zentrieren */
+            .preloader-overlay {
+                height: 100svh;
+                height: 100dvh;
+            }
+
+            .preloader-logo-container {
+                margin: 0 auto !important;
             }
 
             .container,
@@ -1720,6 +1742,8 @@
             .full-width-separator-img {
                 height: 38vh;
                 min-height: 220px;
+                border-top: 1px solid var(--line);
+                border-bottom: 1px solid var(--line);
             }
 
             /* 3 Ablaufschritte */
@@ -2565,7 +2589,7 @@
          LADEBILDSCHIRM / PRELOADER SCREEN
          ========================================================================= -->
     <div class="preloader-overlay fallback-active" id="preloaderOverlay">
-        <div class="preloader-logo-container" style="position: relative; width: 189px; height: 80px; display: block; margin: 0 auto 2rem;">
+        <div class="preloader-logo-container" style="position: relative; width: 189px; height: 80px; display: block; margin: 0 auto;">
             <!-- Faint PNG background placeholder -->
             <img src="logo_transparent.png?v=2" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.12; display: block; pointer-events: none; user-select: none;">
             
