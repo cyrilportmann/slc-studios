@@ -218,19 +218,20 @@
         }
 
         .brand-logo-img {
-            height: 30px;
+            height: 38px;
             width: auto;
             display: block;
-            filter: brightness(0) invert(1);
-            transition: filter 0.3s ease, opacity 0.3s ease;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+            transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
         }
 
         .brand-logo:hover .brand-logo-img {
-            opacity: 0.7;
+            opacity: 0.8;
+            transform: scale(1.03);
         }
 
         .header.scrolled .brand-logo-img {
-            filter: none;
+            filter: contrast(1.35) brightness(0.65) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.08));
         }
 
         .header-menu {
@@ -420,16 +421,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            width: 96px;
+            height: 100px;
         }
         .loader-masked-logo {
-            -webkit-mask-image: 
-                linear-gradient(to right, transparent 36px, #000 36px),
-                conic-gradient(from 120deg at 40px 40px, #000 0%, #000 var(--progress, 0%), transparent var(--progress, 0%), transparent 100%);
+            -webkit-mask-image: conic-gradient(from 0deg at 50% 50%, #000 0%, #000 var(--progress, 0%), transparent var(--progress, 0%), transparent 100%);
             -webkit-mask-composite: source-over;
-            mask-image: 
-                linear-gradient(to right, transparent 36px, #000 36px),
-                conic-gradient(from 120deg at 40px 40px, #000 0%, #000 var(--progress, 0%), transparent var(--progress, 0%), transparent 100%);
+            mask-image: conic-gradient(from 0deg at 50% 50%, #000 0%, #000 var(--progress, 0%), transparent var(--progress, 0%), transparent 100%);
             mask-composite: add;
         }
         .preloader-counter {
@@ -1672,7 +1671,9 @@
             }
 
             .preloader-logo-container {
-                margin: 0 auto !important;
+                width: 80px !important;
+                height: 83px !important;
+                margin: 0 auto 20px !important;
             }
 
             .container,
@@ -1705,7 +1706,7 @@
             }
 
             .brand-logo-img {
-                height: 22px;
+                height: 32px;
             }
 
             .header-links {
@@ -2655,12 +2656,12 @@
          LADEBILDSCHIRM / PRELOADER SCREEN
          ========================================================================= -->
     <div class="preloader-overlay fallback-active" id="preloaderOverlay">
-        <div class="preloader-logo-container" style="position: relative; width: 189px; height: 80px; display: block; margin: 0 auto;">
+        <div class="preloader-logo-container" style="position: relative; width: 96px; height: 100px; display: block; margin: 0 auto 24px;">
             <!-- Faint PNG background placeholder -->
-            <img src="logo_transparent.png?v=2" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.12; display: block; pointer-events: none; user-select: none;">
+            <img src="logo_transparent.png?v=3" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.14; display: block; pointer-events: none; user-select: none; filter: contrast(1.3) brightness(0.65);">
             
             <!-- Animating PNG logo on top with conic gradient mask -->
-            <img src="logo_transparent.png?v=2" id="loader-png-logo" class="loader-masked-logo" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; pointer-events: none; user-select: none; --progress: 0%;">
+            <img src="logo_transparent.png?v=3" id="loader-png-logo" class="loader-masked-logo" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; pointer-events: none; user-select: none; --progress: 0%; filter: contrast(1.3) brightness(0.65);">
         </div>
         <div class="preloader-loading-text">LADEN</div>
         <div class="preloader-counter" id="preloader-count">000</div>
@@ -2672,7 +2673,7 @@
     <header class="header" id="main-header">
         <div class="container header-nav">
             <a href="index.html" class="brand-logo" aria-label="CÉ Studios Startseite">
-                <img src="logo_transparent.png?v=2" alt="CÉ Studios" class="brand-logo-img">
+                <img src="logo_transparent.png?v=3" alt="CÉ Studios" class="brand-logo-img">
             </a>
             <div class="header-menu">
                 <nav class="header-links">
@@ -3215,7 +3216,7 @@
         <div class="container footer-grid">
             <div class="footer-left">
                 <div class="footer-logo">
-                    <img src="logo_transparent.png?v=2" alt="CÉ Studios" style="height: 24px; width: auto; display: block; opacity: 0.55;">
+                    <img src="logo_transparent.png?v=3" alt="CÉ Studios" style="height: 32px; width: auto; display: block; opacity: 0.85; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));">
                 </div>
                 <div class="footer-tagline">Aus Wiesbaden, für Immobilienunternehmen in ganz Deutschland</div>
             </div>
