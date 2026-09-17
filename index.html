@@ -1561,8 +1561,15 @@
 
         /* =========================================================================
            LAPTOP & KOMPAKT-BILDSCHIRME (901px - 1600px)
+           Abstände bleiben unverändert wie gewünscht
            ========================================================================= */
         @media (min-width: 901px) and (max-width: 1600px) {
+            .section-spacing {
+                padding: 140px 0;
+            }
+            .footer {
+                padding: 80px 0;
+            }
             :root {
                 --max-width: 1120px;
             }
@@ -1575,6 +1582,19 @@
             }
             .comparison-grid {
                 column-gap: 40px;
+            }
+        }
+
+        /* =========================================================================
+           PC / GROSSBILDSCHIRME (> 1600px)
+           Abstände zwischen den Sektionen harmonisiert (Bild 1 bis Bild 8)
+           ========================================================================= */
+        @media (min-width: 1601px) {
+            .section-spacing {
+                padding: 64px 0;
+            }
+            .footer {
+                padding: 48px 0;
             }
         }
 
