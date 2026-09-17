@@ -211,8 +211,9 @@
         }
 
         .brand-logo {
-            display: flex;
+            display: inline-flex;
             align-items: center;
+            gap: 12px;
             text-decoration: none;
             color: inherit;
         }
@@ -225,9 +226,24 @@
             transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
         }
 
+        .brand-logo-text {
+            font-family: var(--font-sans);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: currentColor;
+            line-height: 1;
+            transition: opacity 0.3s ease;
+        }
+
         .brand-logo:hover .brand-logo-img {
             opacity: 0.8;
             transform: scale(1.03);
+        }
+
+        .brand-logo:hover .brand-logo-text {
+            opacity: 0.7;
         }
 
         .header.scrolled .brand-logo-img {
@@ -417,13 +433,29 @@
             90% { clip-path: inset(0 0 0 0); }
             100% { clip-path: inset(0 0 100% 0); visibility: hidden; pointer-events: none; }
         }
+        .preloader-brand-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
         .preloader-logo-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 24px;
-            width: 96px;
-            height: 100px;
+            position: relative;
+            width: 72px;
+            height: 75px;
+        }
+        .preloader-logo-text {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--text);
+            line-height: 1;
         }
         .loader-masked-logo {
             -webkit-mask-image: conic-gradient(from 0deg at 50% 50%, #000 0%, #000 var(--progress, 0%), transparent var(--progress, 0%), transparent 100%);
@@ -1670,10 +1702,20 @@
                 height: 100dvh;
             }
 
+            .preloader-brand-wrapper {
+                gap: 12px;
+                margin-bottom: 20px;
+            }
+
             .preloader-logo-container {
-                width: 80px !important;
-                height: 83px !important;
-                margin: 0 auto 20px !important;
+                width: 60px !important;
+                height: 62px !important;
+                margin: 0 !important;
+            }
+
+            .preloader-logo-text {
+                font-size: 11px;
+                letter-spacing: 0.24em;
             }
 
             .container,
@@ -1705,8 +1747,17 @@
                 border-bottom: 1px solid var(--line);
             }
 
+            .brand-logo {
+                gap: 9px;
+            }
+
             .brand-logo-img {
-                height: 32px;
+                height: 28px;
+            }
+
+            .brand-logo-text {
+                font-size: 10px;
+                letter-spacing: 0.24em;
             }
 
             .header-links {
@@ -2656,12 +2707,15 @@
          LADEBILDSCHIRM / PRELOADER SCREEN
          ========================================================================= -->
     <div class="preloader-overlay fallback-active" id="preloaderOverlay">
-        <div class="preloader-logo-container" style="position: relative; width: 96px; height: 100px; display: block; margin: 0 auto 24px;">
-            <!-- Faint PNG background placeholder -->
-            <img src="logo_transparent.png?v=3" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.14; display: block; pointer-events: none; user-select: none; filter: contrast(1.3) brightness(0.65);">
-            
-            <!-- Animating PNG logo on top with conic gradient mask -->
-            <img src="logo_transparent.png?v=3" id="loader-png-logo" class="loader-masked-logo" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; pointer-events: none; user-select: none; --progress: 0%; filter: contrast(1.3) brightness(0.65);">
+        <div class="preloader-brand-wrapper">
+            <div class="preloader-logo-container">
+                <!-- Faint PNG background placeholder -->
+                <img src="logo_transparent.png?v=4" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.14; display: block; pointer-events: none; user-select: none; filter: contrast(1.3) brightness(0.65);">
+                
+                <!-- Animating PNG logo on top with conic gradient mask -->
+                <img src="logo_transparent.png?v=4" id="loader-png-logo" class="loader-masked-logo" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; pointer-events: none; user-select: none; --progress: 0%; filter: contrast(1.3) brightness(0.65);">
+            </div>
+            <span class="preloader-logo-text">STUDIOS</span>
         </div>
         <div class="preloader-loading-text">LADEN</div>
         <div class="preloader-counter" id="preloader-count">000</div>
@@ -2673,7 +2727,8 @@
     <header class="header" id="main-header">
         <div class="container header-nav">
             <a href="index.html" class="brand-logo" aria-label="CÉ Studios Startseite">
-                <img src="logo_transparent.png?v=3" alt="CÉ Studios" class="brand-logo-img">
+                <img src="logo_transparent.png?v=4" alt="CÉ" class="brand-logo-img">
+                <span class="brand-logo-text">STUDIOS</span>
             </a>
             <div class="header-menu">
                 <nav class="header-links">
@@ -3216,7 +3271,10 @@
         <div class="container footer-grid">
             <div class="footer-left">
                 <div class="footer-logo">
-                    <img src="logo_transparent.png?v=3" alt="CÉ Studios" style="height: 32px; width: auto; display: block; opacity: 0.85; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));">
+                    <a href="index.html" class="footer-logo-link" style="display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
+                        <img src="logo_transparent.png?v=4" alt="CÉ" style="height: 30px; width: auto; display: block; opacity: 0.85; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));">
+                        <span style="font-family: var(--font-sans); font-size: 11px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255, 255, 255, 0.85);">STUDIOS</span>
+                    </a>
                 </div>
                 <div class="footer-tagline">Aus Wiesbaden, für Immobilienunternehmen in ganz Deutschland</div>
             </div>
